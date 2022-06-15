@@ -3,41 +3,28 @@
 
 // Given an array containing 0s and 1s, if you are allowed to replace no more than ‘k’ 0s with 1s, find the length of the longest contiguous subarray having all 1s.
 
-const length_of_longest_substring = function(arr, k) {
-  const length_of_longest_substring = function(arr, k) {
-  // Find longest substring length with k replacement
-  // 
-  // use count to count replacements, for 0
-  // use 2 pointers from 1 side, as sliding window
-  // 
-  // iterate array
-  // increment end
-  // increment count if not 1
-  // if length count > k
-  // increment start
-  // decrement couunt if not 1
-  // update max
-  // return max
+const length_of_longest_substring = function (str, k) {
+    let maxCount = -1;
+    let start = 0;
+    let hashMapCount = {};
+    let maxLetterCount = 0;
 
-  let max = 0;
+    for (let i = 0; i < str.length; i++) {
+        let letter = str[i];
+        hashMapCount[letter] = hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
+        maxLetterCount = Math.max(maxLetterCount, hashMapCount[letter]);
 
-  let count = 0;
+        while(i-start+1 - maxLetterCount > k) {
+            let firstLetter = str[start];
+            hashMapCount[firstLetter] = hashMapCount[firstLetter] - 1;
+            start++;
+        }
 
-  let start = 0;
-  for(let end=0; end<arr.length; end++) {
-    if(arr[end] === 0) count++;
-
-    while(count>k){
-      if(arr[start] === 0) count--
-      start++;
+        max = Math.max(maxCount, i-start+1);
     }
 
-    max = Math.max(max, end - start + 1);
-  }
-
-  return max;
-
-} // O(N+N) O(1)
+    return max;
+}; // T:O(N) S:O(1), Kmax = 26 = 1
 
 // def length_of_longest_substring(str, k):
 //   # max length
