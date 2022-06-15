@@ -10,15 +10,16 @@ const non_repeat_substring = function (str) {
 
   for (let i = 0; i < str.length; i++) {
     let letter = str[i];
-    hashMapCount[letter] = hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
+    hashMapCount[letter] =
+      hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
 
-    while(hashMapCount[letter] > 1) {
+    while (hashMapCount[letter] > 1) {
       let starLetter = str[start];
       hashMapCount[starLetter] = hashMapCount[starLetter] - 1;
       start++;
     }
 
-    max = Math.max(max, +i+1-start);
+    max = Math.max(max, +i + 1 - start);
   }
 
   return max;
