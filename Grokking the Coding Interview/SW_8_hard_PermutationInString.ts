@@ -5,7 +5,8 @@ const find_permutation = function (str, pattern) {
   let hashMapCount = {};
 
   for (let letter of pattern.split('')) {
-    hashMapCount[letter] = hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
+    hashMapCount[letter] =
+      hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
   }
   let copy = { ...hashMapCount };
 
@@ -13,7 +14,7 @@ const find_permutation = function (str, pattern) {
   for (let i in str.split('')) {
     let letter = str[i];
     if (hashMapCount[letter] == null) {
-      start = i+1;
+      start = i + 1;
       hashMapCount = { ...copy };
       continue;
     }
@@ -25,7 +26,8 @@ const find_permutation = function (str, pattern) {
       hashMapCount[letter]++;
       start++;
     }
-    if(Object.values(hashMapCount).reduce((res, el)=>res+el,0) === 0) return true;
+    if (Object.values(hashMapCount).reduce((res, el) => res + el, 0) === 0)
+      return true;
   }
 
   return false;
