@@ -5,35 +5,39 @@
 
 // Every anagram is a permutation of a string. As we know, when we are not allowed to repeat characters while finding permutations of a string, we get N!N! permutations (or anagrams) of a string having NN characters. For example, here are the six anagrams of the string “abc”:
 
-const find_string_anagrams = function (str, pattern) {
-  let result_indexes = [];
-  let hashMapCount = {};
+const find_substring = function (str, pattern) {
+  let min = Number.MAX_SAFE_INTEGER;
+  let minString = '';
+  let hashMapCountdown = {};
 
   for (let el of pattern.split('')) {
-    hashMapCount[el] = hashMapCount[el] == null ? 1 : hashMapCount[el] + 1;
+    hashMapCountdown[el] = hashMapCountdown[el] == null ? 1 : hashMapCountdown[el] + 1;
   }
-  let copy = { ...hashMapCount };
+  let matchCountdown = Object.keys(hashMapCountdown).length;
 
   let start = 0;
   for (let i in str.split('')) {
     let letter = str[i];
-    if (hashMapCount[letter] == null) {
-      start = i + 1;
-      hashMapCount = { ...copy };
-      continue;
-    }
+    if (hashMapCountdown[letter] == null) continue;
 
-    hashMapCount[letter]--;
+    hashMapCountdown[letter]--;
+    if (hashMapCountdown[letter] === 0) matchCountdown--;
 
-    while (hashMapCount[letter] < 0) {
+    
+    while (matchCountdown === 0) {
+      if (i - start + 1 < min) {
+        min = i - start + 1;
+        minString = str.slice(start, i + 1);
+      }
+
       let startLetter = str[start];
-      hashMapCount[startLetter]++;
+      if (hashMapCountdown[startLetter] != null) {
+        hashMapCountdown[startLetter]++;
+        if(hashMapCountdown[startLetter] > 0) matchCountdown++;
+      }
       start++;
     }
-
-    if (Object.values(hashMapCount).reduce((res, el) => res + el, 0) === 0)
-      result_indexes.push(start);
   }
 
-  return result_indexes;
-}; // T:O(N+P) S:(1) Pmax 26 letters
+  return minString;
+} // T:O(N+P) S:O(1) Pmax = 26 letters
