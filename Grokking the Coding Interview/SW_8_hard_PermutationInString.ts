@@ -2,31 +2,31 @@
 // Permutation in a String
 
 const find_permutation = function (str, pattern) {
-  let start = 0;
   let hashMapCount = {};
 
   for (let letter of pattern.split('')) {
     hashMapCount[letter] = hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
   }
+  let copy = { ...hashMapCount };
 
-  let hashMapCountCopy = {...hashMapCount};
+  let start = 0;
   for (let i in str.split('')) {
     let letter = str[i];
-    if (pattern.indexOf(letter) === -1) {
-      hashMapCountCopy = {...hashMapCount};
-      start = +i;
+    if (hashMapCount[letter] == null) {
+      start = i+1;
+      hashMapCount = { ...copy };
       continue;
     }
-    if (pattern.indexOf(letter) > -1) hashMapCountCopy[letter]--;
 
-    while (hashMapCountCopy[letter] === -1) {
-      let startLetter = str[start];
-      hashMapCountCopy[startLetter]++;
+    hashMapCount[letter]--;
+
+    while (hashMapCount[letter] < 0) {
+      let letter = str[start];
+      hashMapCount[letter]++;
       start++;
     }
-
-    if (Object.values(hashMapCountCopy).reduce((res, el) => res + el, 0) === 0) return true;
+    if(Object.values(hashMapCount).reduce((res, el)=>res+el,0) === 0) return true;
   }
 
   return false;
-}; // T:O(N+K) S:(1) Kmax 26 letters;
+}; // T:(N) S:(1) Kmax 26
