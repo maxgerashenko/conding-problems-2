@@ -16,7 +16,7 @@ const length_of_longest_substring = function (arr, k) {
       start++;
     }
 
-    maxCount = Math.max(maxCount, +i-start+1);
+    maxCount = Math.max(maxCount, +i - start + 1);
   }
 
   return maxCount;
