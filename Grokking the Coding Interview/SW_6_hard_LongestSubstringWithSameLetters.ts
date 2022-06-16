@@ -5,26 +5,27 @@
 
 const length_of_longest_substring = function (str, k) {
     let maxCount = -1;
-    let hashMapCount = {};
     let start = 0;
+    let hasMapCount = {};
     let maxLetterCount = 0;
 
     for (let i = 0; i < str.length; i++) {
         let letter = str[i];
-        hashMapCount[letter] = hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
-        maxLetterCount = Math.max(maxLetterCount, hashMapCount[letter]);
+        hasMapCount[letter] = hasMapCount[letter] == null ? 1 : hasMapCount[letter] + 1;
 
-        while(i-start+1-maxLetterCount > k){
+        maxLetterCount = Math.max(maxLetterCount, hasMapCount[letter]);
+
+        while (i - start + 1 - maxLetterCount > k) {
             let firstLetter = str[start];
-            hashMapCount[firstLetter]--;
+            hasMapCount[firstLetter]--;
             start++;
         }
 
-        maxCount = Math.max(maxCount, i - start + 1);
+        maxCount = Math.max(maxCount, i-start+1);
     }
 
     return maxCount;
-}; // T:O(n) S:O(1) K = 26 letters max;
+}; // T:O(n) S(1) Kmax = 26 letters
 
 // def length_of_longest_substring(str, k):
 //   # max length
