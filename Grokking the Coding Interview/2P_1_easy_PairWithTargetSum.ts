@@ -10,36 +10,20 @@
 // 2 Pointers O(N) O(1)
 
 const pair_with_targetsum = function (arr, target_sum) {
-  // find the pair in the array which sum is equal to target_sum
-
-  // sort array
-  // iterate array with 2 pointers
-  // use 2 pointers form 2 sides
-  // update sum
-  // if sum > target, move end <-
-  // if sum < target, move start ->
-  // return sum
-
-  // <, not <= coz need 2 values
-
   let start = 0;
   let end = arr.length - 1;
-  // <, coz 2 numbers sum
+
   while (start < end) {
     let sum = arr[start] + arr[end];
+    console.log(sum);
+
     if (sum === target_sum) return [start, end];
-
-    if (sum <= target_sum) {
-      start++;
-      continue;
-    }
-
-    end--;
+    if (sum > target_sum) end--;
+    if (sum < target_sum) start++;
   }
 
-  // corner case
   return [-1, -1];
-}; // O(n)
+}; // T:O(N) S:O(1)
 
 // def pair_with_targetsum(arr, target_sum):
 //   # sorted array

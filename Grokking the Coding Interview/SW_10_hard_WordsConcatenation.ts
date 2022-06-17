@@ -11,7 +11,8 @@ const find_word_concatenation = function (str, words) {
   let matchCount = 0;
 
   for (let word of words) {
-    hashMapCount[word] = hashMapCount[word] == null ? 1 : hashMapCount[word] + 1;
+    hashMapCount[word] =
+      hashMapCount[word] == null ? 1 : hashMapCount[word] + 1;
   }
   let copy = { ...hashMapCount };
 
@@ -25,7 +26,7 @@ const find_word_concatenation = function (str, words) {
     }
 
     hashMapCount[word]--;
-    if (hashMapCount[word] === 0) matchCount++
+    if (hashMapCount[word] === 0) matchCount++;
 
     while (hashMapCount[word] < 0) {
       let wordStart = str.slice(start, start + wordLength);
@@ -34,7 +35,8 @@ const find_word_concatenation = function (str, words) {
       start += wordLength;
     }
 
-    if (matchCount === Object.keys(hashMapCount).length) resultIndices.push(start);
+    if (matchCount === Object.keys(hashMapCount).length)
+      resultIndices.push(start);
   }
 
   return resultIndices;

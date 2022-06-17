@@ -4,20 +4,20 @@
 // Given an array of sorted numbers, remove all duplicates from it. You should not use any extra space; after removing the duplicates in-place return the length of the subarray that has no duplicate in it.
 
 const remove_duplicates = function (arr) {
-  // conner case
-  if (arr.length < 2) return arr.length;
+  let start = -1;
+  let cleanArray = [];
 
-  let curIndex = 0;
-  for (let nextIndex = 1; nextIndex < arr.length; nextIndex++) {
-    // base case
-    if (arr[curIndex] === arr[nextIndex]) continue;
-
-    curIndex++;
-    arr[curIndex] = arr[nextIndex];
+  for (let el of arr) {
+    if (el === arr[start]) {
+      start++;
+      continue;
+    }
+    cleanArray.push(el);
+    start++;
   }
 
-  return curIndex + 1;
-}; // T:O(n) S:O(1)
+  return cleanArray.length;
+}; // T:O(N) S:(1)
 
 // def remove_duplicates(arr):
 //   start = 0
