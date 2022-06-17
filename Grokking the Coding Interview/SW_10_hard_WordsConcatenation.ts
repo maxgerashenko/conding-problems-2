@@ -1,18 +1,41 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/Y5YDWzqPn7O
+//
 // Words Concatenation
 
 // Given a string and a list of words, find all the starting indices of substrings in the given string that are a concatenation of all the given words exactly once without any overlapping of words. It is given that all words are of the same length.
 
-// Find START INDEXES for the CONCATINATION of the GIVE WORDS
-// all words has the same lenght
+const find_word_concatenation = function (str, words) {
+  let result_indices = [];
+  let hasMapCount = {};
+  let matchCount = 0;
+  let start = 0;
 
-// Use 2 pointers from 1 side with a step of word.len
-// use hasmMapCount Words
+  for (let word of words) {
+    hasMapCount[word] = hasMapCount[word] == null ? 1 : hasMapCount[word] + 1;
+  }
 
-// Move end, if last word === any of the word hashMapCount --
-// If steps of word (length > end - start) + 1 > words.length * word.len move start
-// if first word.len word === hashMapCout ++
-// if match count === 0 and end - start + 1 === words.length retun start
+  for (let i = 0; i < str.length; i = i + 3) {
+    let word = str.slice(i, i + 3);
+
+    if (word in hasMapCount) {
+      hasMapCount[word]--;
+      if (hasMapCount[word] === 0) matchCount++;
+    }
+
+    while ((i - start) / 3 >= 2) {
+      let startWord = str.slice(start, start + 3);
+      hasMapCount[startWord]++;
+      start += 3;
+      if (hasMapCount[startWord] === 1) matchCount--;
+    }
+
+    if (matchCount === Object.keys(hasMapCount).length) {
+      result_indices.push(start);
+    }
+  }
+
+  return result_indices;
+}; // T:O(N) S:O(N+W)
 
 // def find_word_concatenation(str, words):
 //   # Find START INDEXES for the CONCATINATION of the GIVE WORDS

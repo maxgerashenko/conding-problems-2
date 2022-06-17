@@ -1,4 +1,5 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/YQ8N2OZq0VM
+//
 // String Anagrams
 
 // Given a string and a pattern, find all anagrams of the pattern in the given string.
@@ -11,7 +12,8 @@ const find_substring = function (str, pattern) {
   let hashMapCountdown = {};
 
   for (let el of pattern.split('')) {
-    hashMapCountdown[el] = hashMapCountdown[el] == null ? 1 : hashMapCountdown[el] + 1;
+    hashMapCountdown[el] =
+      hashMapCountdown[el] == null ? 1 : hashMapCountdown[el] + 1;
   }
   let matchCountdown = Object.keys(hashMapCountdown).length;
 
@@ -23,7 +25,6 @@ const find_substring = function (str, pattern) {
     hashMapCountdown[letter]--;
     if (hashMapCountdown[letter] === 0) matchCountdown--;
 
-    
     while (matchCountdown === 0) {
       if (i - start + 1 < min) {
         min = i - start + 1;
@@ -33,11 +34,11 @@ const find_substring = function (str, pattern) {
       let startLetter = str[start];
       if (hashMapCountdown[startLetter] != null) {
         hashMapCountdown[startLetter]++;
-        if(hashMapCountdown[startLetter] > 0) matchCountdown++;
+        if (hashMapCountdown[startLetter] > 0) matchCountdown++;
       }
       start++;
     }
   }
 
   return minString;
-} // T:O(N+P) S:O(1) Pmax = 26 letters
+}; // T:O(N+P) S:O(1) Pmax = 26 letters
