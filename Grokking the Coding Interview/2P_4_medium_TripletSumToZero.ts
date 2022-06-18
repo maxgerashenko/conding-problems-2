@@ -4,52 +4,38 @@
 // Given an array of unsorted numbers, find all unique triplets in it that add up to zero.
 
 const search_triplets = function (arr) {
-  // find all unque triplets with sum === 0, in unsored array
-  // init results
-  // sort array
-  // iterate array
-  // skip duplicates, if i == i-1
-  // use 2 pointers from 2 sides
-  // add to result if summ is equal 0;
-  // skip start duplicates if start-1 == start
-  // skip end duplicates if end == end+1
-  // return results
-
-  // init results
+  // sort
+  // check sum
+  // remove duplicates
   let triplets = [];
-
-  // sort array
   arr.sort((x, y) => x - y);
 
-  // iterate array
   for (let i = 0; i < arr.length - 2; i++) {
-    // skip duplicate for 1rst num
-    if (i > 0 && arr[i - 1] == arr[i]) i++;
-
-    // use 2 pointers from 2 sides
     let start = i + 1;
     let end = arr.length - 1;
     while (start < end) {
       if (arr[i] + arr[start] + arr[end] === 0) {
-        // !!! push arr []
         triplets.push([arr[i], arr[start], arr[end]]);
-        start++;
-        end--;
 
-        // skip duplicates for start
-        while (start < end && arr[start - 1] == arr[start]) start++;
-        while (start < end && arr[end] == arr[end + 1]) end--;
+        while (start < end && arr[start] === arr[start + 1]) {
+          start++;
+        }
+        while (start < end && arr[end] === arr[end - 1]) {
+          end--;
+        }
       }
 
-      // !!! arr[i] is negative
-      if (arr[start] + arr[end] < -arr[i]) start++;
-      if (arr[start] + arr[end] > -arr[i]) end--;
+      if (arr[i] + arr[start] + arr[end] > 0) {
+        end--;
+        continue;
+      }
+      start++;
     }
   }
-
-  // return result
+  console.log('---');
   return triplets;
-}; // T:O(N log N) + O(N^2) === O(N2) S:O(N) - required for sorting
+}; // T: (NlogN + N^2) S:(N)
+
 
 // def search_triplets(arr):
 //   # sort array
