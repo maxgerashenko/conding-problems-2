@@ -36,7 +36,6 @@ const search_triplets = function (arr) {
   return triplets;
 }; // T: (NlogN + N^2) S:(N)
 
-
 // def search_triplets(arr):
 //   # sort array
 //   # iterate third
