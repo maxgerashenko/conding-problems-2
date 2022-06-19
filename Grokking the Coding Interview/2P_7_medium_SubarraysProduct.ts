@@ -8,15 +8,14 @@
 // interate and take all of them
 
 const find_subarrays = function (arr, target) {
-  let result = [];
-
+  const result = [];
   let start = 0;
   let end = 0;
-  let product = arr[0];
-  while (start <= end && end < arr.length) {
+  let product = arr[start];
+
+  while (end < arr.length) {
     if (product < target) {
-      result.push(arr.slice(start, end + 1));
-      for (let i = start + 1; i <= end; i++) { // and asingle parts of subarray
+      for (let i = start; i <= end; i++) {
         result.push(arr.slice(i, end + 1));
       }
       end++;
@@ -28,7 +27,7 @@ const find_subarrays = function (arr, target) {
   }
 
   return result;
-}; // T:O(NlogN N^2) S:O(N)
+}; // T:O(N*N*N) S:O(N)
 
 // def find_subarrays(arr, target):
 //   result = []
