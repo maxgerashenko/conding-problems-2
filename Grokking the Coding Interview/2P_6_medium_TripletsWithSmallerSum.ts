@@ -60,17 +60,17 @@ const triplet_with_smaller_sum = function (arr, target) {
 // Return triplets
 
 function triplet_with_smaller_sum(arr, target) {
-  arr.sort((x,y) => x - y);
+  arr.sort((x, y) => x - y);
   let triplets = [];
 
   for (let i = 0; i < arr.length; i++) {
     let start = i + 1;
-    let end = arr.length-1;
+    let end = arr.length - 1;
     while (start < end) {
       let sum = arr[i] + arr[start] + arr[end];
       if (sum < target) {
         let tmp = start;
-        while(tmp < end){
+        while (tmp < end) {
           let sum = arr[i] + arr[tmp] + arr[end];
           if (sum < target) triplets.push([arr[i], arr[tmp], arr[end]]);
           tmp++;

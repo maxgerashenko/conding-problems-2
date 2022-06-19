@@ -8,46 +8,27 @@
 // interate and take all of them
 
 const find_subarrays = function (arr, target) {
-  // Find the closest to target triple, if === return the smallest sum
-  // init minDiff = Infinity
-  // ini minSum = Infinity
-  //
-  // sort array
-  // iterate array i
-  // while start < end, coz new 3 numbers
-  // use 2 pointers from 2 sides
-  // update smallest diff
-  // base case, if sum === 0 return sum
-  // if cur diff is < minDiff update min sum
-  // if minDiff === cur sum
-  // check update minSum as min (minSum, cur)
-  // if cur sum > target, end --
-  // if cur sum < target < start ++
-  //
-  // !!! return -1 if minSum === Infinity
+  let result = [];
 
-  let arrs = [];
-
-  let start = 0,
-    end = 0,
-    product = arr[end];
+  let start = 0;
+  let end = 0;
+  let product = arr[0];
   while (start <= end && end < arr.length) {
     if (product < target) {
-      // All values between start and end arr valid
-      for (let i = start; i <= end; i++) {
-        arrs.push(arr.slice(i, end + 1));
+      result.push(arr.slice(start, end + 1));
+      for (let i = start + 1; i <= end; i++) { // and asingle parts of subarray
+        result.push(arr.slice(i, end + 1));
       }
       end++;
       product *= arr[end];
       continue;
     }
-
     product /= arr[start];
     start++;
   }
 
-  return arrs;
-};
+  return result;
+}; // T:O(NlogN N^2) S:O(N)
 
 // def find_subarrays(arr, target):
 //   result = []
