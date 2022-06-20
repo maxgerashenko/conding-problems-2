@@ -19,7 +19,6 @@ const dutch_flag_sort = function (arr) {
     }
     i++;
   }
-
   return arr;
 }; // T:O(n) S:O(1)
 
