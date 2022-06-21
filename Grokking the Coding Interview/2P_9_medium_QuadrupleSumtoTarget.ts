@@ -5,7 +5,7 @@
 
 // 2 for
 // 1 while
-// 4 check of d
+// 4 check of duplicates
 
 const search_quadruplets = function (arr, target) {
   arr.sort((x, y) => x - y);
@@ -42,4 +42,4 @@ const search_quadruplets = function (arr, target) {
     }
   }
   return quadruplets;
-}; // T(NlogN + N*N*N) S:O(N)
+}; // T(NlogN + N^3) S:O(N)
