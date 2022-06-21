@@ -34,6 +34,5 @@ const backspace_compare = function (str1, str2) {
     j--;
   }
 
-  return i===j;
+  return i === j;
 }; // T:O(N+M) S:O(1)
-
