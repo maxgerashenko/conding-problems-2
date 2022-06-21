@@ -13,28 +13,15 @@ const shortest_window_sort = function (arr) {
   let start = 1;
   let end = arr.length - 2;
 
-  while (arr[start] > arr[start - 1] && start <= end) {
-    start++;
-  }
+  while (arr[start] >= arr[start - 1] && start <= end) start++;
+  while (arr[end] <= arr[end + 1] && start <= end) end--;
 
-  while (arr[end - 1] < arr[end] && start <= end) {
-    end--;
-  }
+  let max = arr.slice(start, end + 1).reduce((max, el) => Math.max(max, el), Number.MIN_SAFE_INTEGER);
+  let min = arr.slice(start, end + 1).reduce((min, el) => Math.min(min, el), Number.MAX_SAFE_INTEGER);
 
-  let min = Number.MAX_SAFE_INTEGER;
-  let max = Number.MIN_SAFE_INTEGER;
-  for (let i = start; i <= end; i++) {
-    min = Math.min(min, arr[i]);
-    max = Math.max(max, arr[i]);
-  }
+  while (arr[start-1] > min) start--;
+  while (max > arr[end+1]) end++;
 
-  while (min < arr[start - 1]) {
-    start--;
-  }
-
-  while (max > arr[end + 1]) {
-    end++;
-  }
-
+  console.log(arr, arr[start], arr[end]);
   return end - start + 1;
-}; // T:O(N) S:O(N)
+}; // T:O(N) S:O(1)
