@@ -36,6 +36,5 @@ const shortest_window_sort = function (arr) {
     end++;
   }
 
-  return (end - start + 1);
+  return end - start + 1;
 }; // T:O(N) S:O(N)
-
