@@ -13,5 +13,5 @@ const has_cycle = function (head) {
     if (fast && slow && fast.value === slow.value) return true;
   }
 
-  return false
-} // T:O(N) S:O(N)
+  return false;
+}; // T:O(N) S:O(N)
