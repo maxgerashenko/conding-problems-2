@@ -3,21 +3,15 @@
 
 // Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.
 
-const has_cycle = function(head) {
-  // find the cycle
-  // use 2 fast and slop pointers from one side
-  // if fast is equal null there is no cycle
-  // if fast === slow there is a cycle
-
-  // !!! use let
-  let slow = head;
+const has_cycle = function (head) {
   let fast = head;
+  let slow = head;
 
-  while (fast != null && fast.next) {
+  while (slow != null && slow.next != null) {
     slow = slow.next;
-    fast = fast.next.next;
-    if (fast == slow) return true;
+    fast = fast && fast.next && fast.next.next;
+    if (fast && slow && fast.value === slow.value) return true;
   }
 
-  return false;
-};
+  return false
+} // T:O(N) S:O(N)
