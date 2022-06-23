@@ -3,7 +3,7 @@
 
 // Given the head of a Singly LinkedList that contains a cycle, write a function to find the starting node of the cycle.
 
-const find_cycle_start = function(head) {
+const find_cycle_start = function (head) {
   // use Floyds algorithm to find the start of the cycle
   // use slow and fast pointer to find a meeting point
   // the distance between the meeting point and cycle start
@@ -14,25 +14,18 @@ const find_cycle_start = function(head) {
   // - when start will equal meeting point
   // - then end will equal cycle start
 
-  // find meeting point
-  let slow = head;
-  let fast = head;
-  let meetingPoint, start;
-  while (meetingPoint == null) {
+const find_cycle_start = function (head) {
+  let slow = head && head.next;
+  let fast = slow && slow.next;
+
+  while (fast && slow && fast.value !== slow.value) {
     slow = slow.next;
     fast = fast.next && fast.next.next;
-
-    if (slow == fast) {
-      meetingPoint = fast;
-      slow = head;
-    }
   }
-
-  // find cycle start
-  while (start != fast) {
-    start = start.next;
+  slow = head;
+  while (slow.value !== fast.value) {
+    slow = slow.next;
     fast = fast.next;
   }
-
-  return start;
-}; // O(n) + O(n) === O(n); O(1)
+  return slow;
+}; // T:O(N) S:O(1)

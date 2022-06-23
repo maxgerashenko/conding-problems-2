@@ -1,7 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/3j5GD3EQMGM
 // Middle of the LinkedList
 
-const find_middle_of_linked_list = function(head) {
+const find_middle_of_linked_list = function (head) {
   // return the middle node of the single linked list
   // use 2 pointes from 1 side, fast and slow
   // fast is fast.next.next
