@@ -9,10 +9,9 @@
 const is_palindromic_linked_list = function (head) {
   let slow = head;
   let fast = head;
-
   while (fast.next && fast.next.next) {
     slow = slow.next;
-    fast = fast.next.next
+    fast = fast.next.next;
   }
 
   let pre = slow;
@@ -20,7 +19,7 @@ const is_palindromic_linked_list = function (head) {
   while (start.next) {
     let tmp = start.next;
     start.next = tmp.next;
-    tmp.next = pre.next
+    tmp.next = pre.next;
     pre.next = tmp;
   }
 
@@ -33,4 +32,4 @@ const is_palindromic_linked_list = function (head) {
   }
 
   return true;
-}; // T:O(N) S:(1)
+}; // T:O(N) S:O(1)
