@@ -6,13 +6,11 @@
 const reorder = function (head) {
   let fast = head;
   let slow = head;
-
   while (fast.next && fast.next.next) {
-    slow = slow.next;
     fast = fast.next.next;
+    slow = slow.next;
   }
-
-  let pre = slow;
+  let pre = slow.next;
   let start = pre.next;
   while (start.next) {
     let tmp = start.next;
@@ -23,16 +21,15 @@ const reorder = function (head) {
 
   let first = head;
   let second = pre.next;
-  pre.next = null; 
-  while (first && second) {
+  pre.next = null;
+  while (first.next && second.next) {
     let tmp = first.next;
     first.next = second;
     first = tmp;
-
     tmp = second.next;
     second.next = first;
     second = tmp;
   }
 
   return first;
-}; // T:O(N) S:O(1)
+} // T:O(N) S:O(1)
