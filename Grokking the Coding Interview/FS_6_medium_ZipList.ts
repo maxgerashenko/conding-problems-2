@@ -18,7 +18,6 @@ const reorder = function (head) {
     tmp.next = pre.next;
     pre.next = tmp;
   }
-
   let first = head;
   let second = pre.next;
   pre.next = null;
@@ -32,4 +31,4 @@ const reorder = function (head) {
   }
 
   return first;
-} // T:O(N) S:O(1)
+}; // T:O(N) S:O(1)
