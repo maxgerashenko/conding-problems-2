@@ -14,27 +14,26 @@
 // Output: true
 // Explanation: The array has a cycle among indices: 0 -> 1 -> 3 -> 0
 
-const next = (index, arr, hashMapSum) => {
-  let sum = index + arr[index];
-  if(hashMapSum[sum] != null ) return hashMapSum[sum];
-  hashMapSum[sum] = sum > 0 ? sum % arr.length :
-    (arr.length - sum) % arr.length;
-  return hashMapSum[sum];
+let next = (index, arr, hashMapIndex) => {
+  let val = arr[index];
+  let sum = index + val;
+  if (hashMapIndex.has({ index, val })) return hashMapIndex.get({ index, val });
+  let next = sum > 0 ? sum % arr.length : (arr.length - sum) % arr.length;
+  hashMapIndex.set({ index, val }, next);
+  return next;
 }
-
 const circular_array_loop_exists = function (arr) {
-  let hashMapSum = {};
+  let hashMapIndex = new Map();
   for (let i in arr) {
-    let slow = +i;
     let fast = +i;
-    let isForward = arr[slow] > 0;
+    let slow = +i;
+    let isForward = arr[slow];
     while (true) {
-      slow = next(slow, arr, hashMapSum);
-      fast = next(next(fast, arr, hashMapSum), arr, hashMapSum);
-
+      slow = next(slow, arr, hashMapIndex);
+      fast = next(next(fast, arr, hashMapIndex), arr, hashMapIndex);
       if (arr[slow] > 0 ? !isForward : isForward) break;
       if (slow === fast) return true;
     }
   }
   return false;
-}; // T:O(N^2) S:O(1)  | T:O(N) S:O(N)
+}; // T:O(N) S:O(N) || T:O(N^2) S:O(1)
