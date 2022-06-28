@@ -21,7 +21,7 @@ let next = (index, arr, hashMapIndex) => {
   let next = sum > 0 ? sum % arr.length : (arr.length - sum) % arr.length;
   hashMapIndex.set({ index, val }, next);
   return next;
-}
+};
 const circular_array_loop_exists = function (arr) {
   let hashMapIndex = new Map();
   for (let i in arr) {
