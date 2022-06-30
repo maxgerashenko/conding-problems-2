@@ -3,7 +3,7 @@
 
 // Given two lists of intervals, find the intersection of these two lists. Each list consists of disjoint intervals sorted on their start time.
 
-const merge = function(intervals_a, intervals_b) {
+const merge = function (intervals_a, intervals_b) {
   // intersections
 
   // intervals are sorted
