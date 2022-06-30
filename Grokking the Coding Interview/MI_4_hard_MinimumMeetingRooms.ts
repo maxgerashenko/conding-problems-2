@@ -5,32 +5,32 @@
 // T:O(NlogN + N S:O(N)
 
 class Heap {
-  constructor(sort){
+  constructor(sort) {
     this.sort = sort;
-    this.arr= [];
+    this.arr = [];
   }
-  add(val){
+  add(val) {
     this.arr.push(val);
     this.arr.sort(this.sort);
   }
-  pop(){
+  pop() {
     this.arr.shift();
   }
-  getEl(){
+  getEl() {
     return this.arr[0];
   }
-  getLen(){
+  getLen() {
     return this.arr.length;
   }
 }
 
-const min_meeting_rooms = function(meetings) {
+const min_meeting_rooms = function (meetings) {
   let maxCount = 0;
-  meetings.sort((x,y)=> x.start - y.start);
-  let minHeap = new Heap((x,y)=>x.end-y.end);
+  meetings.sort((x, y) => x.start - y.start);
+  let minHeap = new Heap((x, y) => x.end - y.end);
   minHeap.add(meetings.shift());
-  for(meeting of meetings){
-    while(minHeap.getEl() && minHeap.getEl().end <= meeting.start){
+  for (meeting of meetings) {
+    while (minHeap.getEl() && minHeap.getEl().end <= meeting.start) {
       minHeap.pop();
     }
     minHeap.add(meeting);
