@@ -5,37 +5,37 @@
 // T:O(NlogN + N S:O(N)
 
 class Heap {
-  constructor(isMax = false) {
-    this.isMax = isMax;
-    this.arr = [];
+  constructor(sort){
+    this.sort = sort;
+    this.arr= [];
   }
-  add(el) {
-    this.arr.push(el);
-    this.arr.sort((x, y) => (!this.isMax ? x.end - y.end : y.end - x.end));
+  add(val){
+    this.arr.push(val);
+    this.arr.sort(this.sort);
   }
-  getEl() {
+  pop(){
+    this.arr.shift();
+  }
+  getEl(){
     return this.arr[0];
   }
-  pop() {
-    return this.arr.shift();
-  }
-  getLength() {
+  getLen(){
     return this.arr.length;
   }
 }
 
-const min_meeting_rooms = function (meetings) {
-  meetings.sort((x, y) => x.start - y.start);
-  let maxCount = 1;
-  let minHeap = new Heap();
+const min_meeting_rooms = function(meetings) {
+  let maxCount = 0;
+  meetings.sort((x,y)=> x.start - y.start);
+  let minHeap = new Heap((x,y)=>x.end-y.end);
   minHeap.add(meetings.shift());
-  for (let meeting of meetings) {
-    while (minHeap.getEl() && minHeap.getEl().end <= meeting.start) {
+  for(meeting of meetings){
+    while(minHeap.getEl() && minHeap.getEl().end <= meeting.start){
       minHeap.pop();
     }
     minHeap.add(meeting);
-    maxCount = Math.max(maxCount, minHeap.getLength());
+    maxCount = Math.max(maxCount, minHeap.getLen());
   }
 
   return maxCount;
-}; // T:O(NLogN) S:O(1) | T:O(NlogN N*(N-1) S:O(1)
+}; // T:O(NlogN) S:O(N)
