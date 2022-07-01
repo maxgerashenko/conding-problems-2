@@ -1,7 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/3wEkKy6Pr9A
 // Find the Duplicate Number
 
-const find_duplicate = function(nums) {
+const find_duplicate = function (nums) {
   // Find a duplicate number
   //
   // iterate array
