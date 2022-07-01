@@ -7,17 +7,17 @@
 // Outer loop process all elements
 // Inner `while` loop processes each element only once
 
-const smallest_subarray_sum = function(s, arr) {
+const smallest_subarray_sum = function (s, arr) {
   let min = Number.MAX_SAFE_INTEGER;
   let sum = 0;
   let start = 0;
-  for(let end=0;end<arr.length;end++) {
+  for (let end = 0; end < arr.length; end++) {
     sum += arr[end];
-    while(sum >= s){
+    while (sum >= s) {
       min = Math.min(min, end - start + 1);
       sum -= arr[start];
       start++;
     }
   }
-  return min
+  return min;
 }; // T:O(N) S:O(1)
