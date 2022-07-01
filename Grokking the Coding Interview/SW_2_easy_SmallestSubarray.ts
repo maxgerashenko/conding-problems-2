@@ -7,29 +7,17 @@
 // Outer loop process all elements
 // Inner `while` loop processes each element only once
 
-const smallest_subarray_with_given_sum = function(s, arr) {
-  // find the length of the smallest subarray whose sum
-  // is >= equal s
-  // init sum
-  // init min length = Infinity
-  // iterate the array
-  // use 2 pointers from 1 side as a sliding window
-  // when sum >= s, update the min width
-  // return 0 if it is Infinity, or min length
-
-  // not 0, need to use Infinity for min value
-  let minLength = Infinity;
-
-  let start = 0,
-    sum = 0;
-  for (let end = 0; end < arr.length; end++) {
+const smallest_subarray_sum = function(s, arr) {
+  let min = Number.MAX_SAFE_INTEGER;
+  let sum = 0;
+  let start = 0;
+  for(let end=0;end<arr.length;end++) {
     sum += arr[end];
-    while (sum >= s) {
-      minLength = Math.min(length, end - start + 1);
+    while(sum >= s){
+      min = Math.min(min, end - start + 1);
       sum -= arr[start];
       start++;
     }
   }
-
-  return minLength == Infinity ? 0 : minLength;
-}; // O(N+N),
+  return min
+}; // T:O(N) S:O(1)
