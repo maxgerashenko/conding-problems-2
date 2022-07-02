@@ -4,3 +4,4 @@
 // class Heap {
 // minHeap insert T:(log K) S:(K)
 // max = Math.max
+// for in i; +i
