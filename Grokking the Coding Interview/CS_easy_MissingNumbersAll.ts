@@ -1,16 +1,16 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/Y52qNM0ljWK
 // Find all Missing Numbers
 
-const find_missing_numbers = function(nums) {
-  // find duplicates
-  //
-  // iterate array,
-  // swap when [i] != [i]-1, 2=2=2
-  // iterate array
-  // add num when [i] != [i-1] 2=2=2
-  // return missing numbers
+// find duplicates
+//
+// iterate array,
+// swap when [i] != [i]-1, 2=2=2
+// iterate array
+// add num when [i] != [i-1] 2=2=2
+// return missing numbers
 
-  // conners case
+// conners case
+const find_missing_numbers = function (nums) {
   if (nums.length === 0) return [];
 
   let i = 0;
