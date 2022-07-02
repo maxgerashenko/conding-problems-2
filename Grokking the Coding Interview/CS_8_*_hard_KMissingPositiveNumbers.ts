@@ -14,17 +14,4 @@
 // find [i] !== i+1 and >0 and not it ther set
 
 // conner case
-const find_first_smallest_missing_positive = function (nums) {
-  for (let i in nums) {
-    while (nums[i] !== +i && nums[i] >= 0) {
-      let val = nums[i];
-      [nums[i], nums[val]] = [nums[val], nums[i]];
-    }
-  }
-
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== +i || nums[i] == null) return +i;
-  }
-
-  return -1;
-}; // T:O(N+N-1+N-1) S:O(N)
+find_first_k_missing_positive;
