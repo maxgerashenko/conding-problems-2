@@ -14,19 +14,21 @@
 // find [i] !== i+1 and >0 and not it ther set
 
 // conner case
-const find_first_k_missing_positive = function (nums, k) {
-  const result = [];
-  for (let i in nums) {
-    while (nums[i] !== +i && nums[i] >= 0 && nums[nums[i]] != nums[i]) {
+const find_first_k_missing_positive = function(nums, k) {
+  let result = [];
+  for(let i in nums){
+    while(nums[i] >= 0 && nums[i] !== i && nums[i] !== nums[nums[i]]){
       let val = nums[i];
       [nums[i], nums[val]] = [nums[val], nums[i]];
     }
   }
-
   let i = 1;
-  while (result.length < k) {
-    if (nums[i] != +i) result.push(i);
+  while(k > 0){
+    if(nums[i] !== i) {
+      result.push(i);
+      k--;
+    }
     i++;
   }
   return result;
-}; // T:O(N + N-1 + K) S:O(K)
+}; // T:O(N+K) S:O(K)
