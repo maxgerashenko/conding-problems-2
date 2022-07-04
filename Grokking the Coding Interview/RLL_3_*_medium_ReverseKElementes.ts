@@ -5,27 +5,22 @@
 // If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too.
 
 const reverse_every_k_elements = function (head, k) {
-  // conner case
-  if (!head || !head.next || k < 1) return head;
-
   let pre = new Node();
   pre.next = head;
-  let root = pre;
-
+  let origin = pre;
   let cur = pre.next;
-  while (cur.next) {
-    let count = k;
-    cur = pre.next;
-    while (cur.next && count > 1) {
-      let tmp = cur.next;
-      cur.next = tmp.next;
-      tmp.next = pre.next;
-      pre.next = tmp;
-      count--;
+  let count = k - 1;
+  while (cur && cur.next) {
+    let tmp = cur.next;
+    cur.next = tmp.next;
+    tmp.next = pre.next;
+    pre.next = tmp;
+    count--;
+    if (count === 0) {
+      pre = cur;
+      cur = cur.next;
+      count = k - 1;
     }
-    pre = cur;
   }
-
-  // base case
-  return root.next;
-}; // T:O(n) S:O(1)
+  return origin.next;
+}; // T:O(N) S:O(1)
