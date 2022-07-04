@@ -25,4 +25,4 @@ const reverse_alternate_k_elements = function (head, k) {
   }
 
   return origin.next;
-}; // T:O(N) S:O
+}; // T:O(N) S:O(1)
