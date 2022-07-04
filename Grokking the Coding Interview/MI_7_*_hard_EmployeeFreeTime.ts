@@ -41,3 +41,23 @@ const find_employee_free_time = function (schedule) {
   }
   return result;
 }; // T:O(N) S:O(N)
+
+// with sort
+const find_max_cpu_load = function (jobs) {
+  jobs.sort((x, y) => x.start - y.start);
+  let { start: minStart, end: maxEnd, cpu_load: load } = jobs[0];
+  let maxLoad = load;
+  for (let i = 1; i < jobs.length; i++) {
+    let { start, end, cpu_load } = jobs[i];
+    if (start > maxEnd) {
+      maxLoad = Math.max(maxLoad, load);
+      load = cpu_load;
+      minStart = start;
+      maxEnd = end;
+      continue;
+    }
+    load += cpu_load;
+    maxEnd = Math.max(maxEnd, end);
+  }
+  return Math.max(maxLoad, load);
+}; // T:O(NlogN) S:O(N)

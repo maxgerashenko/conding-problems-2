@@ -5,28 +5,43 @@
 
 // Brute force T:O(NlogN) S:(N)
 
+
+
 class Heap {
   constructor(sort) {
-    this.sort = sort;
     this.arr = [];
+    this.sort = sort;
   }
-  add(el) {
+  push(el) {
     this.arr.push(el);
-    this.arr.sort((x, y) => this.sort);
+    this.arr.sort(this.sort);
   }
-  remove() {
-    return this.arr.pop();
-  }
-  getEl() {
-    return this.arr[0];
-  }
-  getLength() {
-    return this.arr.length();
-  }
-  getTotalLoad() {
-    return this.arr.reduce((res, cur) => res + cur.cpu_load, 0);
+  pop() {
+    return this.arr.shift();
   }
 }
+
+const find_max_cpu_load = function(jobs) {
+  let minHeap = new Heap((x,y)=>x.start - y.start);
+  for(let job of jobs){
+    minHeap.push(job);
+  }
+  let {start:minStart, end:maxEnd, cpu_load: load} = minHeap.pop();
+  let maxLoad = load;
+  while(minHeap.arr.length > 0){
+    let {start, end, cpu_load} = minHeap.pop();
+    if(start > maxEnd) {
+      maxLoad = Math.max(maxLoad, load);
+      load = cpu_load;
+      minStart = start;
+      maxEnd = end;
+      continue;
+    }
+    load += cpu_load;
+    maxEnd = Math.max(maxEnd, end);
+  }
+  return Math.max(maxLoad, load)
+}; // T:O(logN) S:O(N)
 
 const find_max_cpu_load = function (jobs) {
   jobs.sort((x, y) => x.start - y.start);
