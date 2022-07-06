@@ -5,8 +5,6 @@
 // Problem Statement#
 // Given a binary tree and a number ‘S’, find all paths from root-to-leaf such that the sum of all the node values of each path equals ‘S’.
 
-
-
 function DFS({ value, left, right }, sum, allPaths, path = []) {
   if (!left && !right) {
     if (sum === value) allPaths.push([...path, value]);
