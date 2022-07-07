@@ -2,17 +2,9 @@
 //
 // Path ith Given Sequence
 
-const find_path = function (node, sequence = []) {
-  // base case
-  if (!node && sequence && sequence.length === 0) return true;
-
-  // conner case
-  if (!node) return false;
-
-  let { left, right, value } = node;
-  let el = sequence.shift();
-
-  if (value !== el) return false;
-
-  return find_path(left, sequence) || find_path(right, sequence);
-}; // T:O(n) S:O(n) - worse case for linked list call stack
+const find_path = function ({ value, left, right }, sequence) {
+  let seq = [...sequence];
+  if (seq.shift() !== value) return false;
+  if (!left && !right) return true;
+  return (left && find_path(left, seq)) || (right && find_path(right, seq));
+}; // T:O(N) S:(N) - worse case for linked list call stack
