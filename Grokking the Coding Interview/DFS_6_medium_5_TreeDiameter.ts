@@ -11,15 +11,15 @@ class TreeDiameter {
     this.treeDiameter = 0;
     this.max = 0;
   }
-  dfs({right, left}) {
-    if(!right && !left) return 1;
-    let l = left && this.dfs(left) || 0;
-    let r = right && this.dfs(right) || 0;
+  dfs({ right, left }) {
+    if (!right && !left) return 1;
+    let l = (left && this.dfs(left)) || 0;
+    let r = (right && this.dfs(right)) || 0;
     this.max = Math.max(this.max, l + r + 1);
     return Math.max(l, r) + 1;
   }
   find_diameter(root) {
     this.dfs(root).length;
-    return this.max
+    return this.max;
   }
 } // T:O(N) S:O(N|O(logN) - recurcive stack
