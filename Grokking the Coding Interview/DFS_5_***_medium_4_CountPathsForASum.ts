@@ -8,14 +8,18 @@
 //       3 3 3   3 3 3
 //             4 4 4 4
 
-const count_paths = function(node, target, path = []) {
-  let count = sum = 0;
-  if(!node) return 0;
-  let {value, left, right} = node;
+const count_paths = function (node, target, path = []) {
+  let count = (sum = 0);
+  if (!node) return 0;
+  let { value, left, right } = node;
   path.push(value);
-  for(let i = path.length-1;i>0;i--){
+  for (let i = path.length - 1; i > 0; i--) {
     sum += path[i];
     sum === target && count++;
   }
-  return count + count_paths(left, target, [...path]) + count_paths(right, target, [...path])
+  return (
+    count +
+    count_paths(left, target, [...path]) +
+    count_paths(right, target, [...path])
+  );
 }; // T:O(N^2) | O(NlogN) S:O(N)
