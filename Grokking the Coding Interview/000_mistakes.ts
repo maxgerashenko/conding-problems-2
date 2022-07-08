@@ -9,3 +9,4 @@
 // max = Math.max
 // for in i; +i
 // for in i: skip [null, 1]
+// this.arr.sort, but this.arr = this.arr.filter
