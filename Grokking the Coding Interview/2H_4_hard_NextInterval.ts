@@ -2,27 +2,25 @@
 //
 // Next Interval
 
-const find_next_interval = function (intervals) {
-  // init intervals;
-  let maxEnd = new Heap(true);
-  let maxStart = new Heap(true);
-  for (let index = 0; index < intervals.length; index++) {
-    maxEnd.push({ index, value: intervals[index].end });
-    maxStart.push({ index, value: intervals[index].start });
-  } // T: O(N log N)
-
-  // find next
+const find_next_interval = function(intervals) {
   let result = [];
-  while (maxEnd.length() > 0) {
-    let end = maxEnd.pop();
-
-    let start = null;
-    while (maxStart.length() > 0 && maxStart.element().value >= end.value) {
-      start = maxStart.pop();
+  let minStarts = [...intervals.sort((x,y)=>x.start-y.start)];
+  let minEnds = [...intervals.sort((x,y)=>x.end-y.end)];
+  let mapIndex = new Map();
+  for(let i in intervals){
+    mapIndex.set(intervals[i], i);
+  }
+  for(let minEnd of minEnds){
+    let index = mapIndex.get(minEnd);
+    for(let i in minStarts){
+      let minStart = minStarts[i];
+      if(minEnd.end > minStart.start) continue;
+      result[index] = mapIndex.get(minStart);
+      break;
     }
-
-    result[end.index] = start ? start.index : -1;
-  } // T: O(N log N)
-
-  return result;
-}; // T: O(N log N) S: O(N)
+    if(result[index] == null) {
+      result[index] = -1;
+    }
+  }
+  return result
+}; // T:O(NlogN) S:O(N)
