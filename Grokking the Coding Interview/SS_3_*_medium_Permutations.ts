@@ -3,20 +3,16 @@
 // Permutations
 
 const find_permutations = function (nums) {
-  let results = [[nums.shift()]];
-
-  for (let n of nums) {
+  let result = [[nums.shift()]];
+  for (let num of nums) {
     let copy = [];
-    for (let res of results) {
+    for (let res of result) {
       // covers right coner case
-      for (let r = 0; r <= res.length; r++) {
-        let left = res.slice(0, r); // [)
-        let right = res.slice(r);
-        copy.push([...left, n, ...right]);
+      for (let i = 0; i <= res.length; i++) {
+        copy.push([...res.slice(0, i), num, ...res.slice(i)]);
       }
+      result = copy;
     }
-    results = copy;
   }
-
-  return results;
+  return result;
 }; // T:(N*!N), N insert to the array  S:O(N*!N) !N mutations * each contain N elements
