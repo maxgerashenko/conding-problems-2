@@ -4,18 +4,15 @@
 
 const search_next_letter = function (arr, key) {
   let start = 0;
-  let end = arr.length - 1;
-  if (key > arr[end] || key < arr[start]) return arr[start];
+  let end = arr.length;
   while (start <= end) {
-    let mid = start + Math.floor((end - start) / 2);
-    let val = arr[mid];
-    if (key === val) return val;
-    if (key < val) {
-      end = mid - 1;
+    let mid = Math.floor(start / 2 + end / 2);
+    if (arr[mid] === key) return key;
+    if (key > arr[mid]) {
+      start = mid + 1;
       continue;
     }
-    start = mid + 1;
+    end = mid - 1;
   }
-
-  return arr[start]; // start = end + 1;
+  return arr[start] > key ? arr[start] : arr[0];
 }; // T:O(logN) S:O(1)

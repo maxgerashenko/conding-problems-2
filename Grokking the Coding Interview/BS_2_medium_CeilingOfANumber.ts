@@ -18,5 +18,5 @@ const search_ceiling_of_a_number = function (arr, key) {
   return -1;
 }; // T:O(logN) S:(1)
 
-// max that 
+// max that < key
 // if(key > arr[start-1]) return arr[start-1]
