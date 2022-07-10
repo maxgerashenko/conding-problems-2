@@ -7,14 +7,14 @@ const binary_search = function (arr, key) {
   let end = arr.length - 1;
   let isAscending = arr[start] < arr[end];
   while (start <= end) {
-    let mid = start + Math.floor((end - start) / 2);
-    let val = arr[mid];
-    if (key === val) return mid;
-    if ((key < val && isAscending) || (key > val && !isAscending)) {
-      end = mid - 1;
+    let mid = Math.floor(end / 2 + start / 2);
+    if (arr[mid] === key) return mid;
+    if ((isAscending && key > arr[mid]) || (!isAscending && key < arr[mid])) {
+      start = mid + 1;
       continue;
     }
-    start = mid + 1;
+    end = mid - 1;
+    continue;
   }
   return -1;
 }; // T:O(logN) S:O(1)

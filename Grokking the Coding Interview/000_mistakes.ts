@@ -10,3 +10,9 @@
 // for in i; +i
 // for in i: skip [null, 1]
 // this.arr.sort, but this.arr = this.arr.filter
+
+// Subsets
+
+// Binary search
+//  Problem: Math.floor selects left side
+//      FIstart = mid+1 or end = mid-1
