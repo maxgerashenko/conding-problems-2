@@ -15,4 +15,4 @@
 
 // Binary search
 //  Problem: Math.floor selects left side
-//      FIstart = mid+1 or end = mid-1
+//      Fix: start = mid+1 or end = mid-1
