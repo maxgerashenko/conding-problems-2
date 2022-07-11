@@ -2,7 +2,6 @@
 //
 // Number Range
 
-
 function bs(arr, key, isMinIndex = true) {
   let start = 0;
   let end = arr.length;

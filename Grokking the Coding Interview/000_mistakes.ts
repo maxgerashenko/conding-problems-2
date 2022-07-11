@@ -14,5 +14,6 @@
 // Subsets
 
 // Binary search
-//  Problem: Math.floor selects left side
-//      Fix: start = mid+1 or end = mid-1
+//      mid = Math.floor(end/2 + start/2);
+//          Problem: Math.floor selects left side
+//          Fix: start = mid+1 || end = mid-1
