@@ -14,7 +14,24 @@
 // Subsets
 
 // Binary search
-//      mid = Math.floor(end/2 + start/2);
-//          Problem: Math.floor selects left side
-//          Fix: start = mid+1 || end = mid-1
-//      at the end [5,6] start = 6, end = 5 X=
+// function bs(arr, key) {
+//   let start = 0;
+//   let end = arr.length;
+//   while (start <= end) {
+//     let mid = Math.floor(start / 2 + end / 2);
+//     if (arr[mid] === key) return mid;
+//     if (key > arr[mid]) {
+//       start = mid + 1;
+//       continue;
+//     }
+//     end = mind - 1;
+//   }
+//   return -1;
+// }
+// mid = Math.floor(start + (end - start) / 2);
+// Problem: MAX_SAFE_INTEGER;
+// Fix: start + (end - start) / 2
+// Problem: Math.floor selects left side
+// mid = Math.floor(start + (end - start) / 2);
+// Fix: start = mid+1 || end = mid-1
+// at the end if key is not found start === end + 1

@@ -15,5 +15,5 @@ const find_max_in_bitonic_array = function (arr) {
     end = mid;
   }
 
-  return arr[end]; // start = end
+  return arr[start]; // start = end
 }; // T:O(logN) S:O(1)
