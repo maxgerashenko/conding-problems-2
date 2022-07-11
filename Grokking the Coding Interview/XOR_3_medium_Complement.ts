@@ -2,17 +2,13 @@
 //
 // Complement of Base 10 Number
 
-function calculate_bitwise_complement(n) {
-  // number ^ complement = allSet
-  // find min max binar number
-  // convert it to the full of 1
-  // num xor full === complement
-
-  let minBigBinary = 1;
-  while (minBigBinary <= n) {
-    minBigBinary = minBigBinary << 1; // minFull * 2;
-  } // should be > like not 8 for 8
-
-  let allSet = minBigBinary - 1; // 8 === 111 + 1
-  return allSet ^ n; // 0 ^ 1 = 1; 1 ^ 1 === 0
-} // T:O(N) S:O(1);
+function calculate_bitwise_complement(num) {
+  let count = 0
+  let x = num;
+  while(x > 0){
+    count++;
+    x >>= 1; // remove bi
+  }
+  let full = Math.pow(2, count) - 1; // 111 = 2^4 - 1
+  return num ^ full // negative of num;
+} // T:O(N) S:(1)

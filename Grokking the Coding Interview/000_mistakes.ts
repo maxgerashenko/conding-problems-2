@@ -35,3 +35,8 @@
 // mid = Math.floor(start + (end - start) / 2);
 // Fix: start = mid+1 || end = mid-1
 // at the end if key is not found start === end + 1
+
+// XOR 
+// 4 ^= 4 // 0
+// 4 ^= 0 // 4
+//  nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
