@@ -17,3 +17,4 @@
 //      mid = Math.floor(end/2 + start/2);
 //          Problem: Math.floor selects left side
 //          Fix: start = mid+1 || end = mid-1
+//      at the end [5,6] start = 6, end = 5 X=
