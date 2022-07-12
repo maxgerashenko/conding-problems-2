@@ -7,7 +7,7 @@ function calculate_bitwise_complement(num) {
   let x = num;
   while(x > 0){
     count++;
-    x >>= 1; // remove bi
+    x >>= 1; // remove bits
   }
   let full = Math.pow(2, count) - 1; // 111 = 2^4 - 1
   return num ^ full // negative of num;

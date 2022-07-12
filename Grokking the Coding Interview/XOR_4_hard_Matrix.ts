@@ -1,14 +1,18 @@
+// https://www.educative.io/courses/grokking-the-coding-interview/xoExKDNWq8n
+//
+// Problem Statement (hard)
+
+// 1 ^ 1 === 0; 0 ^ 1 === 1;
 function flip_and_invert_image(matrix) {
-  // 1 ^ 1 === 0; 0 ^ 1 === 1;
-  // reverse half is (length + 1) / 2;
-  let length = matrix.length;
-  for (let row in matrix) {
-    for (let c = 0; c < Math.floor((length + 1) / 2); c++) {
-      let tmp = matrix[row][c];
-      matrix[row][c] = matrix[row][length - 1 - c] ^ 1;
-      matrix[row][length - 1 - c] = tmp ^ 1;
+  for(let i in matrix){
+    let len = matrix.length;
+    let half = Math.round(len/2);
+    for(let j=0;j<half; j++) {
+      let last = len - 1 - j;
+      let tmp = matrix[i][j];
+      matrix[i][j] = matrix[i][last] ^ 1
+      matrix[i][last] = tmp ^ 1
     }
   }
-
   return matrix;
 } // T:O(N) S:O(1)
