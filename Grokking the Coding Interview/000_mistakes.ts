@@ -37,6 +37,8 @@
 // at the end if key is not found start === end + 1
 
 // XOR 
-// 4 ^= 4 // 0
-// 4 ^= 0 // 4
-//  nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
+// X^= [1,1] // 0
+// X^= [1,1,2] // 2
+// 0 ^ 1 = 0; 1 ^ 1 = 0;
+// nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
+// half = Math.round(len/2); // includes the middle value
