@@ -2,7 +2,7 @@
 //
 // Subsets With Duplicates
 
-const find_results = function (
+const find_subsets = function (
   nums,
   results = [[]],
   pre = null,
@@ -12,12 +12,12 @@ const find_results = function (
   for (let num of nums) {
     let level = [];
     let options = num != pre ? results : preLevel;
-    for (let option of options) {
-      level.push([...option, num]);
+    for (let opt of options) {
+      level.push([...opt, num]);
     }
     pre = num;
     preLevel = level;
     results = [...results, ...level];
   }
   return results;
-}; // T:O(N^2N) S:O(N2^N)
+}; // T:O(N2^N) S:O(N2^N)
