@@ -2,25 +2,17 @@
 //
 // Evaluate
 
-const isNumber = (char) => !isNaN(Number(char));
-const map = {};
-const expression = function (input) {
-  if (map[input]) return map[input];
-  if (isNumber(input)) return [Number(input)]; // base case
-  let results = [];
-  for (let i = 0; i < input.length; i++) {
-    let char = input[i];
-    if (isNumber(char)) continue;
-    let left = expression(input.substring(0, i)); // [)
-    let right = expression(input.substring(i + 1));
-    for (let l of left) {
-      for (let r of right) {
-        if (char === '+') results.push(l + r);
-        if (char === '-') results.push(l - r);
-        if (char === '*') results.push(l * r);
+const evaluate = function (str, map = {}, result = []) {
+  if (map[str] != null) return map[str];
+  if (!isNaN(Number(str))) return [Number(str)];
+  for (let i = 0; i < str.length; i++) {
+    if (!isNaN(Number(str[i]))) continue;
+    for (let l of evaluate(str.slice(0, i))) {
+      for (let r of evaluate(str.slice(i + 1))) {
+        result.push(str[i] == '+' ? l + r : str[i] == '-' ? l - r : l * r);
       }
     }
   }
-  map[input] = [...results];
-  return results;
-}; // T:O(N*2^N) S:O(2^N) recursion n^4/Vn
+  map[str] = result;
+  return result;
+}; // T:(N2^N) S:O(2^N)
