@@ -10,8 +10,23 @@
 // for in i; +i
 // for in i: skip [null, 1]
 // this.arr.sort, but this.arr = this.arr.filter
+// never use for i
+// always use let left, no GlobalEventHandlersEventMap
 
 // Subsets
+// nums.sort((x,y) => x-y);
+// let result = [];
+// let preLevel = [];
+// let pre = null;
+// for(let num of nums) {
+//   let level = [];
+//   let options = num !== pre ? result : preLevel;
+//   for(let option of options){
+//     level.push([option, num]);
+//   }
+//   preLevel = level;
+//   result = level;
+// } // T:O(N^2N) S:O(2^N)
 
 // Binary search
 // function bs(arr, key) {
