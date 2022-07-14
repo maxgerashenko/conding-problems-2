@@ -48,8 +48,11 @@
 // at the end start > end
 
 // XOR
-// X^= [1,1] // 0
+// parseInt('11',2) // 3
+// x= 3; x.toString(2) // '11'
 // X^= [1,1,2] // 2
-// 0 ^ 1 = 0; 1 ^ 1 = 0;
+// X^1 invers 1->0; 0->1;
+// diff=1; diff<<=1 // '10';
+// xor & diff === 0; '10' & 1 // 0
 // nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
-// half = Math.round(len/2); // includes the middle value
+// to look all = Math.round(len/2); // includes the middle value

@@ -5,16 +5,13 @@
 // reverse the array
 // invert the value 0 ^ 1 = 1;
 
-// 1 ^ 1 === 0; 0 ^ 1 === 1;
-function flip_and_invert_image(matrix) {
-  for(let i in matrix){
-    let len = matrix.length;
-    let half = Math.round(len/2);
-    for(let j=0;j<half; j++) {
-      let last = len - 1 - j;
+// x^1 inverts 1->0 0->1
+function flip_and_invert_image(matrix, len = matrix.length) {
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < Math.round(len / 2); j++) {
       let tmp = matrix[i][j];
-      matrix[i][j] = matrix[i][last] ^ 1;
-      matrix[i][last] = tmp ^ 1;
+      matrix[i][j] = matrix[i][len - 1 - j] ^ 1;
+      matrix[i][len - 1 - j] = tmp ^ 1;
     }
   }
   return matrix;
