@@ -2,4 +2,4 @@
 //
 // Single Number
 
-const find_single_number = nums => nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
+const find_single_number = (arr) => arr.reduce((pre, el) => pre ^ el, 0); // T:O(N) S:O(1)
