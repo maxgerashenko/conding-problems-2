@@ -43,15 +43,11 @@
 //   }
 //   return -1;
 // }
-// mid = Math.floor(start + (end - start) / 2);
-// Problem: MAX_SAFE_INTEGER;
-// Fix: start + (end - start) / 2
-// Problem: Math.floor selects left side
-// mid = Math.floor(start + (end - start) / 2);
-// Fix: start = mid+1 || end = mid-1
-// at the end if key is not found start === end + 1
+// mid = Math.floor(start + (end - start) / 2) // FIX MAX_SAFE_INTEGER
+// Move: start = mid+1 || end = mid-1
+// at the end start > end
 
-// XOR 
+// XOR
 // X^= [1,1] // 0
 // X^= [1,1,2] // 2
 // 0 ^ 1 = 0; 1 ^ 1 = 0;

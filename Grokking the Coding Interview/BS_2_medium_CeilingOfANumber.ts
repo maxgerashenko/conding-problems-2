@@ -5,18 +5,15 @@
 const search_ceiling_of_a_number = function (arr, key) {
   let start = 0;
   let end = arr.length - 1;
+  if (key > arr[end]) return -1; // conner case
   while (start <= end) {
-    let mid = Math.floor(end / 2 + start / 2); // left
-    if (arr[mid] === key) return mid;
+    let mid = Math.floor(start + (end - start) / 2);
+    if (arr[mid] === key) return arr[mid];
     if (key > arr[mid]) {
       start = mid + 1;
       continue;
     }
     end = mid - 1;
   }
-  if (arr[start] > key) return start;
-  return -1;
-}; // T:O(logN) S:(1)
-
-// max that < key
-// if(key > arr[start-1]) return arr[start-1]
+  return arr[start];
+}; // T:O(logN) S:O(1)
