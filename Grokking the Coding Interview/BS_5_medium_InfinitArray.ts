@@ -4,14 +4,13 @@
 
 const search_in_infinite_array = function (reader, key) {
   let start = 0;
-  let end = 1;
-  while (key > reader.get(end)) {
-    let tmp = end;
-    end = (end - start + 1) * 2;
-    start = tmp + 1;
+  let end = 0;
+  while (reader.get(end) < key) {
+    start = end + 1;
+    end = (end + 1) * 2;
   }
   while (start <= end) {
-    let mid = Math.floor(end / 2 + start / 2);
+    let mid = Math.floor(start + (end - start) / 2);
     if (reader.get(mid) === key) return mid;
     if (key > reader.get(mid)) {
       start = mid + 1;
@@ -20,4 +19,4 @@ const search_in_infinite_array = function (reader, key) {
     end = mid - 1;
   }
   return -1;
-}; // T:O(logN) S:O(1)
+}; // T:O(logN + logN) S:O(1)
