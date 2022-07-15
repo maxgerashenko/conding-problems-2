@@ -2,18 +2,18 @@
 //
 // Bitonic Array Maximum
 
-const find_max_in_bitonic_array = function (arr) {
-  // catch error
-  let start = 0;
-  let end = arr.length - 1;
+const find_max_in_bitonic_array = function (
+  arr,
+  start = 0,
+  end = arr.length - 1
+) {
   while (start < end) {
-    let mid = start + Math.floor((end - start) / 2);
-    if (arr[mid] < arr[mid + 1]) {
-      start = mid + 1;
+    let mid = Math.floor(start + (end - start) / 2);
+    if (arr[mid] > arr[mid + 1]) {
+      end = mid;
       continue;
     }
-    end = mid;
+    start = mid + 1;
   }
-
-  return arr[start]; // start = end
-}; // T:O(logN) S:O(1)
+  return arr[start];
+}; // T:O(logN) S:O(N)
