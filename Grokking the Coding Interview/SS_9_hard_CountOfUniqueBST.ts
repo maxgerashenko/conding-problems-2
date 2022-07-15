@@ -2,18 +2,14 @@
 //
 // Count of Structurally Unique Binary Search Trees
 
-let map = {};
-const count_trees_BFS = function (n) {
-  if (map[n] != null) return map[n];
+function count_trees(n, hashMap = {}, count = 0) {
+  if (hashMap[n]) return hashMap[n];
   if (n <= 1) return 1; // base case;
-
-  let count = 0;
   for (let i = 1; i <= n; i++) {
-    let left = count_trees_BFS(i - 1);
-    let right = count_trees_BFS(n - i);
+    let left = count_trees(i - 1, hashMap);
+    let right = count_trees(n - i, hashMap);
     count += left * right;
   }
-
-  map[n] = count;
+  hashMap[n] = count;
   return count;
-}; // T:O(2^n) S:(2^n) 4n/Vn - no n* coz of recursion
+} // T:O(2^N) S:O(2^N) ; memp T:O(2^N) S:O(N)
