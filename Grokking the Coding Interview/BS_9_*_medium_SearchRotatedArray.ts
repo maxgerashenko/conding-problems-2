@@ -2,27 +2,28 @@
 //
 // Search in Rotated Array
 
-const search_rotated_array = function (arr, key) {
-  let start = 0;
-  let end = arr.length - 1;
+const search_rotated_array = function (
+  arr,
+  key,
+  start = 0,
+  end = arr.length - 1
+) {
   while (start <= end) {
-    let mid = Math.floor(end / 2 + start / 2);
-    if (arr[mid] === key) {
-      return arr[mid];
-    }
-    if (arr[start] < arr[mid]) {
-      if (arr[start] <= key && key <= arr[mid]) {
-        end = mid - 1;
+    let mid = Math.floor(start + (end - start) / 2);
+    if (arr[mid] === key) return arr[mid];
+    if (arr[mid] < arr[end]) {
+      if (key > arr[mid] && key <= arr[end]) {
+        start = mid + 1;
         continue;
       }
-      start = mid + 1;
+      end = mid;
       continue;
     }
-    if (arr[mid] <= key && key <= arr[end]) {
-      start = mid + 1;
+    if (key > arr[start] && key <= arr[mid]) {
+      end = mid;
       continue;
     }
-    end = mid - 1;
+    start = mid + 1;
   }
   return -1;
-}; // T:O(logN) S:(1)
+}; // T:O(logN) S:O(1)
