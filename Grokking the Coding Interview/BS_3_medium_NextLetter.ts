@@ -2,17 +2,18 @@
 //
 // Next Letter
 
-const search_next_letter = function (arr, key) {
+const search_next_letter = function (letters, key) {
   let start = 0;
-  let end = arr.length;
+  let end = letters.length - 1;
+  if (key > letters[end]) return letters[start]; // conner case
   while (start <= end) {
-    let mid = Math.floor(start / 2 + end / 2);
-    if (arr[mid] === key) return key;
-    if (key > arr[mid]) {
-      start = mid + 1;
+    let mid = Math.floor(start + (end - start) / 2);
+    if (letters[mid] === key) return letters[mid];
+    if (key < letters[mid]) {
+      end = mid - 1;
       continue;
     }
-    end = mid - 1;
+    start = mid + 1;
   }
-  return arr[start] > key ? arr[start] : arr[0];
+  return letters[start];
 }; // T:O(logN) S:O(1)
