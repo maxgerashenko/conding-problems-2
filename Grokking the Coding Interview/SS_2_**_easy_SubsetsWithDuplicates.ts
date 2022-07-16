@@ -2,22 +2,15 @@
 //
 // Subsets With Duplicates
 
-const find_subsets = function (
-  nums,
-  results = [[]],
-  pre = null,
-  preLevel = []
-) {
+const find_subsets = function (nums, subs = [[]], pre = null, preLevel = []) {
   nums.sort((x, y) => x - y);
   for (let num of nums) {
     let level = [];
-    let options = num != pre ? results : preLevel;
-    for (let opt of options) {
-      level.push([...opt, num]);
-    }
+    let options = num !== pre ? [...subs] : [...preLevel];
+    for (let opt of options) level.push([...opt, num]);
     pre = num;
-    preLevel = level;
-    results = [...results, ...level];
+    subs = [...subs, ...level];
+    preLevel = [...level];
   }
-  return results;
+  return subs;
 }; // T:O(N2^N) S:O(N2^N)

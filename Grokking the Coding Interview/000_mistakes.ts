@@ -1,7 +1,7 @@
+// lastIndex = nums.length-1;
 // sort T:O(NlogN) S(N)
 // minHeap insert T:(log K) S:(K)
 // minHeap all el NlogK if it's limited by K at once
-
 // if(pre && pre.val === key) return node;
 // sort (x.start, y.start) => s.start - y.start
 // this.
@@ -59,3 +59,4 @@
 // xor & diff === 0; '10' & 1 // 0
 // nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
 // to look all = Math.round(len/2); // includes the middle value
+// !!! (el & diff) === 0 - () are required

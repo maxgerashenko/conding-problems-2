@@ -6,13 +6,13 @@
 // invert the value 0 ^ 1 = 1;
 
 // x^1 inverts 1->0 0->1
-function flip_and_invert_image(matrix, len = matrix.length) {
-  for (let i = 0; i < len; i++) {
-    for (let j = 0; j < Math.round(len / 2); j++) {
-      let tmp = matrix[i][j];
-      matrix[i][j] = matrix[i][len - 1 - j] ^ 1;
-      matrix[i][len - 1 - j] = tmp ^ 1;
+function flip_and_invert_image(matrix) {
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < Math.round(matrix.length / 2); j++) {
+      let tmp = matrix[i][j] ^ 1;
+      matrix[i][j] = matrix[i][matrix.length - 1 - j] ^ 1;
+      matrix[i][matrix.length - j - 1] = tmp;
     }
   }
   return matrix;
-} // T:O(N) S:O(1)
+} // T:O(N/2) S:O(1)
