@@ -25,4 +25,4 @@ function generate_permutations(nums, index = 0, perms = [], results = []) {
     results.push(...generate_permutations(nums, index + 1, copy));
   }
   return results;
-} // S:O(N*N!) T:O(N*N! )
+} // S:O(N*N!) T:O(N*N!)
