@@ -15,7 +15,7 @@ const generate_permutations = function (nums, results = [[nums.shift()]]) {
     results = level;
   }
   return results;
-}; // T:O(N*N!) S:O(N*N!) N! permutations N the size of each
+}; // T:O(N*N!) S:O(N*N!)  N! permutations N the size of each
 
 function generate_permutations(nums, index = 0, perms = [], results = []) {
   if (index === nums.length) return [perms]; // base case
@@ -25,4 +25,4 @@ function generate_permutations(nums, index = 0, perms = [], results = []) {
     results.push(...generate_permutations(nums, index + 1, copy));
   }
   return results;
-} // S:O(N*N!) T:O(N*N!)
+} // S:O(N*N!) T:O(N*N! )
