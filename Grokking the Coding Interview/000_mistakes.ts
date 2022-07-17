@@ -29,7 +29,9 @@
 // } // T:O(N^2N) S:O(2^N)
 // Combination in binary tree node is
 // if(n<=1) return 1; // base case;
-// for 1<=n left i-1 * right n-i;
+// insert an el to the array (i=< arr.length) splice(i, 0, element)
+// let copy = [...arr]; copy.splice(i, 0, el) is insert
+// results = [[]] // array of arrays use 's'
 
 // Binary search
 // function bs(arr, key) {
