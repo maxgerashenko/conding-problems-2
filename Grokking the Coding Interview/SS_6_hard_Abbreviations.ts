@@ -2,28 +2,23 @@
 //
 // Abbreviations
 
-const isNumber = (el) => !isNaN(Number(el));
 const generate_generalized_abbreviation = function (word) {
-  word = word.split('');
-  let results = [[word.shift()], ['1']];
-
-  for (let w of word) {
-    let copy = [];
-    for (let res of results) {
-      copy.push([...res, w]); // add letter
-
-      // add number
-      let last = res.length - 1;
-      if (!isNumber(res[last])) {
-        copy.push([...res, '1']);
+  let results = [
+    { str: [1], count: 1 },
+    { str: word[0], count: 0 },
+  ];
+  for (let letter of word.slice(1)) {
+    let level = [];
+    for (let { str, count } of results) {
+      level.push({ str: [...str, letter], count: 0 });
+      if (count === 0) {
+        level.push({ str: [...str, 1], count: 1 });
         continue;
       }
-
-      res[last] = String(Number(res[last]) + 1);
-      copy.push(res);
+      str[str.length - 1] = count + 1;
+      level.push({ str, count: count + 1 });
     }
-    results = copy;
+    results = level;
   }
-
-  return results.map((el) => el.join(''));
-}; // T:(N*2^N) S:(N*2^N)
+  return results.map((el) => el.str.join(''));
+}; // T:(N2^N) S:(N2^N)
