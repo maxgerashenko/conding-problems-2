@@ -12,9 +12,10 @@
 // this.arr.sort, but this.arr = this.arr.filter
 // never use for i
 // always use let left, no GlobalEventHandlersEventMap
+// !isNaN(char) - is number
 
 // Subsets
-// nums.sort((x,y) => x-y);
+// nums.sort((x,y) => x-y) for duplicates
 // let result = [];
 // let preLevel = [];
 // let pre = null;

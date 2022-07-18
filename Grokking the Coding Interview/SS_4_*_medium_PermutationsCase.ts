@@ -2,19 +2,18 @@
 //
 // String Permutations by changing case
 
-const find_letter_case_string_perms = function (str) {
-  let perms = [str];
-  for (let s in str.split('')) {
-    if (!Number.isNaN(Number(str[s]))) continue;
-    let len = perms.length;
-    for (let j = 0; j < len; j++) {
-      let perm = perms[j].split('');
-      perm[s] =
-        perm[s] === perm[s].toUpperCase()
-          ? perm[s].toLowerCase()
-          : perm[s].toUpperCase();
-      perms.push(perm.join(''));
+function stringPermutations(str, results = ['']) {
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let level = [];
+    for (let res of results) {
+      level.push(res + char);
+      if (!isNaN(char)) continue;
+      char =
+        char.toUpperCase() != char ? char.toUpperCase() : char.toLowerCase();
+      level.push(res + char);
     }
+    results = [...level];
   }
-  return perms;
-}; // T:O(S*2^S) S:(S*2^S)
+  return results;
+} // T:O(N2^N) S:O(N2^N)
