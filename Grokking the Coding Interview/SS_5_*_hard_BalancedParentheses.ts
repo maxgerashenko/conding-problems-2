@@ -2,16 +2,23 @@
 //
 // Balanced Parentheses
 
-const generate_valid_parentheses = function (num) {
-  let combs = [{ comb: '(', open: num - 1, bal: 1 }];
-  for (let n = 1; n < num * 2; n++) {
-    let copy = [];
-    for (let { comb, open, bal } of combs) {
-      if (open > 0)
-        copy.push({ comb: comb + '(', open: open - 1, bal: bal + 1 });
-      if (bal > 0) copy.push({ comb: comb + ')', open, bal: bal - 1 });
+const generate_valid_parentheses = function (
+  num,
+  results = [{ countdown: num - 1, openCount: 1, str: '(' }]
+) {
+  while (true) {
+    let level = [];
+    for (let { countdown, openCount, str } of results) {
+      if (countdown > 0)
+        level.push({
+          str: str + '(',
+          countdown: countdown - 1,
+          openCount: openCount + 1,
+        });
+      if (openCount > 0)
+        level.push({ str: str + ')', countdown, openCount: openCount - 1 });
     }
-    combs = copy;
+    if (level.length === 0) return results.map((el) => el.str);
+    results = [...level];
   }
-  return combs.map((el) => el.comb);
-}; //T:O(N*2^N) S:O(N*2^N)
+}; // T:O(N2^N) S:O(N2^N)
