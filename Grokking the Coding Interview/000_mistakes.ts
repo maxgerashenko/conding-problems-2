@@ -63,3 +63,6 @@
 // nums.reduce((cur, pre) => pre^=cur, 0); // T:O(N) S:O(1)
 // to look all = Math.round(len/2); // includes the middle value
 // !!! (el & diff) === 0 - () are required
+
+// TOPK
+// Use heap and update K elements
