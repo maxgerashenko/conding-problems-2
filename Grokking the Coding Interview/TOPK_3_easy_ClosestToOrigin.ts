@@ -2,46 +2,44 @@
 //
 // Closest Points to the Origin
 
+class Heap {
+  constructor(sort) {
+    this.arr = [];
+    this.sort = sort;
+  }
+  push(el) {
+    this.arr.push(el);
+    this.arr.sort((a, b) => this.sort(a, b));
+  }
+  pop() {
+    let tmp = this.arr.shift();
+    this.arr.sort((a, b) => this.sort(a, b));
+    return tmp;
+  }
+}
 class Point {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.val = Math.sqrt(x * x + y * y);
   }
-
   get_point() {
     return '[' + this.x + ', ' + this.y + '] ';
   }
-}
-
-const find_closest_points = function (points, k) {
-  // catch error
-  let max = new Heap(true);
-  for (let i = 0; i < k; i++) {
-    max.push(points.shift());
+  get dist() {
+    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
   }
-
+}
+const find_closest_points = function (
+  points,
+  k,
+  results = [],
+  maxHeap = new Heap((x, y) => y.dist - x.dist)
+) {
+  for (let i = 0; i < k; i++) maxHeap.push(points.shift());
   for (let point of points) {
-    if (point.val >= max.arr[0]) continue;
-    max.pop();
-    max.push(point);
+    if (point.dist >= maxHeap.arr[0].dist) continue;
+    maxHeap.pop();
+    maxHeap.push(point);
   }
-
-  return max.arr;
-}; // T:O(KlogK + (N-K)logK) S:O(K)
-
-class Heap {
-  constructor(isMax = false) {
-    this.arr = [];
-    this.sort = isMax ? (a, b) => b.val - a.val : (a, b) => a.val - b.val;
-  }
-  push(el) {
-    this.arr.push(el);
-    this.arr.sort(this.sort);
-  }
-  pop() {
-    let tmp = this.arr.shift();
-    this.arr.sort(this.sort);
-    return tmp;
-  }
-}
+  return maxHeap.arr;
+}; // T:(NlogK) S:O(K)
