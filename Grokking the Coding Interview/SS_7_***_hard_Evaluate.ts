@@ -2,17 +2,21 @@
 //
 // Evaluate
 
-const evaluate = function (str, map = {}, result = []) {
-  if (map[str] != null) return map[str];
-  if (!isNaN(Number(str))) return [Number(str)];
-  for (let i = 0; i < str.length; i++) {
-    if (!isNaN(Number(str[i]))) continue;
-    for (let l of evaluate(str.slice(0, i))) {
-      for (let r of evaluate(str.slice(i + 1))) {
-        result.push(str[i] == '+' ? l + r : str[i] == '-' ? l - r : l * r);
+const evaluate = function (input, map = {}, results = []) {
+  if (map[input] != null) return map[input]; // hasMap
+  if (!isNaN(input)) return [Number(input)]; // base case
+  for (let i = 0; i < input.length; i++) {
+    if (!isNaN(input[i])) continue;
+    let leftOptions = evaluate(input.substring(0, i), map);
+    let rightOptions = evaluate(input.substring(i + 1), map);
+    for (let l of leftOptions) {
+      for (let r of rightOptions) {
+        results.push(
+          input[i] === '+' ? l + r : input[i] === '-' ? l - r : l * r
+        );
       }
     }
   }
-  map[str] = result;
-  return result;
-}; // T:(N2^N) S:O(2^N)
+  map[input] = results; // hasMap
+  return results;
+}; // T:O(N2^N) T:O(2^N)
