@@ -2,34 +2,36 @@
 //
 // Kth Smallest Number
 
-const find_Kth_smallest_number = function (nums, k) {
-  // catch error
-  let max = new Heap(true);
-  for (let i = 0; i < k; i++) {
-    max.push(nums.shift());
-  } // init
-
-  for (let num of nums) {
-    if (num >= max.arr[0]) continue;
-    max.pop();
-    max.push(num);
-  } // unpdate max
-
-  return max.arr[0];
-}; // T:O(KlogK + (N-K)logK) S:O(K)
-
 class Heap {
-  constructor(isMax = false) {
+  constructor(sort) {
     this.arr = [];
-    this.sort = isMax ? (a, b) => b - a : (a, b) => a - b;
+    this.sort = sort;
   }
   push(el) {
     this.arr.push(el);
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
   }
   pop() {
     let tmp = this.arr.shift();
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
     return tmp;
   }
 }
+
+const find_Kth_smallest_number = function (
+  nums,
+  k,
+  maxHeap = new Heap((x, y) => y - x)
+) {
+  for (let i = 0; i < k; i++) {
+    maxHeap.push(nums[i]);
+  }
+
+  for (let i = k; i < nums.length; i++) {
+    if (nums[i] > maxHeap.arr[0]) continue;
+    maxHeap.pop();
+    maxHeap.push(nums[i]);
+  }
+
+  return maxHeap.arr[0];
+}; // T:O(NLogK) S:O(K)

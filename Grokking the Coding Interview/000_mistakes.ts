@@ -65,4 +65,5 @@
 // !!! (el & diff) === 0 - () are required
 
 // TOPK
-// Use heap and update K elements
+// Use min/max heap for max/min elements and update K elements
+// T:O(NlogK) better than T:O(NlogN)
