@@ -2,41 +2,55 @@
 //
 // Frequent Numbers
 
-const find_k_frequent_numbers = function (nums, k) {
-  // catch error
-  let map = {};
-  for (let num of nums) {
-    map[num] = map[num] ? map[num] + 1 : 1;
-  }
-  let distinct = Object.keys(map);
-  let min = new Heap();
-  for (let i = 0; i < k; i++) {
-    min.push(distinct.shift());
-  }
-
-  for (let num of distinct) {
-    if (map[num] <= min.arr[0].count) continue;
-    min.pop();
-    min.push({ val: num, count: map[num] });
-  }
-
-  return min.arr.map(({ val }) => val);
-}; // T:O(KlogK + (N-K)logK) S:O(N)
+// Given an unsorted array of numbers, find the top ‘K’ frequently occurring numbers in it
 
 class Heap {
-  constructor(isMax = false) {
+  constructor(sort) {
     this.arr = [];
-    this.sort = isMax
-      ? (a, b) => b.count - a.count
-      : (a, b) => a.count - b.count;
+    this.sort = sort;
   }
   push(el) {
     this.arr.push(el);
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
   }
   pop() {
     let tmp = this.arr.shift();
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
     return tmp;
   }
 }
+const find_k_frequent_numbers = function (
+  nums,
+  k,
+  results = [],
+  hashMapCount = {},
+  minHeap = new Heap((x, y) => x.count - y.count)
+) {
+  for (let num of nums) {
+    hashMapCount[num] = hashMapCount[num] == null ? 1 : hashMapCount[num] + 1;
+  }
+  let keys = Object.keys(hashMapCount);
+  for (let i = 0; i < k; i++) {
+    let num = keys.shift();
+    minHeap.push({ num, count: hashMapCount[num] });
+  }
+  for (let num of keys) {
+    if (minHeap.arr[0].count >= hashMapCount[num]) continue;
+    minHeap.pop();
+    minHeap.push({ num, count: hashMapCount[num] });
+  }
+  return minHeap.arr.map((el) => el.num);
+}; // T:O(N + N*LogK) S:O(N)
+
+console.log(
+  `Here are the K frequent numbers: ${find_k_frequent_numbers(
+    [1, 3, 5, 12, 11, 12, 11],
+    2
+  )}`
+);
+console.log(
+  `Here are the K frequent numbers: ${find_k_frequent_numbers(
+    [5, 12, 11, 3, 11],
+    2
+  )}`
+);

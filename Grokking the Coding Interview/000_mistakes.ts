@@ -67,3 +67,4 @@
 // TOPK
 // Use min/max heap for max/min elements and update K elements
 // T:O(NlogK) better than T:O(NlogN)
+// sort alternative with Heap

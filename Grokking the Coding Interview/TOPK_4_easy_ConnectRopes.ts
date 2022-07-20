@@ -2,35 +2,37 @@
 //
 // Connect Ropes
 
-const minimum_cost_to_connect_ropes = function (ropeLengths) {
-  // catch error
-  let min = new Heap();
-  let total = 0;
-  for (let length of ropeLengths) {
-    min.push(length);
-  }
-
-  while (min.arr.length > 1) {
-    let mins = min.pop() + min.pop();
-    total += mins;
-    min.push(mins);
-  }
-
-  return total;
-}; // T:O(NlogN) S:(N)
-
 class Heap {
-  constructor(isMax = false) {
+  constructor(sort) {
     this.arr = [];
-    this.sort = isMax ? (a, b) => b - a : (a, b) => a - b;
+    this.sort = sort;
   }
   push(el) {
     this.arr.push(el);
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
   }
   pop() {
     let tmp = this.arr.shift();
-    this.arr.sort(this.sort);
+    this.arr.sort((a, b) => this.sort(a, b));
     return tmp;
   }
 }
+
+const minimum_cost_to_connect_ropes = function (
+  ropeLengths,
+  result = 0,
+  minHeap = new Heap((x, y) => x - y)
+) {
+  for (let rope of ropeLengths) {
+    minHeap.push(rope);
+  }
+  if (ropeLengths.length === 0) return 0; // conner case
+  if (ropeLengths.length === 1) return ropeLengths[0]; // conner case
+  let sum = minHeap.pop() + minHeap.pop();
+  result += sum;
+  while (minHeap.arr.length > 0) {
+    sum += minHeap.pop();
+    result += sum;
+  }
+  return result;
+}; // T:O(NlogN) S:O(N)
