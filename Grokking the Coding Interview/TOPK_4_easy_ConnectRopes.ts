@@ -4,20 +4,13 @@
 
 class Heap {
   constructor(sort) {
-    this.arr = [];
     this.sort = sort;
-  }
-  push(el) {
-    this.arr.push(el);
-    this.arr.sort((a, b) => this.sort(a, b));
-  }
-  pop() {
-    let tmp = this.arr.shift();
-    this.arr.sort((a, b) => this.sort(a, b));
-    return tmp;
+    this.arr = [];
+    this.push = (el) =>
+      (this.arr = [...this.arr, el].sort((a, b) => this.sort(a, b)));
+    this.pop = () => this.arr.shift();
   }
 }
-
 const minimum_cost_to_connect_ropes = function (
   ropeLengths,
   result = 0,

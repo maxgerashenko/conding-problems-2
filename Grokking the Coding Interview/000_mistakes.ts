@@ -1,3 +1,4 @@
+// --- Common
 // lastIndex = nums.length-1;
 // sort T:O(NlogN) S(N)
 // minHeap insert T:(log K) S:(K)
@@ -14,7 +15,7 @@
 // always use let left, no GlobalEventHandlersEventMap
 // !isNaN(char) - is number
 
-// Subsets
+// --- Subsets
 // nums.sort((x,y) => x-y) for duplicates
 // let result = [];
 // let preLevel = [];
@@ -34,7 +35,7 @@
 // let copy = [...arr]; copy.splice(i, 0, el) is insert
 // results = [[]] // array of arrays use 's'
 
-// Binary search
+// --- Binary search
 // function bs(arr, key) {
 //   let start = 0;
 //   let end = arr.length;
@@ -53,7 +54,7 @@
 // Move: start = mid+1 || end = mid-1
 // at the end start > end
 
-// XOR
+// --- XOR
 // parseInt('11',2) // 3
 // x= 3; x.toString(2) // '11'
 // X^= [1,1,2] // 2
@@ -64,7 +65,17 @@
 // to look all = Math.round(len/2); // includes the middle value
 // !!! (el & diff) === 0 - () are required
 
-// TOPK
+// --- TOPK
 // Use min/max heap for max/min elements and update K elements
 // T:O(NlogK) better than T:O(NlogN)
 // sort alternative with Heap
+
+// --- Merge K
+// for (let list of lists) minHeap.push({ val: list.shift(), list });
+// while (minHeap.arr.length > 0) {
+//   let { val, list } = minHeap.pop();
+//   result.push(val);
+//   if (list.length === 0) continue;
+//   minHeap.push({ val: list.shift(), list});
+// }
+// return result
