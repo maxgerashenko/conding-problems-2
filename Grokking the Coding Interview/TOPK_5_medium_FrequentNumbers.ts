@@ -41,16 +41,3 @@ const find_k_frequent_numbers = function (
   }
   return minHeap.arr.map((el) => el.num);
 }; // T:O(N + N*LogK) S:O(N)
-
-console.log(
-  `Here are the K frequent numbers: ${find_k_frequent_numbers(
-    [1, 3, 5, 12, 11, 12, 11],
-    2
-  )}`
-);
-console.log(
-  `Here are the K frequent numbers: ${find_k_frequent_numbers(
-    [5, 12, 11, 3, 11],
-    2
-  )}`
-);
