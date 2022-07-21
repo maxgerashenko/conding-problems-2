@@ -79,3 +79,5 @@
 //   minHeap.push({ val: list.shift(), list});
 // }
 // return result
+// K element for the min heap
+// Rage min form Heap and max of currently inserted
