@@ -1,4 +1,5 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/3jyVPKRA8yx
+//
 // Merge Intervals
 
 const merge = function (intervals) {
