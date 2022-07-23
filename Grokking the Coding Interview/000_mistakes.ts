@@ -14,6 +14,7 @@
 // never use for i
 // always use let left, no GlobalEventHandlersEventMap
 // !isNaN(char) - is number
+// Array(5+1).fill([])
 
 // --- Subsets
 // nums.sort((x,y) => x-y) for duplicates
@@ -81,3 +82,8 @@
 // return result
 // K element for the min heap
 // Rage min form Heap and max of currently inserted
+
+// DP
+// Top Down  - Recursive tree with hashMap
+// Bottom up - 2x table with reusing of previus row value
+// 1st row  - Array(7+1).fill(0).map((el, c) => c >= 2 ? 2 : el )
