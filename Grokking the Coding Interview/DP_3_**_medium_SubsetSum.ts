@@ -1,6 +1,8 @@
-// https://www.educative.io/courses/grokking-the-coding-interview/gxrnL0GQGqk
-//
 // Subset Sum (medium)
+//
+// https://www.educative.io/courses/grokking-the-coding-interview/gxrnL0GQGqk
+
+// Given a set of positive numbers, determine if a subset exists whose sum is equal to a given number ‘S’.
 
 const canPartition = function (nums, sum, half = sum / 2, dp = []) {
   if (sum % 2 !== 0) return false;
