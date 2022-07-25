@@ -86,4 +86,7 @@
 // DP
 // Top Down  - Recursive tree with hashMap
 // Bottom up - 2x table with reusing of previus row value
-// 1st row  - Array(7+1).fill(0).map((el, c) => c >= 2 ? 2 : el )
+// 1st col - 0
+// 1sr row - pre set
+// Selected - go backwards throw the matrix
+// Optimize - 2 rows with i%2, second row go backwards c--
