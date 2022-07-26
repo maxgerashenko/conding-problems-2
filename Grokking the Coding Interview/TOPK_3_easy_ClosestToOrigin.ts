@@ -23,17 +23,16 @@ class Point {
     return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
   }
 }
-const find_closest_points = function (
+function find_closest_points(
   points,
   k,
-  results = [],
   maxHeap = new Heap((x, y) => y.dist - x.dist)
 ) {
   for (let i = 0; i < k; i++) maxHeap.push(points.shift());
   for (let point of points) {
     if (point.dist >= maxHeap.arr[0].dist) continue;
-    maxHeap.pop();
     maxHeap.push(point);
+    maxHeap.pop();
   }
   return maxHeap.arr;
-}; // T:(NlogK) S:O(K)
+} // T:O(NlogK) S:O(K)
