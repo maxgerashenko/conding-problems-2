@@ -11,20 +11,16 @@ class Heap {
     this.pop = () => this.arr.shift();
   }
 }
-const find_Kth_smallest_number = function (
+function find_Kth_smallest_number(
   nums,
   k,
   maxHeap = new Heap((x, y) => y - x)
 ) {
-  for (let i = 0; i < k; i++) {
-    maxHeap.push(nums[i]);
-  }
-
-  for (let i = k; i < nums.length; i++) {
-    if (nums[i] > maxHeap.arr[0]) continue;
+  for (let i = 0; i < k; i++) maxHeap.push(nums.shift());
+  for (let num of nums) {
+    if (num >= maxHeap.arr[0]) continue;
+    maxHeap.push(num);
     maxHeap.pop();
-    maxHeap.push(nums[i]);
   }
-
   return maxHeap.arr[0];
-}; // T:O(NLogK) S:O(K)
+} // T:O(NLogK) S:O(K)
