@@ -71,6 +71,7 @@
 // T:O(NlogK) better than T:O(NlogN)
 // sort alternative with Heap
 // (k1, k2) not icluded = arr.pop() for(i=0;i<k2-k1-1;i++) sum+= arr.pop();
+// no dublicate in a row = maxHeap.arr is empty and pre is empty
 
 // --- Merge K
 // for (let list of lists) minHeap.push({ val: list.shift(), list });

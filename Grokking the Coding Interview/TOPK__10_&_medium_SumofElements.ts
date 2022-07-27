@@ -1,6 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/qVljv3Plr67
 //
 // Sum of Elements
+// & get a range form the heap (1-4) both not icluded = arr.pop() for i=0<4-2-1;i++
 
 class Heap {
   constructor(sort) {

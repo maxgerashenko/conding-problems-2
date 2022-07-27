@@ -1,6 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/gx6oKY8PGYY
 //
 // Maximum Distinct Elements
+// & use minHeap for k els, use min for removal, at last k could be not enogth to make it distinct
 
 class Heap {
   constructor(sort) {
