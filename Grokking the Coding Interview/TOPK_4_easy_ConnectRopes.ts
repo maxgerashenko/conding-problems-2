@@ -11,21 +11,16 @@ class Heap {
     this.pop = () => this.arr.shift();
   }
 }
-const minimum_cost_to_connect_ropes = function (
+function minimum_cost_to_connect_ropes(
   ropeLengths,
-  result = 0,
-  minHeap = new Heap((x, y) => x - y)
+  minHeap = new Heap((x, y) => x - y),
+  res = 0
 ) {
-  for (let rope of ropeLengths) {
-    minHeap.push(rope);
+  for (let rope of ropeLengths) minHeap.push(rope);
+  while (minHeap.arr.length > 1) {
+    let sum = minHeap.pop() + minHeap.pop();
+    res += sum;
+    minHeap.push(sum);
   }
-  if (ropeLengths.length === 0) return 0; // conner case
-  if (ropeLengths.length === 1) return ropeLengths[0]; // conner case
-  let sum = minHeap.pop() + minHeap.pop();
-  result += sum;
-  while (minHeap.arr.length > 0) {
-    sum += minHeap.pop();
-    result += sum;
-  }
-  return result;
-}; // T:O(NlogN) S:O(N)
+  return res;
+} // T:O(NlogN) S:O(N)
