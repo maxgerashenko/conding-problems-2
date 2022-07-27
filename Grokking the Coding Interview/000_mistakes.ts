@@ -70,6 +70,7 @@
 // Use min/max heap for max/min elements and update K elements
 // T:O(NlogK) better than T:O(NlogN)
 // sort alternative with Heap
+// (k1, k2) not icluded = arr.pop() for(i=0;i<k2-k1-1;i++) sum+= arr.pop();
 
 // --- Merge K
 // for (let list of lists) minHeap.push({ val: list.shift(), list });
@@ -83,7 +84,7 @@
 // K element for the min heap
 // Rage min form Heap and max of currently inserted
 
-// DP
+// --- DP
 // Top Down  - Recursive tree with hashMap
 // Bottom up - 2x table with reusing of previus row value
 // 1st col - 0
