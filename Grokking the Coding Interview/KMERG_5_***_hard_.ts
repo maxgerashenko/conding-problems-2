@@ -28,3 +28,28 @@ const find_k_largest_pairs = function (
   }
   return minHeap.arr;
 }; // T:O(N^2logK) S:O(K)
+
+function find_k_largest_pairs(
+  nums1,
+  nums2,
+  k,
+  results = [],
+  maxHeap = new Heap((x, y) => y.val - x.val)
+) {
+  let i = 0;
+  let j = 0;
+  maxHeap.push(nums1[i + 1]);
+  maxHeap.push(nums2[j + 1]);
+  while (results.length < k) {
+    results.push([nums1[i], nums2[j]]);
+    let val = maxHeap.pop();
+    if (val == nums1[i + 1]) {
+      i++;
+      maxHeap.push(nums1[i + 1]);
+    } else {
+      j++;
+      maxHeap.push(nums2[j + 1]);
+    }
+  }
+  return results;
+} // T:O(KlogK) S:O(K)
