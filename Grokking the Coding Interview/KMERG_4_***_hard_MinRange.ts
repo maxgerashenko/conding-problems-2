@@ -18,15 +18,12 @@ const find_smallest_range = function (
   minRange = [0, Infinity],
   minHeap = new Heap((x, y) => x.val - y.val)
 ) {
-  for (let list of lists) minHeap.push({ val: list.shift(), list }); // init Heap
+  for (let list of lists) minHeap.push({ val: list.shift(), list });
   while (minHeap.arr.length === lists.length) {
     let { val: min, list } = minHeap.pop();
-    let max = Math.max(...minHeap.arr.map(({ val }) => val));
-    minRange =
-      Math.min(max - min, minRange[1] - minRange[0]) === max - min
-        ? [min, max]
-        : minRange;
-    if (list.length > 0) minHeap.push({ val: list.shift(), list });
+    let max = minHeap.arr.reduce((pre, el) => Math.max(pre, el.val), -Infinity);
+    if (max - min < minRange[1] - minRange[0]) minRange = [min, max];
+    list.length > 0 && minHeap.push({ val: list.shift(), list });
   }
   return minRange;
-}; // T:O(NlogK) S:O(K)
+}; // T:O(NlogL) S:O(L)
