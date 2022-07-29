@@ -8,27 +8,22 @@ let solveKnapsack = function (
   profits,
   weights,
   capacity,
-  dp = [],
+  matrix = [],
   selected = []
 ) {
-  for (let i = 0; i < profits.length; i++) {
-    dp[i] = [0];
-  } // first call
-  for (let c = 0; c < capacity + 1; c++) {
-    dp[0][c] = c >= weights[0] ? profits[0] : 0;
-  } // first row
-  for (let i = 1; i < profits.length; i++) {
-    for (let c = 1; c < capacity + 1; c++) {
-      dp[i][c] = Math.max(
-        dp[i - 1][c],
-        c >= weights[i] ? profits[i] + dp[i - 1][c - weights[i]] : 0
+  for (let i in profits) matrix[i] = [0]; // 1st col
+  for (let c = 1; c < capacity + 1; c++)
+    matrix[0][c] = c >= weights[0] ? profits[0] : 0;
+  for (let i = 1; i < profits.length; i++)
+    for (let c = 1; c < capacity + 1; c++)
+      matrix[i][c] = Math.max(
+        matrix[i - 1][c],
+        c >= weights[i] ? profits[i] + matrix[i - 1][c - weights[i]] : 0
       );
-    }
-  }
   let i = profits.length - 1;
   let c = capacity;
-  while (i >= 0 && c > 0) {
-    if (dp[i - 1] && dp[i][c] === dp[i - 1][c]) {
+  while (matrix[i] && matrix[i][c] > 0) {
+    if (matrix[i - 1] && matrix[i][c] == matrix[i - 1][c]) {
       i--;
       continue;
     }
@@ -36,6 +31,5 @@ let solveKnapsack = function (
     c -= weights[i];
     i--;
   }
-  console.log(dp[profits.length - 1][capacity]);
   return selected;
-}; // T:O(N*K) S:O(N*K)
+}; // T:(NC) T:(NC)
