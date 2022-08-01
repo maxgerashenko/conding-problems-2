@@ -12,35 +12,33 @@ class Heap {
     this.pop = () => this.arr.shift();
   }
 }
+
 const find_maximum_distinct_elements = function (
   nums,
   k,
-  hashMapCount = {},
-  maxHeap = new Heap((x, y) => y.count - x.count),
+  distinctCount = 0,
+  hasMapCout = {},
   minHeap = new Heap((x, y) => x.count - y.count)
 ) {
-  for (let num of nums) {
-    if (hashMapCount[num] == null) hashMapCount[num] = 0;
-    hashMapCount[num]++;
-  } // init hashMapCount
-  let keys = Object.keys(hashMapCount).filter((key) => hashMapCount[key] > 1);
-  let distinctLegth = Object.keys(hashMapCount).length - keys.length;
-  let len = Math.min(k, keys.length); // arr could shorter than k
-  for (let i = 0; i < len; i++) {
-    let key = keys.shift();
-    maxHeap.push({ key, count: hashMapCount[key] });
-  } // init maxHeap
-  for (let key of keys) {
-    if (hashMapCount[key] > maxHeap.arr[0].count) continue;
-    maxHeap.push({ key, count: hashMapCount[key] });
-    maxHeap.pop();
-  } // get k min of max
-  while (maxHeap.arr.length > 0) minHeap.push(maxHeap.pop()); // init min
+  if (nums.length <= k) return 0; // conner case
+  for (let key of nums) {
+    if (hasMapCout[key] == null) hasMapCout[key] = 0;
+    hasMapCout[key]++; // init Hashmap
+  } // O(N)
+  let keys = Object.keys(hasMapCout);
+  for (i = 0; i < keys.length; i++) {
+    if (hasMapCout[keys[i]] < 2) {
+      distinctCount++;
+      continue;
+    }
+    minHeap.push({ key: keys[i], count: hasMapCout[keys[i]] }); // init minHeap
+  } // T:O(NlogN)
   while (k > 0 && minHeap.arr.length > 0) {
-    let { count } = minHeap.pop();
-    k -= count - 1;
-    if (k >= 0) distinctLegth++;
-  }
-  if (k > 0) distinctLegth -= k;
-  return distinctLegth;
-}; // T:O(NLogK) S:O(D||K);
+    k -= minHeap.arr[0].count - 1;
+    if (k > 0) {
+      distinctCount++;
+      minHeap.pop();
+    }
+  } // T:O(KlogN)
+  return k > 0 ? distinctCount - k : distinctCount;
+}; // T:O(NlogN) S:O(N) , use maxHeap for min to have T:O(NlogK)

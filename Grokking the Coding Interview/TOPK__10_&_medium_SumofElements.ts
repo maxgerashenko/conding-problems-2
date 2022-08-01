@@ -16,16 +16,17 @@ const find_sum_of_elements = function (
   nums,
   k1,
   k2,
+  sum = 0,
   maxHeap = new Heap((x, y) => y - x)
 ) {
-  for (let i = 0; i < k2; i++) maxHeap.push(nums.shift()); // init maxHeap
-  for (let num of nums) {
-    if (num >= maxHeap.arr[0]) continue;
-    maxHeap.push(num);
+  let end = Math.min(k2, nums.length);
+  if (end < k1 + 1) return 0;
+  for (let i = 0; i < k2 - 1; i++) maxHeap.push(nums[i]); // init min of MaxHeap // KlogK
+  for (let i = k2 - 1; i < nums.length; i++) {
+    if (nums[i] >= maxHeap.arr[0]) continue;
     maxHeap.pop();
-  } // get k min el
-  maxHeap.pop(); // (k1, k2) on included 3,6 = 4,5 i=0;i<(6-3)-1;i++; i<3-1 == 2 times
-  let sum = 0;
-  for (let i = 0; i < k2 - k1 - 1; i++) sum += maxHeap.pop();
+    maxHeap.push(nums[i]);
+  } // NlogK
+  for (let i = 0; i < k2 - k1 - 1; i++) sum += maxHeap.pop(); // KlogK
   return sum;
-}; // T:O(NlgoK) S:O(K)
+}; // T:(NlogK2) S:O(K2)
