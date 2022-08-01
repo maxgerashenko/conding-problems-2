@@ -14,23 +14,26 @@ class Heap {
 }
 const rearrange_string = function (
   str,
-  newString = '',
   hashMapCount = {},
   maxHeap = new Heap((x, y) => y.count - x.count)
 ) {
   for (let s of str) {
     if (hashMapCount[s] == null) hashMapCount[s] = 0;
     hashMapCount[s]++;
-  } // init hashmap
-  for (let key of Object.keys(hashMapCount))
+  }
+  for (key of Object.keys(hashMapCount))
     maxHeap.push({ key, count: hashMapCount[key] });
+  let str2 = '';
   let tmp = null;
   while (maxHeap.arr.length > 0) {
     let { key, count } = maxHeap.pop();
-    tmp && tmp.count > 0 && maxHeap.push({ ...tmp });
-    newString += key;
+    str2 += key;
     count--;
+    if (count === 0) continue;
+    if (tmp !== null) maxHeap.push(tmp);
     tmp = { key, count };
   }
-  return newString.length == str.length ? newString : '';
-}; // T:O(NlogN) S:O(N)
+  if (tmp.count === 1) str2 += tmp.key;
+
+  return str2.length === str.length ? str2 : '';
+}; // T:O(NlogN) S:O(N) // worse case every character is unique
