@@ -20,21 +20,22 @@ const reorganize_string = function (
   hashMapCount = {},
   maxHeap = new Heap((x, y) => y.count - x.count)
 ) {
-  for (let key of str)
-    hashMapCount[key] = !!hashMapCount[key] ? hashMapCount[key] + 1 : 1;
+  for (let val of str)
+    hashMapCount[val] = hashMapCount[val] == null ? 1 : hashMapCount[val] + 1; // init hashMapCount
   for (let key of Object.keys(hashMapCount))
     maxHeap.push({ key, count: hashMapCount[key] });
   while (maxHeap.arr.length > 0) {
     let queue = [];
-    let used = -1;
+    let minK = k - 1 + 1;
     while (maxHeap.arr.length > 0) {
       let { key, count } = maxHeap.pop();
-      result += key;
       count--;
-      used + 1;
+      result += key;
+      minK--;
       if (count > 0) queue.push({ key, count });
     }
-    if (result.length >= k - 1 - used) for (let el of queue) maxHeap.push(el);
+    if (queue.length === 0) return result;
+    if (queue.length < minK) return '';
+    for (let el of queue) maxHeap.push(el);
   }
-  return result.length === str.length ? result : '';
 }; // T:O(NlogN) S:O(N)
