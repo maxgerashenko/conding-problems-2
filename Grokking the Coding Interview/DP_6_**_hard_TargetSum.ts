@@ -2,20 +2,22 @@
 //
 // Target Sum (hard)
 
-// S1 + S2 = Total
-// S1 - S2 = S
-// 2 S1 = Total + S
-// S1 = (Total + S) / 2
+// S1 + S2 = SUM
+// S1 - S2 = Taget
+// S1+S1 + S2-S2 = SUM+Target
+// S2*S1 + 0 = Sum+Target
+// S1 = (Sum+Targe)/2
 const findTargetSubsets = function (
   nums,
   target,
-  totalSum = nums.reduce((pre, el) => pre + el, 0, (dp = [1]))
+  dp = [1],
+  sumTotal = nums.reduce((pre, el) => pre + el, 0)
 ) {
-  if ((totalSum + target) % 2 !== 0) return 0; // conner case
-  let sum = totalSum / 2 + target / 2;
-  for (let s = sum; s > 0; s--) dp[s] = s === nums[0] ? 1 : 0;
-  for (let n = 1; n < nums.length; n++)
+  if ((target + sumTotal) % 2 !== 0) return 0;
+  let sum = (target + sumTotal) / 2;
+  for (let s = 1; s < sum + 1; s++) dp[s] = s === nums[0] ? 1 : 0; // init 1st row
+  for (let i = 1; i < nums.length; i++)
     for (let s = sum; s > 0; s--)
-      dp[s] += s - nums[n] >= 0 ? dp[s - nums[n]] : 0;
+      dp[s] += s - nums[i] >= 0 ? dp[s - nums[i]] : 0;
   return dp[sum];
-}; // T:O(NS) S:O(S)
+}; // T:O(N*S) S:O(N)
