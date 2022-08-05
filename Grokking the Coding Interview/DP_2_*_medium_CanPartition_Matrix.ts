@@ -2,15 +2,16 @@
 //
 // https://www.educative.io/courses/grokking-the-coding-interview/g7QYlD8RwRr
 
-const can_partition = function (
+const canPartitionOptimized = function (
   nums,
   sum = nums.reduce((pre, el) => pre + el, 0),
-  half = sum / 2,
-  matrix = [true]
+  dp = [1],
+  half = sum / 2
 ) {
-  if (sum % 2 !== 0) return false;
-  for (let s = 1; s < half + 1; s++) matrix[s] = nums[0] === s;
-  for (let i = 1; i < nums.length - 1; i++)
-    for (let h = half; h > 0; h--) matrix[h] = matrix[h] || matrix[h - nums[i]];
-  return matrix[half];
-}; // T:O(NH) n - numbser h - half of numbers sum
+  if (sum % 2 !== 0) return false; // conner case
+  for (let s = 1; s < half + 1; s++) dp[s] = s === nums[0] ? 1 : 0; // init row
+  for (let i = 1; i < nums.length; i++)
+    for (let s = sum; s > 0; s--)
+      dp[s] |= s - nums[i] > 0 ? dp[s - nums[i]] : 0;
+  return !!dp[sum];
+}; // T:O(SN) S:O(S)
