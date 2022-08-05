@@ -14,4 +14,4 @@ const max_sub_array_of_size_k = function (k, arr) {
     max = Math.max(max, sum);
   }
   return max;
-}; // T:O(N) S:O(K)
+}; // T:O(N) S:O(1)
