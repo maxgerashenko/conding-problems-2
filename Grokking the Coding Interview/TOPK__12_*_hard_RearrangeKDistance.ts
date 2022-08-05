@@ -25,17 +25,17 @@ const reorganize_string = function (
   for (let key of Object.keys(hashMapCount))
     maxHeap.push({ key, count: hashMapCount[key] });
   while (maxHeap.arr.length > 0) {
+    let gapCount = k - 2;
     let queue = [];
-    let minK = k - 1 + 1;
     while (maxHeap.arr.length > 0) {
       let { key, count } = maxHeap.pop();
       count--;
       result += key;
-      minK--;
-      if (count > 0) queue.push({ key, count });
+      (count > 0 && queue.push({ key, count })) || gapCount--;
     }
-    if (queue.length === 0) return result;
-    if (queue.length < minK) return '';
+    if (queue.length === 0) break;
+    if (gapCount > 0) return '';
     for (let el of queue) maxHeap.push(el);
   }
+  return result;
 }; // T:O(NlogN) S:O(N)

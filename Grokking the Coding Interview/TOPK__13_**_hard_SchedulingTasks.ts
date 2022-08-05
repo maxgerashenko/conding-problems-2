@@ -9,6 +9,7 @@ class Heap {
     this.push = (el) =>
       (this.arr = [...this.arr, el].sort((a, b) => this.sort(a, b)));
     this.pop = () => this.arr.shift();
+    this.length = () => this.arr.length;
   }
 }
 const schedule_tasks = function (
@@ -19,24 +20,24 @@ const schedule_tasks = function (
   maxHeap = new Heap((x, y) => y.count - x.count)
 ) {
   for (let task of tasks)
-    hashMapCount[task] = !!hashMapCount[task] ? hashMapCount[task] + 1 : 1; // init hashMapCount
+    hashMapCount[task] =
+      hashMapCount[task] == null ? 1 : hashMapCount[task] + 1; // init hashMap
   for (let key of Object.keys(hashMapCount))
-    maxHeap.push({ key, count: hashMapCount[key] }); // init max Heap
-  while (maxHeap.arr.length) {
+    maxHeap.push({ key, count: hashMapCount[key] }); // init maxHeap
+  while (maxHeap.arr.length > 0) {
     let queue = [];
-    let used = -1;
-    while (maxHeap.arr.length) {
+    let gapCount = k + 1; // 1 char itself
+    while (maxHeap.arr.length > 0) {
       let { key, count } = maxHeap.pop();
       count--;
       result += key;
-      used++;
-      if (count > 0) queue.push({ key, count });
+      (count > 0 && queue.push({ key, count })) || gapCount--;
     }
-    if (queue.length > 0) {
-      if (k - used > 0) result += ' '.repeat(k - used);
-      for (let { count, key } of queue)
-        count > 0 && maxHeap.push({ key, count });
-    }
+    if (queue.length === 0) break;
+    result += ' '.repeat(
+      gapCount - queue.length < 0 ? 0 : gapCount - queue.length
+    );
+    for (let task of queue) maxHeap.push(task);
   }
   return result.length;
 }; // T:O(NlogN) S:O(N)
