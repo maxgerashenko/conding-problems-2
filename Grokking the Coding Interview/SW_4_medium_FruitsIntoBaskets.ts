@@ -5,26 +5,24 @@
 // You can start with any tree, but you can’t skip a tree once you have started. You will pick one fruit from each tree until you cannot, i.e., you will stop when you have to pick from a third fruit type.
 // Write a function to return the maximum number of fruits in both baskets.
 
-const fruits_into_baskets = function (
-  fruits,
-  k = 2,
+const length_of_longest_substring = function (
+  str,
+  k,
+  maxLength = 0,
   start = 0,
-  end = 0,
-  count = 0,
-  max = 0,
-  hashMapCount = {}
+  hashMapCount = {},
+  maxCount = 0
 ) {
-  for (let end = 0; end < fruits.length; end++) {
-    if (hashMapCount[fruits[end]] == null) hashMapCount[fruits[end]] = 0;
-    hashMapCount[fruits[end]]++;
-    count++;
-    while (start < end && Object.keys(hashMapCount).length > k) {
-      hashMapCount[fruits[start]]--;
-      if (hashMapCount[fruits[start]] === 0) delete hashMapCount[fruits[start]];
+  for (let end = 0; end < str.length; end++) {
+    if (hashMapCount[str[end]] == null) hashMapCount[str[end]] = 0;
+    hashMapCount[str[end]]++;
+    maxCount = Math.max(maxCount, hashMapCount[str[end]]);
+    while (end - start + 1 - maxCount > k) {
+      hashMapCount[str[start]]--;
       start++;
-      count--;
+      maxLength = Math.max(maxLength, hashMapCount[str[end]]);
     }
-    max = Math.max(max, count);
+    maxLength = Math.max(maxLength, end - start + 1);
   }
-  return max;
-}; // T:O(N) S:O(1)
+  return maxLength;
+}; // T:O(N) S:(1) 26 letters
