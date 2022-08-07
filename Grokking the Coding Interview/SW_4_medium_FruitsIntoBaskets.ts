@@ -7,20 +7,18 @@
 
 const fruits_into_baskets = function (
   fruits,
+  k = 2,
   start = 0,
   end = 0,
-  count = 1,
-  max = 1,
-  k = 2,
+  count = 0,
+  max = 0,
   hashMapCount = {}
 ) {
-  hashMapCount[fruits[start]] = 1;
-  while (end < fruits.length) {
-    end++;
+  for (let end = 0; end < fruits.length; end++) {
+    if (hashMapCount[fruits[end]] == null) hashMapCount[fruits[end]] = 0;
+    hashMapCount[fruits[end]]++;
     count++;
-    hashMapCount[fruits[end]] =
-      hashMapCount[fruits[end]] == null ? 1 : hashMapCount[fruits[end]] + 1;
-    while (start <= end && Object.keys(hashMapCount).length > k) {
+    while (start < end && Object.keys(hashMapCount).length > k) {
       hashMapCount[fruits[start]]--;
       if (hashMapCount[fruits[start]] === 0) delete hashMapCount[fruits[start]];
       start++;
@@ -29,4 +27,4 @@ const fruits_into_baskets = function (
     max = Math.max(max, count);
   }
   return max;
-}; // T:O(N) S:O(K)
+}; // T:O(N) S:O(1)
