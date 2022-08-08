@@ -1,44 +1,30 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/YQ8N2OZq0VM
 //
-// String Anagrams
+// String Anagrams (hard)
 
-// Given a string and a pattern, find all anagrams of the pattern in the given string.
+// Given a string and a pattern, find all anagrams of the pattern in the given string
 
-// Every anagram is a permutation of a string. As we know, when we are not allowed to repeat characters while finding permutations of a string, we get N!N! permutations (or anagrams) of a string having NN characters. For example, here are the six anagrams of the string “abc”:
-
-const find_substring = function (str, pattern) {
-  let min = Number.MAX_SAFE_INTEGER;
-  let minString = '';
-  let hashMapCountdown = {};
-
-  for (let el of pattern.split('')) {
-    hashMapCountdown[el] =
-      hashMapCountdown[el] == null ? 1 : hashMapCountdown[el] + 1;
-  }
-  let matchCountdown = Object.keys(hashMapCountdown).length;
-
-  let start = 0;
-  for (let i in str.split('')) {
-    let letter = str[i];
-    if (hashMapCountdown[letter] == null) continue;
-
-    hashMapCountdown[letter]--;
-    if (hashMapCountdown[letter] === 0) matchCountdown--;
-
-    while (matchCountdown === 0) {
-      if (i - start + 1 < min) {
-        min = i - start + 1;
-        minString = str.slice(start, i + 1);
-      }
-
-      let startLetter = str[start];
-      if (hashMapCountdown[startLetter] != null) {
-        hashMapCountdown[startLetter]++;
-        if (hashMapCountdown[startLetter] > 0) matchCountdown++;
-      }
-      start++;
+const find_string_anagrams = function (
+  str,
+  pattern,
+  results = [],
+  start = 0,
+  count = 0,
+  hashMapCount = {}
+) {
+  for (let el of pattern)
+    hashMapCount[el] = el in hashMapCount ? hashMapCount[el] + 1 : 1; // init pattern hashMap
+  for (let end = 0; end < str.length; end++) {
+    if (str[end] in hashMapCount) {
+      hashMapCount[str[end]]--;
+      if (hashMapCount[str[end]] === 0) count++;
     }
+    if (count === Object.keys(hashMapCount).length) results.push(start);
+    if (end < pattern.length - 1) continue;
+    if (!(str[start] in hashMapCount)) continue;
+    if (hashMapCount[str[start]] === 0) count--;
+    hashMapCount[str[start]]++;
+    start++;
   }
-
-  return minString;
-}; // T:O(N+P) S:O(1) Pmax = 26 letters
+  return results;
+}; // T:O(N) S:(N) patter is 1 char and all str is that char

@@ -1,34 +1,28 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/N8vB7OVYo2D
 // Permutation in a String
 
-const find_permutation = function (str, pattern) {
-  let hashMapCount = {};
-
-  for (let letter of pattern.split('')) {
-    hashMapCount[letter] =
-      hashMapCount[letter] == null ? 1 : hashMapCount[letter] + 1;
-  }
-  let copy = { ...hashMapCount };
-
-  let start = 0;
-  for (let i in str.split('')) {
-    let letter = str[i];
-    if (hashMapCount[letter] == null) {
-      start = i + 1;
-      hashMapCount = { ...copy };
-      continue;
+const find_permutation = function (
+  str,
+  pattern,
+  start = 0,
+  matchCount = 0,
+  hasMapCount = {}
+) {
+  for (let el of pattern)
+    hasMapCount[el] = el in hasMapCount ? hasMapCount[el] + 1 : 1; // init hashMapCount
+  for (let end = 0; end < str.length; end++) {
+    if (str[end] in hasMapCount) {
+      hasMapCount[str[end]]--;
+      if (hasMapCount[str[end]] === 0) matchCount++;
     }
-
-    hashMapCount[letter]--;
-
-    while (hashMapCount[letter] < 0) {
-      let letter = str[start];
-      hashMapCount[letter]++;
+    if (matchCount === Object.keys(hasMapCount).length) return true; // base case
+    if (end - start + 1 >= pattern.length) {
+      if (str[start] in hasMapCount) {
+        if (hasMapCount[str[start]] === 0) matchCount--;
+        hasMapCount[str[start]]++;
+      }
       start++;
     }
-    if (Object.values(hashMapCount).reduce((res, el) => res + el, 0) === 0)
-      return true;
   }
-
   return false;
-}; // T:(N) S:(1) Kmax 26
+}; // T:O(N) S:O(1) English Letters 26
