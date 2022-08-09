@@ -3,28 +3,30 @@
 
 // Given an array of unsorted numbers and a target number, find a triplet in the array whose sum is as close to the target number as possible, return the sum of the triplet. If there are more than one such triplet, return the sum of the triplet with the smallest sum.
 
-const triplet_sum_close_to_target = function (arr, target_sum) {
-  let minSum = Number.MAX_SAFE_INTEGER;
-  arr.sort((x, y) => x - y);
-
+const triplet_sum_close_to_target = function (
+  arr,
+  target_sum,
+  minDiff = Infinity,
+  minSum = Infinity
+) {
+  arr.sort((x, y) => x - y); // NlogN
   for (let i = 0; i < arr.length - 2; i++) {
     let start = i + 1;
     let end = arr.length - 1;
     while (start < end) {
       let sum = arr[i] + arr[start] + arr[end];
-      if (Math.abs(target_sum - sum) < Math.abs(target_sum - minSum)) {
+      if (target_sum - sum === 0) return 0;
+      if (Math.abs(target_sum - sum) === minDiff && sum < minSum) minSum = sum;
+      if (Math.abs(target_sum - sum) < minDiff) {
+        minDiff = Math.abs(target_sum - sum);
         minSum = sum;
       }
-      if (Math.abs(target_sum - minSum) === Math.abs(target_sum - sum)) {
-        mindSum = Math.min(minSum, sum);
-      }
-      if (sum > target_sum) {
-        end--;
+      if (sum < target_sum) {
+        start++;
         continue;
       }
-      start++;
+      end--;
     }
   }
-
-  return minSum;
-}; // T:O(NlogN + N^2) S:O(N)
+  return minSum === Infinity ? -1 : minSum;
+}; // T:O(N^2) S:O(N)
