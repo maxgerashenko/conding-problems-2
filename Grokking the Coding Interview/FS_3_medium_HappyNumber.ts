@@ -12,20 +12,17 @@
 // if fast is 1 it ißs happy number
 // if fast === slow it is cycle
 
-const next = (number) =>
+let step = (number) =>
   String(number)
     .split('')
-    .map((num) => Math.pow(+num, 2))
-    .reduce((res, num) => res + num, 0);
-
+    .reduce((pre, el) => pre + Math.pow(el, 2), 0);
 const find_happy_number = function (num) {
-  let slow = num;
-  let fast = num;
-  while (slow !== 1) {
-    slow = next(slow);
-    fast = next(next(fast));
-    if (slow !== 1 && slow == fast) return false;
+  let slow = step(num);
+  let fast = step(step(num));
+  while (slow !== fast) {
+    if (fast === 1) return true;
+    slow = step(slow);
+    fast = step(step(fast));
   }
-
-  return true;
-}; // T:O(LogN) S:O(1)
+  return false;
+}; // T:O(N) S:O(1)

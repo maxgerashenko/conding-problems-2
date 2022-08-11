@@ -13,18 +13,19 @@
 // - when start will equal meeting point
 // - then end will equal cycle start
 
-const find_cycle_start = function (head) {
-  let slow = head && head.next;
-  let fast = slow && slow.next;
-
-  while (fast && slow && fast.value !== slow.value) {
+const find_cycle_start = function (head, slow = head, fast = head) {
+  slow = slow && slow.next;
+  fast = fast && fast.next && fast.next.next;
+  while (fast && fast.next) {
     slow = slow.next;
-    fast = fast.next && fast.next.next;
+    fast = fast.next.next;
+    if (slow.value === fast.value) break;
   }
+
   slow = head;
-  while (slow.value !== fast.value) {
+  while (fast.value != slow.value) {
     slow = slow.next;
     fast = fast.next;
   }
-  return slow;
+  return fast;
 }; // T:O(N) S:O(1)
