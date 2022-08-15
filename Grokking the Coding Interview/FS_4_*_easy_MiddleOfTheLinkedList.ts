@@ -14,6 +14,5 @@ const find_middle_of_linked_list = function (head) {
     fast = fast.next.next;
     slow = slow.next;
   }
-
   return slow;
 }; // T:O(N) S:O(1)

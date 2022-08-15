@@ -14,17 +14,14 @@
 // - then end will equal cycle start
 
 const find_cycle_start = function (head, slow = head, fast = head) {
-  slow = slow && slow.next;
-  fast = fast && fast.next && fast.next.next;
-  while (fast && fast.next) {
+  while (fast.next && fast.next.next) {
     slow = slow.next;
     fast = fast.next.next;
-    if (slow.value === fast.value) break;
+    if (slow == fast) break;
   }
-
-  slow = head;
-  while (fast.value != slow.value) {
-    slow = slow.next;
+  let start = head;
+  while (start !== fast) {
+    start = start.next;
     fast = fast.next;
   }
   return fast;

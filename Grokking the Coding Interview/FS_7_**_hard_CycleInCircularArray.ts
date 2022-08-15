@@ -14,28 +14,22 @@
 // Output: true
 // Explanation: The array has a cycle among indices: 0 -> 1 -> 3 -> 0
 
-const circular_array_loop_exists = function (
-  arr,
-  len = arr.length,
-  hashMapI = {}
-) {
-  // hasMap inxex to avoid re calculation, decrease time complexity but increase space complexity
-  let next = (i, step) =>
-    (hashMapI[i] = hashMapI[i]
-      ? hashMapI[i]
-      : i + step > 0
-      ? (i + step) % len
-      : len + ((i + step) % len));
+const circular_array_loop_exists = function (arr, len = arr.length, map = {}) {
+  let step = (i, step = arr[i]) =>
+    (map[i] =
+      map[i] != null
+        ? map[i]
+        : i + step > 0
+        ? (i + step) % len
+        : len + ((i + step) % len));
   for (let i = 0; i < len; i++) {
-    let slow = i;
-    let fast = i;
+    let slow = (fast = i);
     let isForward = arr[i] > 0;
     while (arr[slow] > 0 === isForward) {
-      slow = next(slow, arr[slow]);
-      let tmp = next(fast, arr[fast]);
-      fast = next(tmp, arr[tmp]);
-      if (fast === slow) return true;
+      slow = step(slow);
+      fast = step(step(fast));
+      if (slow === fast) return true;
     }
   }
   return false;
-}; // T:O(N^2) S:O(1) or T:O(N) S:O(N) with HashMapIndex
+}; //T:O(N^2) S:O(1) || T:O(N) S:O(N)
