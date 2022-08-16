@@ -25,4 +25,4 @@ const find_permutation = function (
     }
   }
   return false;
-}; // T:O(N) S:O(1) English Letters 26
+}; // T:O(N+L) S:O(1) English Letters 26 L - letters in the pattern
