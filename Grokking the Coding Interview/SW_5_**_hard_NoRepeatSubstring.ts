@@ -3,11 +3,17 @@
 
 // Given a string, find the length of the longest substring, which has no repeating characters.
 
-const non_repeat_substring = function (str, start = 0, max = 0, hashMap = {}) {
+const non_repeat_substring = function (
+  str,
+  max = 0,
+  start = 0,
+  hashMapIndex = {}
+) {
   for (let end = 0; end < str.length; end++) {
-    if (hashMap[str[end]] != null) start = hashMap[str[end]] + 1;
-    hashMap[str[end]] = end;
+    let endEl = str[end];
+    if (hashMapIndex[endEl] != null) start = hashMapIndex[endEl] + 1;
+    hashMapIndex[endEl] = end;
     max = Math.max(max, end - start + 1);
   }
   return max;
-}; // T:O(N) S:O(1) 26 english
+}; // T:O(N) S:(1) 25 letter in English

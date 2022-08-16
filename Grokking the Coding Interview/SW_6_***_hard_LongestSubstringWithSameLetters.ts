@@ -6,21 +6,22 @@
 const length_of_longest_substring = function (
   str,
   k,
-  maxLength = 0,
   start = 0,
-  hashMapCount = {},
-  maxCount = 0
+  maxCount = 0,
+  maxLength = 0,
+  hashMapCount = {}
 ) {
   for (let end = 0; end < str.length; end++) {
-    if (hashMapCount[str[end]] == null) hashMapCount[str[end]] = 0;
-    hashMapCount[str[end]]++;
-    maxCount = Math.max(maxCount, hashMapCount[str[end]]);
-    while (end - start + 1 - maxCount > k) {
-      hashMapCount[str[start]]--;
+    let endEl = str[end];
+    hashMapCount[endEl] =
+      hashMapCount[endEl] == null ? 1 : hashMapCount[endEl] + 1;
+    maxCount = Math.max(maxCount, hashMapCount[endEl]);
+    while (end - start + 1 > maxCount + k) {
+      let startEl = str[start];
+      hashMapCount[startEl]--;
       start++;
-      maxLength = Math.max(maxLength, hashMapCount[str[end]]);
     }
     maxLength = Math.max(maxLength, end - start + 1);
   }
   return maxLength;
-}; // T:O(N) S:(1) 26 letters
+}; // T:O(N) S:O(1) 26 letters in English

@@ -7,22 +7,20 @@
 const longest_substring_with_k_distinct = function (
   str,
   k,
-  max = 0,
   start = 0,
-  end = 0,
-  hashMapCount = {}
+  hashMap = {},
+  max = 0
 ) {
-  hashMapCount[str[start]] = 1;
-  while (start <= end && end < str.length) {
-    max = Math.max(max, end - start + 1);
-    end++;
-    hashMapCount[str[end]] =
-      hashMapCount[str[end]] == null ? 1 : hashMapCount[str[end]]++;
-    while (start <= end && Object.keys(hashMapCount).length > k) {
-      hashMapCount[str[start]]--;
-      if (hashMapCount[str[start]] === 0) delete hashMapCount[str[start]];
+  for (let end = 0; end < str.length; end++) {
+    let endEl = str[end];
+    hashMap[endEl] = hashMap[endEl] == null ? 1 : hashMap[endEl] + 1;
+    while (Object.keys(hashMap).length > k) {
+      let startEl = str[start];
+      hashMap[startEl]--;
+      if (hashMap[startEl] === 0) delete hashMap[startEl];
       start++;
     }
+    max = Math.max(max, end - start + 1);
   }
   return max;
-}; // T:O(N) S:O(K)
+}; // T:O(N) S:O(1)
