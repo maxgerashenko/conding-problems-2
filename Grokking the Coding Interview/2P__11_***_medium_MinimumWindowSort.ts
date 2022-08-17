@@ -16,15 +16,14 @@ const shortest_window_sort = function (
   min = Infinity,
   max = -Infinity
 ) {
-  while (start < end && arr[start] < arr[start + 1]) start++;
-  if (start === end) return 0; // connet case array is sorted
-  while (end > start && arr[end] > arr[end - 1]) end--;
-  for (i = start + 1; i < end; i++) {
+  while (arr[start] < arr[start + 1]) start++;
+  if (start === end) return 0;
+  while (arr[end] > arr[end - 1]) end--;
+  for (let i = start + 1; i < end; i++) {
     min = Math.min(min, arr[i]);
     max = Math.max(max, arr[i]);
   }
-  while (min < arr[start]) start--;
-  while (max > arr[end]) end++;
-
+  while (arr[start] > min) start--;
+  while (arr[end] < max) end++;
   return end - 1 - start - 1 + 1;
 }; // T:O(N) S:O(1)

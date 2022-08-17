@@ -3,15 +3,15 @@
 
 // Given an array of sorted numbers, remove all duplicates from it. You should not use any extra space; after removing the duplicates in-place return the length of the subarray that has no duplicate in it.
 
-const remove_duplicates = function (arr, slow = 0, fast = 0) {
-  while (fast < arr.length) {
-    if (arr[fast] === arr[slow]) {
-      fast++;
+const remove_duplicates = function (arr, start = 0) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[start] === arr[i]) continue;
+    if (i === start) {
+      start++;
       continue;
     }
-    [arr[slow + 1], arr[fast]] = [arr[fast], arr[slow + 1]];
-    fast++;
-    slow++;
+    start++;
+    [arr[start], arr[i]] = [arr[i], arr[start]];
   }
-  return slow + 1;
+  return start + 1;
 }; // T:O(N) S:O(1)

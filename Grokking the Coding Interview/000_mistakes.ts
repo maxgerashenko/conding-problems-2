@@ -14,6 +14,7 @@
 // never use for i
 // always use let left, no GlobalEventHandlersEventMap
 // !isNaN(char) - is number
+// end=arr.length-1
 // Array(5+1).fill([])
 
 // --- Subsets
@@ -92,3 +93,10 @@
 // 1sr row - pre set
 // Selected - go backwards throw the matrix
 // Optimize - 2 rows with i%2, second row go backwards c--
+
+// --- 2P
+// end=arr.length-1
+// while start<end, when need 2 numbers
+// while start<=end, when need 1 number
+// when sum===target start++ end--
+// sort

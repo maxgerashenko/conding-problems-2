@@ -6,24 +6,22 @@
 const backspace_compare = function (
   str1,
   str2,
-  s1,
-  s2,
-  end1 = str1.length - 1,
-  end2 = str2.length - 1
+  s1 = str1.length - 1,
+  s2 = str2.length - 1
 ) {
-  const clear = (str, index, count = 0) => {
-    while (count > 0 || str[index] == '#') {
-      count = str[index] == '#' ? count + 1 : count - 1;
-      index--;
+  let backspace = (str, s, count = 0) => {
+    while (str[s] === '#' || count > 0) {
+      count = str[s] === '#' ? count + 1 : count - 1;
+      s--;
     }
-    return index;
+    return s;
   };
-  while (end1 >= 0 && end2 >= 0) {
-    end1 = clear(str1, end1);
-    end2 = clear(str2, end2);
-    if (str1[end1] !== str2[end2]) return false;
-    end1--;
-    end2--;
+  while (s1 > 0 || s2 > 0) {
+    s1 = backspace(str1, s1);
+    s2 = backspace(str2, s2);
+    if (str1[s1] !== str2[s2]) return false;
+    s1--;
+    s2--;
   }
   return true;
-}; // T:O(M+N) S:O(1)
+}; // T:O(N1+N2) S:O(1)

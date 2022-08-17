@@ -27,4 +27,4 @@ const find_subarrays = function (
     }
   }
   return results;
-}; // T:O(N^3) S:O(N)
+}; // T:O(N^3) S:O(N) N - 2P N^2 for subarray
