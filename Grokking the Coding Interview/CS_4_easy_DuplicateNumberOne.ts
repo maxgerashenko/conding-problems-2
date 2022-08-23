@@ -2,12 +2,12 @@
 // Find the Duplicate Number
 
 const find_duplicate = function (nums) {
-  for (let n in nums) {
-    while (nums[n] != +n + 1) {
-      let val = nums[n];
-      if (nums[n] === nums[val - 1]) return nums[n];
-      [nums[n], nums[val - 1]] = [nums[val - 1], nums[n]];
+  for (let i = 0; i < nums.length; i++) {
+    while (i + 1 != nums[i]) {
+      let val = nums[i];
+      if (nums[i] === nums[val - 1]) return val;
+      [nums[i], nums[val - 1]] = [nums[val - 1], nums[i]];
     }
   }
-  return nums;
-}; // T:O(n+n-1) S:O(1)
+  return -1;
+}; // T:O(N) S:O(1)
