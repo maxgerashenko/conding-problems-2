@@ -16,6 +16,7 @@
 // !isNaN(char) - is number
 // end=arr.length-1
 // Array(5+1).fill([])
+// nums.lenght
 
 // --- Subsets
 // nums.sort((x,y) => x-y) for duplicates
