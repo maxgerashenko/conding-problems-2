@@ -29,4 +29,4 @@ const find_first_k_missing_positive = function (nums, k, results = []) {
     i++;
   }
   return results;
-}; // T:O(N) S:O(1)
+}; // T:O(N+K) S:O(K)
