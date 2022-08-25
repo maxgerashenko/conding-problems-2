@@ -101,3 +101,7 @@
 // while start<=end, when need 1 number
 // when sum===target start++ end--
 // sort
+
+// --- CS
+// nums[i] = i+1
+// [nums[i], nums[val-1]] = [nums[val-1], nums[i]]
