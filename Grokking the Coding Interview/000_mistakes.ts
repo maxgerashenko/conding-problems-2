@@ -1,4 +1,6 @@
 // --- Common
+// nums.length
+// max = Math.max
 // lastIndex = nums.length-1;
 // sort T:O(NlogN) S(N)
 // minHeap insert T:(log K) S:(K)
@@ -7,16 +9,10 @@
 // sort (x.start, y.start) => s.start - y.start
 // this.
 // class Heap {
-// max = Math.max
-// for in i; +i
-// for in i: skip [null, 1]
 // this.arr.sort, but this.arr = this.arr.filter
-// never use for i
 // always use let left, no GlobalEventHandlersEventMap
 // !isNaN(char) - is number
-// end=arr.length-1
 // Array(5+1).fill([])
-// nums.lenght
 
 // --- Subsets
 // nums.sort((x,y) => x-y) for duplicates

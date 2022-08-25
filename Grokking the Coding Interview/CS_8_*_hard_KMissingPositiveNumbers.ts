@@ -13,21 +13,20 @@
 // iterate
 // find [i] !== i+1 and >0 and not it ther set
 
-const find_first_k_missing_positive = function (nums, k) {
-  let result = [];
-  for (let i in nums) {
-    while (nums[i] >= 0 && nums[i] !== i && nums[i] !== nums[nums[i]]) {
+const find_first_k_missing_positive = function (nums, k, results = []) {
+  for (let i = 0; i < nums.length; i++)
+    while (i != nums[i]) {
       let val = nums[i];
+      if (nums[i] == null || nums[i] < 0 || nums[i] == nums[val]) break;
       [nums[i], nums[val]] = [nums[val], nums[i]];
     }
-  }
   let i = 1;
   while (k > 0) {
-    if (nums[i] !== i) {
-      result.push(i);
+    if (nums[i] != i) {
+      results.push(i);
       k--;
     }
     i++;
   }
-  return result;
-}; // T:O(N+K) S:O(K)
+  return results;
+}; // T:O(N) S:O(1)
