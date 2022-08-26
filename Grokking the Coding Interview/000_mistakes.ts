@@ -101,3 +101,4 @@
 // --- CS
 // nums[i] = i+1
 // [nums[i], nums[val-1]] = [nums[val-1], nums[i]]
+// null is always an option
