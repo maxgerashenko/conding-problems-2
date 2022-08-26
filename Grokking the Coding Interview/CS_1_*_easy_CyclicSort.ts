@@ -3,7 +3,7 @@
 
 const cyclic_sort = function (nums) {
   for (let i = 0; i < nums.length; i++) {
-    while (nums[i] != i + 1) {
+    while (i + 1 != nums[i]) {
       let val = nums[i];
       [nums[i], nums[val - 1]] = [nums[val - 1], nums[i]];
     }
