@@ -12,10 +12,10 @@
 // conners case
 const find_missing_numbers = function (nums, results = []) {
   for (let i = 0; i < nums.length; i++) {
-    let index = nums[i] - 1;
-    while (i != index && nums[i] != nums[index]) {
-      index = nums[i] - 1;
-      [nums[i], nums[index]] = [nums[index], nums[i]];
+    while (nums[i] != i + 1) {
+      let val = nums[i];
+      if (nums[i] == nums[val - 1]) break;
+      [nums[i], nums[val - 1]] = [nums[val - 1], nums[i]];
     }
   }
   for (let i = 0; i < nums.length; i++)
