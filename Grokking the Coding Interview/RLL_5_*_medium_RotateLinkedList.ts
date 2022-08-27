@@ -3,32 +3,22 @@
 
 // Given the head of a Singly LinkedList and a number ‘k’, rotate the LinkedList to the right by ‘k’ nodes.
 
-const rotate = function (head, rotation) {
-  let pre = new Node();
-  pre.next = head;
-  let cur = pre.next;
+const rotate = function (head, r, root = { next: head }, pre = root) {
   let len = 0;
-  while (cur) {
-    cur = cur.next;
+  while (r > 0) {
+    if (pre.next == null) {
+      r %= len;
+      pre = root;
+      continue;
+    }
+    pre = pre.next;
+    r--;
     len++;
   }
-  rotation = rotation % len;
-  while (rotation > 0) {
-    rotation--;
-    pre = pre.next;
-  }
-  cur = pre.next;
-  while (cur.next) {
-    let tmp = cur.next;
-    cur.next = tmp.next;
-    tmp.next = pre.next;
-    pre.next = tmp;
-  }
-  let second = pre.next;
-  cur.next = head;
-  while (head.value !== pre.value) {
-    head = head.next;
-  }
-  head.next = null;
-  return second;
+  let newHead = pre.next;
+  pre.next = null;
+  let newEnd = newHead;
+  while (newEnd.next) newEnd = newEnd.next;
+  newEnd.next = head;
+  return newHead;
 }; // T:O(N) S:O(1)
