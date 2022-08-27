@@ -10,11 +10,11 @@
 
 const find_first_smallest_missing_positive = function (nums) {
   for (let i = 0; i < nums.length; i++)
-    while (i != nums[i]) {
+    while (nums[i] != i) {
       let val = nums[i];
-      if (nums[i] < 0 || nums[i] == null) break;
+      if (nums[i] == nums[val] || nums[i] == null || nums[i] < 0) break;
       [nums[i], nums[val]] = [nums[val], nums[i]];
     }
-  for (let i = 1; i < nums.length; i++) if (i != nums[i]) return i;
+  for (let i = 1; i < nums.length; i++) if (nums[i] != i) return i;
   return -1;
-}; // T:O(N) S:O(1)
+}; // T:O(N) S:(1)
