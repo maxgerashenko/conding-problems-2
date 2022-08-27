@@ -2,7 +2,7 @@
 // Reverse a LinkedList
 
 const reverse = function (head) {
-  let pre = new Node();
+  let pre = {};
   pre.next = head;
   let start = pre.next;
   while (start.next) {
