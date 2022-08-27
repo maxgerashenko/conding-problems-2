@@ -20,6 +20,5 @@ const reverse_sub_list = function (head, p, q) {
     tmp.next = pre.next;
     pre.next = tmp;
   }
-
   return head;
 }; // T:O(N) S:O(1)
