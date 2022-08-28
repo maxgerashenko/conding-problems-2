@@ -2,23 +2,20 @@
 //
 // https://www.educative.io/courses/grokking-the-coding-interview/qVANqMonoB2
 
-const reverse_sub_list = function (head, p, q) {
-  let pre;
-  let tmp = new Node();
-  tmp.next = head;
-  while (tmp.next) {
-    if (tmp.next.value === p) {
-      pre = tmp;
-      break;
-    }
-    tmp = tmp.next;
-  }
-  let cur = pre.next;
-  while (cur.next && cur.next.value != q) {
-    let tmp = cur.next;
-    cur.next = tmp.next;
+const reverse_sub_list = function (
+  head,
+  s,
+  e,
+  pre = { next: head },
+  root = head
+) {
+  while (pre.next && pre.next.value != s) pre = pre.next;
+  let start = pre.next;
+  while (start.next && pre.next.value != e) {
+    let tmp = start.next;
+    start.next = tmp.next;
     tmp.next = pre.next;
     pre.next = tmp;
   }
-  return head;
+  return root;
 }; // T:O(N) S:O(1)
