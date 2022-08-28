@@ -4,12 +4,12 @@
 const reverse_alternate_k_elements = function (
   head,
   k,
-  root = { next: head },
-  pre = root
+  pre = { next: head },
+  root = pre
 ) {
   while (pre.next) {
-    start = pre.next;
-    let count = k - 1;
+    let start = pre.next;
+    count = k - 1;
     while (start.next && count > 0) {
       let tmp = start.next;
       start.next = tmp.next;
@@ -18,7 +18,7 @@ const reverse_alternate_k_elements = function (
       count--;
     }
     pre = start;
-    while (pre.next && count < k) {
+    while (count < k) {
       pre = pre.next;
       count++;
     }
