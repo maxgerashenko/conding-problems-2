@@ -1,9 +1,7 @@
 // https://www.educative.io/courses/grokking-the-coding-interview/3wENz1N4WW9
 // Reverse a LinkedList
 
-const reverse = function (head) {
-  let pre = {};
-  pre.next = head;
+const reverse = function (head, pre = { next: head }) {
   let start = pre.next;
   while (start.next) {
     let tmp = start.next;
