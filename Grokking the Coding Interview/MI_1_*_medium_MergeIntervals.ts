@@ -2,20 +2,20 @@
 //
 // Merge Intervals
 
-const merge = function (intervals) {
+const merge = function (intervals, results = []) {
   intervals.sort((x, y) => x.start - y.start);
-  let result = [];
-  let start = intervals[0].start;
-  let preMaxEnd = intervals[0].end;
-  for (let i = 1; i < intervals.length; i++) {
-    if (preMaxEnd < intervals[i].start) {
-      result.push(new Interval(start, preMaxEnd));
-      start = intervals[i].start;
-      preMaxEnd = intervals[i].end;
+  let { start, end } = intervals.shift();
+  while (intervals.length > 0) {
+    let el = intervals.shift();
+    if (end < el.start) {
+      results.push(new Interval(start, end));
+      start = el.start;
+      end = el.end;
       continue;
     }
-    preMaxEnd = Math.max(preMaxEnd, intervals[i].end);
+    start = Math.min(start, el.start);
+    end = Math.max(end, el.end);
   }
-  result.push(new Interval(start, preMaxEnd));
-  return result;
-}; // T:O(NlogN) S:O(N)
+  results.push(new Interval(start, end));
+  return results;
+}; // T:O(NlogN+N) S:O(N) Space of sort is N
