@@ -16,65 +16,25 @@ class Heap {
     return this.arr.shift();
   }
 }
-
-const find_employee_free_time = function (schedule) {
-  let busy = [];
-  let minHeap = new Heap((x, y) => x.start - y.start);
-  for (let i in schedule) {
+const find_employee_free_time = function (
+  schedule,
+  results = [],
+  minHeap = new Heap((x, y) => x.end - y.end)
+) {
+  for (let i = 0; i < schedule.length; i++) {
     let { start, end } = schedule[i].shift();
-    minHeap.push(new Interval(start, end, i));
-  }
-  let { start: minStart, end: maxEnd, index: lastIndex } = minHeap.pop();
-  if (schedule[lastIndex].length > 0) {
-    let { start, end } = schedule[lastIndex].shift();
-    minHeap.push(new Interval(start, end, lastIndex));
-  }
-  while (minHeap.arr.length > 0) {
-    let { start, end, index } = minHeap.pop();
-    if (schedule[index].length > 0) {
-      let { start, end } = schedule[index].shift();
-      minHeap.push(new Interval(start, end, index));
+    minHeap.push({ start, end, i });
+  } // init heap
+  let { end, i } = minHeap.pop();
+  while (minHeap.arr.length || schedule[i].length) {
+    if (schedule[i].length) {
+      let { start, end } = schedule[i].shift();
+      minHeap.push({ start, end, i });
     }
-    if (maxEnd < start) {
-      busy.push(new Interval(minStart, maxEnd));
-      minStart = start;
-      maxEnd = end;
-      continue;
-    }
-    maxEnd = Math.max(maxEnd, end);
+    let busy = minHeap.pop();
+    i = busy.i;
+    if (end < busy.start) results.push(new Interval(end, busy.start));
+    end = Math.max(end, busy.end);
   }
-  busy.push(new Interval(minStart, maxEnd));
-
-  let free = [];
-  let { end: busyEnd } = busy.shift();
-  for (let { start, end } of busy) {
-    if (start > busyEnd) {
-      free.push(new Interval(busyEnd, start));
-      busyEnd = end;
-      continue;
-    }
-    busyEnd = Math.max(busyEnd, end);
-  }
-
-  return free;
-}; // T:O(logK*N) S:(K)
-
-// with sort
-const find_max_cpu_load = function (jobs) {
-  jobs.sort((x, y) => x.start - y.start);
-  let { start: minStart, end: maxEnd, cpu_load: load } = jobs[0];
-  let maxLoad = load;
-  for (let i = 1; i < jobs.length; i++) {
-    let { start, end, cpu_load } = jobs[i];
-    if (start > maxEnd) {
-      maxLoad = Math.max(maxLoad, load);
-      load = cpu_load;
-      minStart = start;
-      maxEnd = end;
-      continue;
-    }
-    load += cpu_load;
-    maxEnd = Math.max(maxEnd, end);
-  }
-  return Math.max(maxLoad, load);
-}; // T:O(NlogN) S:O(N)
+  return results;
+}; // T:O(NLogN) S:O(K) K - number of employees
