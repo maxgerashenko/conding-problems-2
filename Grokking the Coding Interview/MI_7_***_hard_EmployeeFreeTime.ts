@@ -18,19 +18,26 @@ class Heap {
 }
 const find_employee_free_time = function (
   schedule,
-  free = [],
-  minHeap = new Heap((x, y) => x.end - y.end)
+  meetings = [],
+  meeting = null,
+  minHeap = new Heap((x, y) => x.end - y.end),
+  results = []
 ) {
-  for (let i in schedule) minHeap.push({ ...schedule[i].shift(), i });
-  let { end, i } = minHeap.pop();
+  for (let i = 0; i < schedule.length; i++) {
+    let { start, end } = schedule[i].shift();
+    minHeap.push({ start, end, i });
+  } // init the heap
+  let { end, i } = minHeap.pop(); // get init el
   while (minHeap.arr.length || schedule[i].length) {
-    if (schedule[i].length > 0) minHeap.push({ ...schedule[i].shift(), i });
-    let meeting = minHeap.pop();
-    i = meeting.i;
-    if (end < meeting.start) {
-      free.push(new Interval(end, meeting.start));
+    if (schedule[i].length) minHeap.push({ ...schedule[i].shift(), i }); // put back
+    let el = minHeap.pop(); // get el
+    i = el.i;
+    if (end < el.start) {
+      results.push(new Interval(end, el.start));
+      end = el.end;
+      continue;
     }
-    end = Math.max(end, meeting.end);
+    end = Math.max(end, el.end);
   }
-  return free;
-}; // T:O(logK*N) S:(K)
+  return results;
+}; // T:O(NlogK) S:O(K)
