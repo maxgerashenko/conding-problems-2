@@ -3,9 +3,9 @@
 // Merge Intervals
 
 const merge = function (intervals, results = []) {
-  intervals.sort((x, y) => x.start - y.start);
-  let { start, end } = intervals.shift();
-  while (intervals.length > 0) {
+  intervals.sort((x, y) => x.start - y.start); // sort by start
+  let { start, end } = intervals.shift(); // take first
+  while (intervals.length) {
     let el = intervals.shift();
     if (end < el.start) {
       results.push(new Interval(start, end));
@@ -13,9 +13,7 @@ const merge = function (intervals, results = []) {
       end = el.end;
       continue;
     }
-    start = Math.min(start, el.start);
     end = Math.max(end, el.end);
   }
-  results.push(new Interval(start, end));
-  return results;
-}; // T:O(NlogN+N) S:O(N) Space of sort is N
+  return [...results, new Interval(start, end)]; // and the last
+}; // T:O(NLOG N) S:O(N)
