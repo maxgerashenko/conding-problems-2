@@ -36,4 +36,4 @@ const find_max_cpu_load = function (
     maxLoad = Math.max(maxLoad, load);
   }
   return maxLoad;
-}; // T:O(NlogN+N) S:O(N)
+}; // T:O(NlogN+N)  S:O(N)
