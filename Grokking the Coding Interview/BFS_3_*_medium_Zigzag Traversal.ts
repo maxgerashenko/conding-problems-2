@@ -13,23 +13,18 @@
 // if even lelve shift values
 // return values
 
-const traverse = function (root) {
-  let result = [];
-  let nodes = [root];
-  while (nodes.length) {
-    let level = [];
-    let values = [];
-    for (let { left, right, value } of nodes) {
-      if (left) level.push(left);
-      if (right) level.push(right);
-      if (result.length % 2 === 0) {
-        values.push(value);
-        continue;
-      }
-      values.unshift(value);
+const traverse = function (root, level = [root], results = []) {
+  while (level.length) {
+    let tmp = [];
+    let result = [];
+    while (level.length) {
+      let { value, left, right } = level.shift();
+      results.length % 2 === 0 ? result.push(value) : result.unshift(value);
+      left && tmp.push(left);
+      right && tmp.push(right);
     }
-    nodes = level;
-    result.push(values);
+    results.push(result);
+    level = tmp;
   }
-  return result;
-}; // T:O(N) S:O(N/2)
+  return results;
+}; // T:O(N) S:O(N/2), for result S:O(N)
