@@ -11,20 +11,18 @@
 // unshift level to levels
 // return levels
 
-const traverse = function (root) {
-  let result = [];
-  let nodes = [root];
-  while (nodes.length > 0) {
-    let values = [];
-    let level = [];
-    for (let { value, left, right } of nodes) {
-      values.push(value);
-      if (left) level.push(left);
-      if (right) level.push(right);
+const traverse = function (root, level = [root], results = []) {
+  while (level.length) {
+    let tmp = [];
+    let result = [];
+    while (level.length) {
+      let { value, left, right } = level.shift();
+      result.push(value);
+      left && tmp.push(left);
+      right && tmp.push(right);
     }
-    nodes = level;
-    result.unshift(values);
+    results.unshift(result);
+    level = tmp;
   }
-
-  return result;
-}; // T:O(N) S:(N/2)
+  return results;
+}; // T:O(N) S:O(N/2) for result S:O(N);
