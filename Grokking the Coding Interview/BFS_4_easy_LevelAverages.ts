@@ -5,19 +5,20 @@
 // Problem Statement#
 // Given a binary tree, populate an array to represent the averages of all of its levels.
 
-const find_level_averages = function (root) {
-  let result = [];
-  let nodes = [root];
-  while (nodes.length) {
+const find_level_averages = function (root, level = [root], results = []) {
+  // conner case
+  while (level.length) {
+    let tmp = [];
+    let len = level.length;
     let sum = 0;
-    let level = [];
-    for (let { right, left, value } of nodes) {
+    while (level.length) {
+      let { value, left, right } = level.shift();
+      left && tmp.push(left);
+      right && tmp.push(right);
       sum += value;
-      left && level.push(left);
-      right && level.push(right);
     }
-    result.push(sum / nodes.length);
-    nodes = level;
+    level = tmp;
+    results.push(sum / len);
   }
-  return result;
-}; // T:O(N) S(N/2)
+  return results;
+}; // T:O(N) S:O(N/2), for resuls S:O(Log(n+1))-1)
