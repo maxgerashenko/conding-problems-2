@@ -5,15 +5,12 @@
 // Problem Statement#
 // Given a binary tree, populate an array to represent its level-by-level traversal. You should populate the values of all nodes of each level from left to right in separate sub-arrays.
 
-const traverse = function (root) {
-  let result = [];
-  let nodes = [root];
-  while (nodes.length) {
-    let { left, right, val } = nodes.shift();
-    result.push(val);
-    if (left) nodes.push(left);
-    if (right) nodes.push(right);
+const traverse = function (root, level = [root], results = []) {
+  while (level.length) {
+    let { val, left, right } = level.shift();
+    results.push(val);
+    left && level.push(left);
+    right && level.push(right);
   }
-
-  return result;
-}; // T:O(N) S:O(N/2)
+  return results;
+}; // T:O(N) S:O(N) for result for traberce T:O(N) S:O(N/2) N/2 max el on level
