@@ -14,19 +14,16 @@
 // connect nodes from diffrent levels
 // return root
 
-const connect_all_siblings = function (root) {
-  let nodes = [root];
-  let pre = null;
-  while (nodes.length) {
-    let level = [];
-    for (let node of nodes) {
-      if (pre) pre.next = node;
-      pre = node;
-      let { left, right } = node;
-      left && level.push(left);
-      right && level.push(right);
+const connect_all_siblings = function (root, level = [root], pre = null) {
+  while (level.length) {
+    let tmp = [];
+    for (let el of level) {
+      if (pre) pre.next = el;
+      pre = el;
+      let { left, right } = el;
+      left && tmp.push(left);
+      right && tmp.push(right);
     }
-    nodes = level;
+    level = tmp;
   }
-  return root;
 }; // T:O(N) S:O(N/2)
