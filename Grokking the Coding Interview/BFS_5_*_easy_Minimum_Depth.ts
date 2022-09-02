@@ -5,18 +5,16 @@
 // Problem Statement#
 // Find the minimum depth of a binary tree. The minimum depth is the number of nodes along the shortest path from the root node to the nearest leaf node.
 
-const find_minimum_depth = function (root) {
-  let nodes = [root];
-  let count = 1;
-  while (nodes.length) {
-    let level = [];
-    for (let { left, right } of nodes) {
-      left && level.push(left);
-      right && level.push(right);
-      if (!level.length) return count;
-    }
+const find_minimum_depth = function (root, level = [root], count = 0) {
+  // conner case
+  while (level.length) {
+    let tmp = [];
     count++;
-    nodes = level;
+    while (level.length) {
+      const { left, right } = level.shift();
+      if (!left && !right) return count;
+      tmp.push(left, right);
+    }
+    level = tmp;
   }
-  return 0;
-}; // T:O(N-(N/2-1)) S:O(N/2)
+}; // T:O(N) S:O(N/2)
