@@ -11,17 +11,15 @@
 // take the last value from the level
 // return last values from the level
 
-const tree_right_view = function (root) {
-  let result = [root.value];
-  let nodes = [root];
-  while (nodes.length) {
-    let level = [];
-    for (let { left, right } of nodes) {
-      left && level.push(left);
-      right && level.push(right);
+const tree_right_view = function (root, level = [root], results = []) {
+  while (level.length) {
+    let tmp = [];
+    results.push(level[level.length - 1].value);
+    for (let { left, right } of level) {
+      left && tmp.push(left);
+      right && tmp.push(right);
     }
-    nodes = [...level];
-    level.length && result.push(level.pop().value);
+    level = tmp;
   }
-  return result;
-}; // T:O(N) S:O(N/2)
+  return results;
+}; // T:O(N) S:O(N)
