@@ -5,16 +5,18 @@
 // Problem Statement#
 // Given a binary tree and a node, find the level order successor of the given node in the tree. The level order successor is the node that appears right after the given node in the level order traversal.
 
-const find_successor = function (root, key) {
-  let nodes = [root];
-  let pre = null;
-  while (nodes.length) {
-    let node = nodes.shift();
-    if (pre && pre.val === key) return node;
-    pre = node;
-    let { left, right } = node;
-    left && nodes.push(left);
-    right && nodes.push(right);
+const find_successor = function (root, key, level = [root], isNext = false) {
+  // conner case
+  while (level.length) {
+    let tmp = [];
+    while (level.length) {
+      const { val, left, right } = level.shift();
+      if (isNext) return { val };
+      if (val === key) isNext = true;
+      left && tmp.push(left);
+      right && tmp.push(right);
+    }
+    level = tmp;
   }
   return null;
 }; // T:O(N) S:O(N/2)
