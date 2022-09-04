@@ -2,17 +2,10 @@
 //
 // Sum of Path Numbers
 
-function DFS({ value, left, right }, result, path = '') {
-  if (!left && !right) {
-    result.sum += Number(path + value);
-    return;
-  }
-  left && DFS(left, result, path + value);
-  right && DFS(right, result, path + value);
-}
-
-const find_sum_of_path_numbers = function (root) {
-  let result = { sum: 0 };
-  DFS(root, result);
-  return result.sum;
-}; // T:O(N) S:(N) or S(logN)
+function find_sum_of_path_numbers({ value, right, left }, sum = 0) {
+  sum = sum * 10 + value; // base case
+  if (!right && !left) return sum;
+  const leftSum = (left && find_sum_of_path_numbers(left, sum)) || 0;
+  const rightSum = (right && find_sum_of_path_numbers(right, sum)) || 0;
+  return leftSum + rightSum;
+} // T:O(N) S:O(N)
