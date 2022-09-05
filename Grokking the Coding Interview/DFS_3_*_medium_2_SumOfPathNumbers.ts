@@ -8,4 +8,4 @@ const find_sum_of_path_numbers = function ({ value, left, right }, sum = 0) {
   const leftSum = (left && find_sum_of_path_numbers(left, sum)) || 0;
   const rightSum = (right && find_sum_of_path_numbers(right, sum)) || 0;
   return leftSum + rightSum;
-}; // T:O(N) S:O(N)
+}; // T:O(N)  S:O(N)
