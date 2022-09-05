@@ -8,18 +8,22 @@
 //       3 3 3   3 3 3
 //             4 4 4 4
 
-const count_paths = function (node, target, path = []) {
-  let count = (sum = 0);
-  if (!node) return 0;
-  let { value, left, right } = node;
+const count_paths = function (
+  { value, left, right },
+  S,
+  path = [],
+  sum = 0,
+  count = 0
+) {
   path.push(value);
-  for (let i = path.length - 1; i > 0; i--) {
-    sum += path[i];
-    sum === target && count++;
+  sum += value;
+  let curSum = sum;
+  for (let val of path) {
+    if (curSum === S) count++;
+    if (curSum < S) break;
+    curSum -= val;
   }
-  return (
-    count +
-    count_paths(left, target, [...path]) +
-    count_paths(right, target, [...path])
-  );
-}; // T:O(N^2) | O(NlogN) S:O(N)
+  const leftCount = (left && count_paths(left, S, path, sum)) || 0;
+  const rightCount = (right && count_paths(right, S, path, sum)) || 0;
+  return count + leftCount + rightCount;
+}; // T:O(N^2) S:O(N) call stack

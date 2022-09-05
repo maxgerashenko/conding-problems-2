@@ -13,6 +13,7 @@
 // always use let left, no GlobalEventHandlersEventMap
 // !isNaN(char) - is number
 // Array(5+1).fill([])
+// let sum = 0; // init value
 
 // --- Subsets
 // nums.sort((x,y) => x-y) for duplicates
