@@ -9,17 +9,17 @@
 class TreeDiameter {
   constructor() {
     this.treeDiameter = 0;
-    this.max = 0;
-  }
-  dfs({ right, left }) {
-    if (!right && !left) return 1;
-    let l = (left && this.dfs(left)) || 0;
-    let r = (right && this.dfs(right)) || 0;
-    this.max = Math.max(this.max, l + r + 1);
-    return Math.max(l, r) + 1;
   }
   find_diameter(root) {
-    this.dfs(root).length;
-    return this.max;
+    this.dfs(root);
+    return this.treeDiameter;
   }
-} // T:O(N) S:O(N|O(logN) - recurcive stack
+  dfs({ left, right }) {
+    if (!left && !right) return 1; // base case
+    const leftDiametr = (left && this.dfs(left)) || 0;
+    const rightDiametr = (right && this.dfs(right)) || 0;
+    const diametr = 1 + leftDiametr + rightDiametr;
+    this.treeDiameter = Math.max(this.treeDiameter, diametr);
+    return 1 + Math.max(leftDiametr, rightDiametr);
+  }
+} // T:O(N) all elements S:O(N) stack size
