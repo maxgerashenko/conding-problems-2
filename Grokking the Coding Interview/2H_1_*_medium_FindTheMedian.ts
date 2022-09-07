@@ -4,6 +4,16 @@
 
 // Design a class to calculate the median of a number stream
 
+class Heap {
+  constructor(sort) {
+    this.sort = sort;
+    this.arr = [];
+    this.push = (el) =>
+      (this.arr = [...this.arr, el].sort((a, b) => this.sort(a, b)));
+    this.pop = () => this.arr.shift();
+  }
+}
+
 class MedianOfAStream {
   constructor() {
     this.minHeap = new Heap((x, y) => x - y);
