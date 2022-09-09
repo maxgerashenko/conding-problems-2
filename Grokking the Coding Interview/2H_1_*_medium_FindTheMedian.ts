@@ -11,28 +11,32 @@ class Heap {
     this.push = (el) =>
       (this.arr = [...this.arr, el].sort((a, b) => this.sort(a, b)));
     this.pop = () => this.arr.shift();
+    this.remove = (toDelete) =>
+      (this.arr = this.arr.filter((el) => el !== toDelete));
   }
 }
-
 class MedianOfAStream {
   constructor() {
-    this.minHeap = new Heap((x, y) => x - y);
     this.maxHeap = new Heap((x, y) => y - x);
+    this.minHeap = new Heap((x, y) => x - y);
+  }
+  rebalance() {
+    if (this.maxHeap.arr.length > this.minHeap.arr.length + 1) {
+      this.minHeap.push(this.maxHeap.pop());
+      return;
+    }
+    if (this.maxHeap.arr.length < this.minHeap.arr.length)
+      this.maxHeap.push(this.minHeap.pop());
   }
   insert_num(num) {
-    if (this.maxHeap.length === 0) {
-      this.maxHeap.push(num);
-      return;
-    } // conner case;
-    if (num > this.maxHeap.arr[0]) {
-      this.minHeap.push(num);
-    } else {
-      this.maxHeap.push(num);
-    } // distribute
-    if (this.maxHeap.arr.length - this.minHeap.arr.length <= 1) return; // max + 1 >= min
-    this.minHeap.push(this.maxHeap.pop());
+    this.maxHeap.length === 0 || num < this.maxHeap.arr[0]
+      ? this.maxHeap.push(num)
+      : this.minHeap.push(num);
+    this.rebalance();
   }
   find_median(self) {
-    return (this.maxHeap.arr[0] + this.minHeap.arr[0]) / 2;
+    return this.maxHeap.arr.length === this.minHeap.arr.length
+      ? this.maxHeap.arr[0] / 2 + this.minHeap.arr[0] / 2
+      : this.maxHeap.arr[0];
   }
-} // T:O(logN) to Add T:O(1) to Get S:O(N)
+} // T:O(logN) S:O(2N)
