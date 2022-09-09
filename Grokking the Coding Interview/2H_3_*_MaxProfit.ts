@@ -35,3 +35,5 @@ const find_maximum_capital = function (
   }
   return cash;
 }; // T:O(N) S:O(N)
+// after all heap init
+// T:O(NlogN + KLogN) K - selected projects count
