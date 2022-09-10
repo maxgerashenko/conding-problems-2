@@ -14,29 +14,34 @@ class Heap {
     this.remove = (toDelete) =>
       (this.arr = this.arr.filter((el) => el !== toDelete));
   }
+  get length() {
+    return this.arr.length;
+  }
+  get value() {
+    return this.arr[0];
+  }
 }
 class MedianOfAStream {
   constructor() {
     this.maxHeap = new Heap((x, y) => y - x);
     this.minHeap = new Heap((x, y) => x - y);
   }
-  rebalance() {
-    if (this.maxHeap.arr.length > this.minHeap.arr.length + 1) {
-      this.minHeap.push(this.maxHeap.pop());
-      return;
-    }
-    if (this.maxHeap.arr.length < this.minHeap.arr.length)
-      this.maxHeap.push(this.minHeap.pop());
-  }
   insert_num(num) {
-    this.maxHeap.length === 0 || num < this.maxHeap.arr[0]
+    this.maxHeap.length === 0 && num <= this.maxHeap.length
       ? this.maxHeap.push(num)
       : this.minHeap.push(num);
     this.rebalance();
+    return this.find_median();
   }
-  find_median(self) {
+  rebalance() {
+    if (this.maxHeap.length > this.minHeap.length + 1)
+      this.minHeap.push(this.maxHeap.pop());
+    if (this.maxHeap.length < this.minHeap.length)
+      this.maxHeap.push(this.minHeap.pop());
+  }
+  find_median() {
     return this.maxHeap.arr.length === this.minHeap.arr.length
-      ? this.maxHeap.arr[0] / 2 + this.minHeap.arr[0] / 2
-      : this.maxHeap.arr[0];
+      ? this.maxHeap.value / 2 + this.minHeap.value / 2
+      : this.maxHeap.value;
   }
-} // T:O(logN) S:O(2N)
+} // T:O(LOGN) find media O(1) S:O(N)
