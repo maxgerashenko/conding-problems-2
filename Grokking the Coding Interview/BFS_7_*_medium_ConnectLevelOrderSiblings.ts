@@ -14,19 +14,17 @@
 // set null at the end of the level
 // return root
 
-const connect_level_order_siblings = function (root, level = [root]) {
+const connect_all_siblings = function (root, level = [root], pre = null) {
   while (level.length) {
     let tmp = [];
-    let pre = null;
     while (level.length) {
-      el = level.pop();
-      el.next = pre;
+      let el = level.shift();
+      let { left, right, value } = el;
+      pre && (pre.next = el);
       pre = el;
-      let { left, right } = el;
-      right && tmp.unshift(right);
-      left && tmp.unshift(left);
+      left && tmp.push(left);
+      right && tmp.push(right);
     }
     level = tmp;
   }
-  return root;
 }; // T:O(N) S:O(N/2)

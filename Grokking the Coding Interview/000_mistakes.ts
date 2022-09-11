@@ -103,3 +103,21 @@
 // nums[i] = i+1
 // [nums[i], nums[val-1]] = [nums[val-1], nums[i]]
 // null is always an option
+
+// --- BFS
+// while (level.length) {
+//  let tmp = [];
+//  while (level.length) {
+
+// --- 2H
+// rebalance(){
+//   if(this.maxHeap.length > this.minHeap.length + 1)
+//     this.minHeap.push(this.maxHeap.pop())
+//   if(this.maxHeap.length < this.minHeap.length)
+//     this.maxHeap.push(this.minHeap.pop())
+// }
+// find_median(){
+//     return this.maxHeap.arr.length === this.minHeap.arr.length
+//     ? this.maxHeap.value/2 + this.minHeap.value/2
+//     : this.maxHeap.value;
+//   }
