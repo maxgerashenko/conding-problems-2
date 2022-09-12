@@ -16,14 +16,11 @@ const count_paths = function (
   count = 0
 ) {
   path.push(value);
-  sum += value;
-  let curSum = sum;
-  for (let val of path) {
-    if (curSum === S) count++;
-    if (curSum < S) break;
-    curSum -= val;
+  for (let i = path.length - 1; i > 0; i--) {
+    sum += path[i];
+    if (sum === S) count++;
   }
-  const leftCount = (left && count_paths(left, S, path, sum)) || 0;
-  const rightCount = (right && count_paths(right, S, path, sum)) || 0;
+  const leftCount = (left && count_paths(left, S, [...path])) || 0;
+  const rightCount = (right && count_paths(right, S, [...path])) || 0;
   return count + leftCount + rightCount;
-}; // T:O(N^2) S:O(N) call stack
+}; // T:O(N^2) the best case is N * hight of the tree log N S:O(N) stack size the stack
