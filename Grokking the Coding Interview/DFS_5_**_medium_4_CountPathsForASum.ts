@@ -19,6 +19,7 @@ const count_paths = function (
   for (let i = path.length - 1; i > 0; i--) {
     sum += path[i];
     if (sum === S) count++;
+    if (sum > S) break;
   }
   const leftCount = (left && count_paths(left, S, [...path])) || 0;
   const rightCount = (right && count_paths(right, S, [...path])) || 0;
