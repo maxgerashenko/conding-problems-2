@@ -6,76 +6,59 @@
 
 class Heap {
   constructor(sort) {
-    this.arr = [];
     this.sort = sort;
+    this.arr = [];
+    this.push = (el) =>
+      (this.arr = [...this.arr, el].sort((a, b) => this.sort(a, b)));
+    this.pop = () => this.arr.shift();
+    this.remove = (toDelete) =>
+      (this.arr = this.arr.filter((el) => el !== toDelete));
   }
-  push(value) {
-    this.arr.push(value);
-    this.arr.sort(this.sort);
-  }
-  pop() {
-    return this.arr.shift();
-  }
-  get len() {
+  get length() {
     return this.arr.length;
   }
-  get val() {
+  get value() {
     return this.arr[0];
-  }
-}
-
-class TwoHeaps {
-  constructor() {
-    this.min = new Heap((x, y) => x - y);
-    this.max = new Heap((x, y) => y - x);
-  }
-  push(val) {
-    if (this.max.len == 0 || val <= this.max.val) {
-      this.max.push(val);
-      this.balance();
-      return;
-    }
-    this.min.push(val);
-    this.balance();
-  }
-  balance() {
-    if (this.max.len === this.min.len || this.max.len === this.min.len + 1)
-      return;
-    if (this.max.len > this.min.len + 1) {
-      this.min.push(this.max.pop());
-      return;
-    }
-    this.max.push(this.min.pop());
-  }
-  get median() {
-    return this.max.len === this.min.len
-      ? this.max.val / 2 + this.min.val / 2
-      : this.max.val;
-  }
-  remove(val) {
-    if (val <= this.max.val) {
-      this.max.arr = this.max.arr.filter((el) => el !== val);
-      this.balance();
-      return;
-    }
-    this.min.arr = this.min.arr.filter((el) => el !== val);
-    this.balance();
   }
 }
 
 class SlidingWindowMedian {
   constructor() {
-    this.twoHeaps = new TwoHeaps();
+    this.maxHeap = new Heap((x, y) => y - x);
+    this.minHeap = new Heap((x, y) => x - y);
+    this.results = [];
   }
+  add(num) {
+    !this.maxHeap.length || num <= this.maxHeap.value
+      ? this.maxHeap.push(num)
+      : this.minHeap.push(num);
+    this.rebalance();
+  }
+  remove(num) {
+    const heap = num <= this.maxHeap.value ? this.maxHeap : this.minHeap;
+    heap.remove(num);
+    this.rebalance();
+  }
+  rebalance() {
+    if (this.maxHeap.length > this.minHeap.length + 1)
+      this.minHeap.push(this.maxHeap.pop);
+    if (this.maxHeap.length < this.minHeap.length)
+      this.maxHeap.push(this.minHeap.pop());
+  }
+  getMedian() {
+    return this.maxHeap.length === this.minHeap.length
+      ? this.maxHeap.value / 2 + this.minHeap.value / 2
+      : this.maxHeap.value;
+  }
+
   find_sliding_window_median(nums, k) {
-    let result = [];
-    for (let i = 0; i < k; i++) this.twoHeaps.push(nums[i]);
-    result.push(this.twoHeaps.median);
+    for (let i = 0; i < k; i++) this.add(nums[i]); // init heap
+    this.results.push(this.getMedian()); // add first value
     for (let i = k; i < nums.length; i++) {
-      this.twoHeaps.push(nums[i]);
-      this.twoHeaps.remove(nums[i - k]);
-      result.push(this.twoHeaps.median);
+      this.add(nums[i]);
+      this.remove(nums[i - k]);
+      this.results.push(this.getMedian());
     }
-    return result;
+    return this.results;
   }
-} // T:O(N*K) S:(K) remove is K inser is logK
+} // T:O(N*K) insert logK removing K S:O(K)
