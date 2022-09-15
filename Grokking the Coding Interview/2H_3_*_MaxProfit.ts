@@ -15,25 +15,29 @@ class Heap {
     this.remove = (toDelete) =>
       (this.arr = this.arr.filter((el) => el !== toDelete));
   }
+  get length() {
+    return this.arr.length;
+  }
+  get value() {
+    return this.arr[0];
+  }
 }
 const find_maximum_capital = function (
   capitals,
   profits,
   count,
-  cash,
-  minHeap = new Heap((x, y) => x.capital - y.capital),
-  maxHeap = new Heap((x, y) => y.profit - x.profit)
+  capital,
+  maxProfitHeap = new Heap((x, y) => y - x),
+  minCapitalHeap = new Heap((x, y) => x.capital - y.capital)
 ) {
-  for (let i = 0; i < capitals.length; i++)
-    minHeap.push({ capital: capitals[i], profit: profits[i] }); // init minCapital
-  for (let i = 0; i < count; i++) {
-    if (!minHeap.arr.length) break; // conner case
-    while (minHeap.arr.length && cash >= minHeap.arr[0].capital)
-      maxHeap.push(minHeap.pop()); // initMaxProfits
-    cash += maxHeap.arr[0].profit;
-    maxHeap.pop();
+  for (let index = 0; index < capitals.length; index++)
+    minCapitalHeap.push({ capital: capitals[index], index }); // init min Capital Heap
+  for (let i = count; i > 0; i--) {
+    while (minCapitalHeap.length > 0 && capital >= minCapitalHeap.value.capital)
+      maxProfitHeap.push(profits[minCapitalHeap.pop().index]);
+    if (maxProfitHeap.length === 0) break;
+    capital += maxProfitHeap.pop();
+    count--;
   }
-  return cash;
-}; // T:O(N) S:O(N)
-// after all heap init
-// T:O(NlogN + KLogN) K - selected projects count
+  return capital;
+}; // T:O(NLogN*KlogN) S:O(N)
