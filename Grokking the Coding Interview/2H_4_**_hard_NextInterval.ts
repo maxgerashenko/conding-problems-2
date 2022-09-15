@@ -12,30 +12,40 @@ class Heap {
     this.remove = (toDelete) =>
       (this.arr = this.arr.filter((el) => el !== toDelete));
   }
+  get length() {
+    return this.arr.length;
+  }
+  get value() {
+    return this.arr[0];
+  }
 }
+
 const find_next_interval = function (
   intervals,
   results = [],
-  maxEnd = new Heap((x, y) => y.end - x.end),
-  maxStart = new Heap((x, y) => y.start - x.start)
+  maxStartHeap = new Heap((x, y) => y.start - x.start),
+  maxEndHeap = new Heap((x, y) => y.end - x.end)
 ) {
   for (let i = 0; i < intervals.length; i++) {
     let { start, end } = intervals[i];
-    maxEnd.push({ iMaxEnd: i, end });
-    maxStart.push({ iMaxStart: i, start });
-  } // init
-  while (maxEnd.arr.length) {
-    let { end, iMaxEnd } = maxEnd.pop();
-    if (maxStart.arr.length === 0) break;
-    let { start, iMaxStart } = maxStart.pop();
-    while (maxStart.arr.length > 0 && maxStart.arr[0].start >= end) {
-      let el = maxStart.pop();
+    maxEndHeap.push({ index: i, end });
+    maxStartHeap.push({ index: i, start });
+  } // init heaps
+  while (maxEndHeap.length) {
+    let { end, index: endIndex } = maxEndHeap.pop();
+    let { start, index: startIndex } = maxStartHeap.pop();
+    while (maxStartHeap.length && maxStartHeap.value.start >= end) {
+      let el = maxStartHeap.pop();
       start = el.start;
-      iMaxStart = el.iMaxStart;
+      startIndex = el.index;
+      if (start === end) break;
     }
-    maxStart.push({ start, iMaxStart });
-    console.log(start, end);
-    results[iMaxEnd] = start >= end ? [iMaxStart] : -1;
+    if (start >= end) {
+      results[endIndex] = startIndex;
+      continue;
+    }
+    results[endIndex] = -1;
+    maxStartHeap.push({ start, index: startIndex });
   }
   return results;
-}; // T:O(NlogN) S:O(N)
+}; // T:O(NlogN+NlogN) S:O(N)
