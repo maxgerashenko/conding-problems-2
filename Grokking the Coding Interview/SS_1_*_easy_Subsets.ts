@@ -4,13 +4,12 @@
 
 // Given a set with distinct elements, find all of its distinct subsets.
 
-const find_subsets = function (nums, subs = [[]]) {
-  for (let num of nums) {
-    let level = [];
-    for (let sub of subs) {
-      level.push(sub, [...sub, num]);
-    }
-    subs = [...level];
+const find_subsets = function (nums, subsets = [[]]) {
+  while (nums.length) {
+    let num = nums.pop();
+    let tmp = [];
+    for (let el of subsets) tmp.push([...el, num]);
+    subsets.push(...tmp);
   }
-  return subs;
-}; // S:O(N2^N) S:O(N2^N)
+  return subsets;
+}; // T:O(N*2^N) S:O(N*2^N)
