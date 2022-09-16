@@ -22,32 +22,24 @@ class Heap {
     return this.arr[0];
   }
 }
-
 const find_maximum_capital = function (
   capitals,
   profits,
-  count,
-  capital,
-  minCapital = new Heap((x, y) => x.cap - y.cap),
-  maxProfit = new Heap((x, y) => y.prof - x.prof)
+  projectsCount,
+  totalCapital,
+  minCapital = new Heap((x, y) => x.capital - y.capital),
+  maxProfit = new Heap((x, y) => y - x)
 ) {
   for (let i = 0; i < capitals.length; i++)
-    minCapital.push({ cap: capitals[i], index: i }); // init cap
-  for (let i = 0; i < count; i++) {
-    if (minCapital.length === 0) break;
-    let { cap: minCap, index } = minCapital.pop(); // init capital
-    if (capital >= minCap) maxProfit.push({ prof: profits[index] }); // init profits
-    while (minCapital.length && capital >= minCapital.value.cap) {
-      let el = minCapital.pop();
-      minCap = el.cap;
-      index = el.index;
-      maxProfit.push({ prof: profits[index] }); // update profits options
-      if (minCap === capital) break;
+    minCapital.push({ index: i, capital: capitals[i] }); // init min capital
+  while (projectsCount && minCapital.length) {
+    projectsCount--;
+    let { index } = minCapital.pop();
+    maxProfit.push(profits[index]);
+    while (minCapital.length && totalCapital >= minCapital.value.capital) {
+      maxProfit.push(profits[minCapital.pop().index]);
     }
-    if (maxProfit.length === 0) break;
-    let { prof } = maxProfit.pop();
-    capital += prof;
+    totalCapital += maxProfit.pop();
   }
-
-  return capital;
-}; // T:O(K*NLogN+NlogK) S:O(N)
+  return totalCapital;
+}; // T:O(NlongN + KlogN) S:O(N)
