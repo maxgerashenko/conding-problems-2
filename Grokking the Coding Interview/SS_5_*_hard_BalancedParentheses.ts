@@ -4,21 +4,21 @@
 
 const generate_valid_parentheses = function (
   num,
-  results = [{ countdown: num - 1, openCount: 1, str: '(' }]
+  results = [{ str: '(', openCount: 1, total: 1 }]
 ) {
-  while (true) {
+  for (let i = 1; i < num * 2; i++) {
     let level = [];
-    for (let { countdown, openCount, str } of results) {
-      if (countdown > 0)
+    for (let { str, openCount, total } of results) {
+      if (total < num)
         level.push({
           str: str + '(',
-          countdown: countdown - 1,
           openCount: openCount + 1,
+          total: total + 1,
         });
       if (openCount > 0)
-        level.push({ str: str + ')', countdown, openCount: openCount - 1 });
+        level.push({ str: str + ')', openCount: openCount - 1, total });
     }
-    if (level.length === 0) return results.map((el) => el.str);
-    results = [...level];
+    results = level;
   }
-}; // T:O(N2^N) S:O(N2^N)
+  return results.map(({ str }) => str);
+}; // T:O(N*2^N) S:O(2^N)
