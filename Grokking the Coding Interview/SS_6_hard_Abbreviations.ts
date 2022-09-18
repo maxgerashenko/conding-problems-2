@@ -2,23 +2,27 @@
 //
 // Abbreviations
 
-const generate_generalized_abbreviation = function (word) {
-  let results = [
-    { str: [1], count: 1 },
-    { str: word[0], count: 0 },
-  ];
-  for (let letter of word.slice(1)) {
+const generate_generalized_abbreviation = function (word, results = [[]]) {
+  for (let char of word) {
     let level = [];
-    for (let { str, count } of results) {
-      level.push({ str: [...str, letter], count: 0 });
-      if (count === 0) {
-        level.push({ str: [...str, 1], count: 1 });
+    for (let substring of results) {
+      level.push([...substring, { char }]);
+      if (!substring.length) {
+        level.push([{ count: 1 }]);
+        continue;
+      } // coner case
+      const lastIndex = substring.length - 1;
+      const count = substring[lastIndex].count;
+      if (!count) {
+        level.push([...substring, { count: 1 }]);
         continue;
       }
-      str[str.length - 1] = count + 1;
-      level.push({ str, count: count + 1 });
+      substring[lastIndex].count++;
+      level.push(substring);
     }
     results = level;
   }
-  return results.map((el) => el.str.join(''));
-}; // T:(N2^N) S:(N2^N)
+  return results.map((el) =>
+    el.map(({ char, count }) => (count ? count : char)).join('')
+  );
+}; // T:O(N*2^N) S:O(2^N)
