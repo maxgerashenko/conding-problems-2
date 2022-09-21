@@ -2,21 +2,28 @@
 //
 // Evaluate
 
-const evaluate = function (input, map = {}, results = []) {
-  if (map[input] != null) return map[input]; // hasMap
-  if (!isNaN(input)) return [Number(input)]; // base case
+const diff_eval = function (input, hashMap = {}, results = []) {
+  if (hashMap[input] != null) return hashMap[input];
+  if (!isNaN(Number(input))) return [Number(input)]; // base case
   for (let i = 0; i < input.length; i++) {
-    if (!isNaN(input[i])) continue;
-    let leftOptions = evaluate(input.substring(0, i), map);
-    let rightOptions = evaluate(input.substring(i + 1), map);
-    for (let l of leftOptions) {
-      for (let r of rightOptions) {
-        results.push(
-          input[i] === '+' ? l + r : input[i] === '-' ? l - r : l * r
-        );
-      }
+    if (isNaN(Number(input[i]))) {
+      const left = diff_eval(input.slice(0, i), hashMap);
+      const right = diff_eval(input.slice(i + 1), hashMap);
+      for (let l of left)
+        for (let r of right)
+          switch (input[i]) {
+            case '+':
+              results.push(l + r);
+              break;
+            case '-':
+              results.push(l - r);
+              break;
+            case '*':
+              results.push(l * r);
+              break;
+          }
     }
   }
-  map[input] = results; // hasMap
+  hashMap[input] = results;
   return results;
-}; // T:O(N2^N) T:O(2^N)
+}; // exponential complexity T:O(N*2^N) S:O(2^N)
