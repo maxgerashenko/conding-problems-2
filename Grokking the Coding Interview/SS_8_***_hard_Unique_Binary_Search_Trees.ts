@@ -2,17 +2,24 @@
 //
 // Structurally Unique Binary Search Trees
 
-const find_unique_trees = function (end, start = 1, results = []) {
-  if (start > end) return [null]; // base case
-  for (let i = start; i <= end; i++) {
-    let left = find_unique_trees(i - 1, start);
-    let right = find_unique_trees(end, i + 1);
-    for (let l of left) {
-      for (let r of right) {
-        let node = new TreeNode(i, l, r);
-        results.push(node);
+function dfs(start, end, hashMap = new Map(), results = []) {
+  if (hashMap.has([start, end])) return hashMap.get([start, end]);
+  if (start === end) return [[]]; // conner case
+  for (let i = start; i < end; i++) {
+    let root = new TreeNode(i + 1);
+    let letOptions = dfs(start, i);
+    let rightOptions = dfs(i + 1, end);
+    for (let left of letOptions)
+      for (let right of rightOptions) {
+        let copy = { ...root };
+        copy.left = left || null;
+        copy.right = right || null;
+        results.push(copy);
       }
-    }
   }
+  hashMap.set([start, end], results);
   return results;
-}; // T:O(N2^N) S:O(2^N)  No Memoization possible
+}
+const find_unique_trees = function (n) {
+  return dfs(0, n);
+}; // T:O(N*2^N) S:O(N*2^N)
