@@ -2,33 +2,34 @@
 //
 // Number Range
 
-function bs(arr, key, isMinIndex = true) {
-  let start = 0;
-  let end = arr.length;
+function BS(arr, key, start, end, equal, leftSide) {
   while (start <= end) {
-    let mid = Math.floor(end / 2 + start / 2);
-    if (key === arr[mid]) {
-      if (isMinIndex) {
-        if (arr[mid - 1] !== key) return mid;
-        end = mid - 1;
-        continue;
-      }
-      if (arr[mid + 1] !== key) return mid;
-      start = mid;
+    let mid = Math.floor(start + (end - start) / 2);
+    if (equal(mid)) return mid;
+    if (leftSide(mid)) {
+      end = mid - 1;
       continue;
     }
-    if (key > arr[mid]) {
-      start = mid + 1;
-      continue;
-    }
-    end = mid - 1;
+    start = mid + 1;
   }
-  return -1;
 }
-
-const find_range = function (arr, key) {
-  let start = bs(arr, key);
-  if (start === -1) return [-1, -1];
-  let end = bs(arr, key, false);
-  return [start, end];
-}; // T:O(NlogN) S:O(1)
+const find_range = function (arr, key, start = 0, end = arr.length - 1) {
+  let leftBorder = BS(
+    arr,
+    key,
+    start,
+    end,
+    (mid) => arr[mid] === key && arr[mid - 1] !== key,
+    (mid) => arr[mid] >= key
+  );
+  if (leftBorder == null) return [-1, -1];
+  let rightBorder = BS(
+    arr,
+    key,
+    leftBorder,
+    end,
+    (mid) => arr[mid] === key && arr[mid + 1] !== key,
+    (mid) => arr[mid] > key
+  );
+  return [leftBorder, rightBorder];
+}; // T:O(lonN) S:O(1)
