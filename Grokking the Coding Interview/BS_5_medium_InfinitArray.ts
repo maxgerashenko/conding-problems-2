@@ -5,6 +5,7 @@
 const search_in_infinite_array = function (reader, key, start = 0, end = 1) {
   if (reader.get(0) === key) return 0; // conner case
   while (reader.get(end) < key) {
+    start = end + 1;
     end *= 2;
   } // find end
   while (start <= end) {
