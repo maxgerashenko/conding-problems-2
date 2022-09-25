@@ -2,15 +2,13 @@
 //
 // Search in a Sorted Infinite Array
 
-const search_in_infinite_array = function (reader, key) {
-  let start = 0;
-  let end = 0;
+const search_in_infinite_array = function (reader, key, start = 0, end = 1) {
+  if (reader.get(0) === key) return 0; // conner case
   while (reader.get(end) < key) {
-    start = end + 1;
-    end = (end + 1) * 2;
-  }
+    end *= 2;
+  } // find end
   while (start <= end) {
-    let mid = Math.floor(start + (end - start) / 2);
+    mid = Math.floor(start + end / 2 - start / 2);
     if (reader.get(mid) === key) return mid;
     if (key > reader.get(mid)) {
       start = mid + 1;
@@ -19,4 +17,4 @@ const search_in_infinite_array = function (reader, key) {
     end = mid - 1;
   }
   return -1;
-}; // T:O(logN + logN) S:O(1)
+}; // T:O(logN) S:O(1)
