@@ -7,13 +7,15 @@ const find_max_in_bitonic_array = function (
   start = 0,
   end = arr.length - 1
 ) {
-  while (start < end) {
-    let mid = Math.floor(start + (end - start) / 2);
-    if (arr[mid] > arr[mid + 1]) {
-      end = mid;
+  if (arr[start] > arr[start + 1]) return arr[start]; // conner case
+  if (arr[end] > arr[end - 1]) return arr[end]; // conner case
+  while (start <= end) {
+    let mid = Math.floor(start + end / 2 - start / 2);
+    if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1]) return arr[mid]; // base case
+    if (arr[mid] < arr[mid + 1]) {
+      start = mid + 1;
       continue;
     }
-    start = mid + 1;
+    end = mid - 1;
   }
-  return arr[start];
-}; // T:O(logN) S:O(N)
+}; // T:O(logN) S:O(1)
