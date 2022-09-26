@@ -2,20 +2,23 @@
 //
 // Minimum Difference
 
-const search_min_diff_element = function (arr, key) {
-  let start = 0;
-  let end = arr.length - 1;
-  if (key < arr[start]) return arr[start];
-  if (key > arr[end]) return arr[end];
+const search_min_diff_element = function (
+  arr,
+  key,
+  start = 0,
+  end = arr.length,
+  minDiff = Number.MAX_SAFE_INTEGER
+) {
   while (start <= end) {
-    let mid = Math.floor(end / 2 + start / 2);
-    if (arr[mid] === key) return arr[mid];
-    if (key > arr[mid]) {
+    let mid = Math.floor(start + end / 2 - start / 2);
+    let midEl = arr[mid];
+    minDiff = Math.abs(key - midEl) < Math.abs(key - minDiff) ? midEl : minDiff;
+    if (midEl === key) return key;
+    if (key > midEl) {
       start = mid + 1;
       continue;
     }
     end = mid - 1;
   }
-
-  return key - arr[end] < arr[start] - key ? arr[end] : arr[start];
+  return minDiff;
 }; // T:O(logN) S:O(1)
