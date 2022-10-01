@@ -9,18 +9,14 @@ const search_rotated_array = function (
   end = arr.length - 1
 ) {
   while (start <= end) {
-    let mid = Math.floor(start + (end - start) / 2);
-    if (arr[mid] === key) return arr[mid];
-    if (arr[mid] < arr[end]) {
-      if (key > arr[mid] && key <= arr[end]) {
-        start = mid + 1;
-        continue;
-      }
-      end = mid;
-      continue;
-    }
-    if (key > arr[start] && key <= arr[mid]) {
-      end = mid;
+    let mid = Math.floor(start + end / 2 - start / 2);
+    if (arr[mid] === key) return mid; // base case
+    const isLeftAscending = arr[start] < arr[mid];
+    const isKeyInLeftSide =
+      (isLeftAscending && key > arr[start] && key < arr[mid]) ||
+      (!isLeftAscending && (key < arr[mid] || key > arr[end]));
+    if (isKeyInLeftSide) {
+      end = mid - 1;
       continue;
     }
     start = mid + 1;
