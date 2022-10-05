@@ -2,13 +2,12 @@
 //
 // Complement of Base 10 Number
 
-function calculate_bitwise_complement(n) {
-  return parseInt(
+const calculate_bitwise_complement = (n) =>
+  parseInt(
     n
       .toString(2)
       .split('')
-      .map((num) => num ^ 1)
+      .map((el) => el ^ 1)
       .join(''),
     2
-  );
-} // T:O(b) S:O(1) b - bits
+  ); // T:O(N.length) S:O(1)
