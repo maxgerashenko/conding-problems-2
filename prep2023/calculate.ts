@@ -40,8 +40,21 @@ result 48
 
 */
 
+  /** Key take aways
+   *
+   * all number /^\d+$/
+   * get fist symbol the righ, left
+   * calculate separe functoin
+   * calculate - as factor
+   * calculate numbers but return string
+   * calculates from left <- right, right to left
+   * count ( to find next string in breakets
+   * parse befor '(', between, after ')'
+   * calcString( calcString + parseAll(afterCloseValue))
+   */
+
   function isNumber(str) {
-    return /^[0-9]*$/.test(str);
+    return /^\d+$/.test(str);
   }
 
   function getFirstSymbol(str) {
@@ -56,7 +69,9 @@ result 48
     );
   }
 
-  function parseEquation(str) {
+  const calcStringCache = {};
+  function calcString(str) {
+    if (calcStringCache[str] != null) return calcStringCache[str];
     let factor = 1;
     if (str[0] === '-') {
       factor = -1;
@@ -73,24 +88,25 @@ result 48
     switch (symbol) {
       case '+':
         result =
-          factor * Number(parseEquation(leftString)) +
-          Number(parseEquation(rightString));
+          factor * Number(calcString(leftString)) +
+          Number(calcString(rightString));
         break;
       case '-':
         result =
-          factor * Number(parseEquation(leftString)) -
-          Number(parseEquation(rightString));
+          factor * Number(calcString(leftString)) -
+          Number(calcString(rightString));
         break;
       case '*':
         result =
           factor *
-          Number(parseEquation(leftString)) *
-          Number(parseEquation(rightString));
+          Number(calcString(leftString)) *
+          Number(calcString(rightString));
         break;
     }
 
     console.log(str, leftString, rightString, result);
-    return String(result);
+    calcStringCache[str] = String(result);
+    return calcStringCache[str];
   }
 
   function getCloseIndex(afterOpen) {
@@ -114,11 +130,14 @@ result 48
     return indexClose;
   }
 
+  const parseCache = {};
   function parseAll(str) {
     if (str.length === 0) return '';
+    if (parseCache[str] != null) return parseCache[str];
+    console.log(str);
     let indexOpen = str.indexOf('(');
     if (indexOpen === -1) {
-      return Number(parseEquation(str));
+      return Number(calcString(str));
     }
 
     const afterOpen = str.slice(indexOpen + 1);
@@ -130,11 +149,13 @@ result 48
     const afterCloseSymbol = afterClose.slice(0, 1);
     const afterCloseValue = afterClose.slice(1);
 
-    return parseEquation(
-      parseEquation(beforeOpen + parseAll(between)) +
+    parseCache[str] = calcString(
+      calcString(beforeOpen + parseAll(between)) +
         afterCloseSymbol +
         parseAll(afterCloseValue)
     );
+
+    return parseCache[str];
   }
   // 1+(2*3)+3+3+(1+1)
   console.log(parseAll('-((5+4)*4)+(2*(4+(((2*(1+3))+1)*2)))+2'));
