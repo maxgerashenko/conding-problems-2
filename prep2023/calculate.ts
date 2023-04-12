@@ -40,9 +40,8 @@ result 48
 
 */
 
-  // C:O(n) S:O(n)
   function isNumber(str) {
-    return /^\d*$/.test(str);
+    return /^[0-9]*$/.test(str);
   }
 
   function getFirstSymbol(str) {
@@ -69,8 +68,6 @@ result 48
     let symbol = str[index];
     const leftString = str.slice(0, index);
     const rightString = str.slice(index + 1);
-    console.log(leftString);
-    console.log(rightString);
 
     let result;
     switch (symbol) {
@@ -118,7 +115,7 @@ result 48
   }
 
   function parseAll(str) {
-    console.log('str', str);
+    if (str.length === 0) return '';
     let indexOpen = str.indexOf('(');
     if (indexOpen === -1) {
       return Number(parseEquation(str));
@@ -133,16 +130,12 @@ result 48
     const afterCloseSymbol = afterClose.slice(0, 1);
     const afterCloseValue = afterClose.slice(1);
 
-    console.log('- beforeOpen', beforeOpen);
-    console.log('- between', between);
-    console.log('- afterClose', afterClose);
-
     return parseEquation(
       parseEquation(beforeOpen + parseAll(between)) +
         afterCloseSymbol +
         parseAll(afterCloseValue)
     );
   }
-
-  console.log(parseAll('1+(2*3)+3+3+(1+1)'));
+  // 1+(2*3)+3+3+(1+1)
+  console.log(parseAll('-((5+4)*4)+(2*(4+(((2*(1+3))+1)*2)))+2'));
 })();
