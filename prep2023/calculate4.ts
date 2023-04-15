@@ -1,17 +1,15 @@
 document.write(`<h2>Coding Problem<h2/>`);
 // https://www.geeksforgeeks.org/expression-evaluation/
 
-const isValid = (str = '') => {
+const isValid = (str) => {
   let counter = 0;
   for (let i = 0; i < str.length; i++) {
     if (str[i] === '(') {
       counter++;
-    } else if (str[i] === ')') {
-      counter--;
-      if (counter < 0) {
-        return false;
-      }
+      continue;
     }
+    counter--;
+    if (counter < 0) return false;
   }
   return counter === 0;
 };
@@ -140,4 +138,4 @@ console.log(1);
 console.log(1);
 console.log(1);
 console.log(1);
-console.log(evaluate('(1+2)*(3+3)'));
+console.log(evaluate('(1+2)*(3+3)))'));
