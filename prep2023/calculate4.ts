@@ -1,3 +1,4 @@
+document.write(`<h2>Coding Problem<h2/>`);
 // https://www.geeksforgeeks.org/expression-evaluation/
 
 function evaluate(expression) {
@@ -119,7 +120,4 @@ function applyOp(op, b, a) {
   return 0;
 }
 
-document.write(evaluate('10 + 2 * 6') + '</br>');
-document.write(evaluate('100 * 2 + 12') + '</br>');
-document.write(evaluate('100 * ( 2 + 12 )') + '</br>');
-document.write(evaluate('100 * ( 2 + 12 ) / 14') + '</br>');
+console.log(evaluate('100-(2+2)*4'));
