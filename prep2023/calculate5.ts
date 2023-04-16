@@ -15,6 +15,7 @@
       const el = str[index];
       if (isNumber(el)) {
         let endIndex = index + getSymbolIndex(str, index);
+        console.log(endIndex);
         let num = str.slice(index, endIndex);
         postFix.push(parseInt(num));
         index = endIndex;
