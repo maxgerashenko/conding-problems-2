@@ -7,6 +7,7 @@
     '*': 2,
     '/': 2,
   };
+  const getStackTop = (arr) => arr[arr.length - 1];
   const isNumber = (el) => /^\d*$/.test(el);
   const isOperator = (el) => /^[*+-]$/.test(el);
   const getSymbolIndex = (str) => str.search(/[-+*()]/);
@@ -32,8 +33,22 @@
     let postFix = [];
 
     let length = str.length;
-    for (let index = 0; index < length; index++) {
+    for (let index = 0; index < length + 1; index++) {
       const el = str[index];
+      console.log(el);
+
+      if (el === '(') {
+        stack.push('(');
+        continue;
+      }
+      if (el === ')') {
+        console.log('----');
+        while (getStackTop(stack) !== '(') {
+          postFix.push(stack.pop());
+        }
+        stack.pop();
+        continue;
+      }
       if (isNumber(el)) {
         let endIndex = getSymbolIndex(str.slice(index));
         if (endIndex === -1) {
@@ -55,6 +70,7 @@
         continue;
       }
     }
+    console.log(JSON.stringify(stack));
     postFix.push(...stack.reverse());
     console.log(JSON.stringify(postFix));
     return postFix;
@@ -63,7 +79,7 @@
     let stack = [];
 
     while (postFix.length > 0) {
-      console.log(stack);
+      // console.log(stack);
       let el = postFix.shift();
       if (isNumber(el)) {
         stack.push(el);
@@ -82,5 +98,5 @@
     return calculatePostFix(postFix);
   }
 
-  console.log(calculate('2+3*4+5*3+6'));
+  console.log(calculate('(10+2*5+(18+2)*(2+1)+10)'));
 })();
