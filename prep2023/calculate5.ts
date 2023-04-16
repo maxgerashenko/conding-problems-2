@@ -18,7 +18,7 @@
         console.log(endIndex);
         let num = str.slice(index, endIndex);
         postFix.push(parseInt(num));
-        index = endIndex;
+        // index = endIndex;
         console.log('endIndex', endIndex);
         continue;
       }
