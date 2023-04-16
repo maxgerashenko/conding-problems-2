@@ -1,3 +1,9 @@
+// parenthesis
+// if '(' just openCount
+// if ')' move evething until '('
+// dont add '('
+// '(' priority 0
+
 (() => {
   console.clear();
   const priorityMap = {
