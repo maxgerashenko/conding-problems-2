@@ -1,4 +1,5 @@
 (() => {
+  console.clear();
   console.log('start');
 
   const isNumber = (el) => /^\d*$/.test(el);
@@ -14,13 +15,12 @@
     for (let index = 0; index < length; index++) {
       const el = str[index];
       if (isNumber(el)) {
-        let endIndex = getSymbolIndex(str.slice(index));
+        let endIndex = index + getSymbolIndex(str.slice(index));
         let num = str.slice(index, endIndex);
         postFix.push(parseInt(num));
         index += endIndex - 1;
         console.log('index', index);
         console.log('endIndex', endIndex);
-        console.log('num', num);
         continue;
       }
       if (isOperator(el)) {
