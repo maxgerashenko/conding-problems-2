@@ -8,3 +8,22 @@ var productExceptSelf = function (nums) {
 };
 
 // T:O(n) S:O(n)
+
+// prefix postfix
+var productExceptSelf = function (nums) {
+  let prefix = 1;
+  const result = [];
+  for (let index in nums) {
+    result[index] = prefix;
+    prefix *= nums[index];
+  }
+  let postFix = 1;
+  for (let index = nums.length - 1; index >= 0; index--) {
+    result[index] *= postFix;
+    postFix *= nums[index];
+  }
+
+  return result;
+};
+
+// T:O(N) S:O(1)
