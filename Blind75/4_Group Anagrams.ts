@@ -7,8 +7,7 @@ const groupAnagrams = function (strs) {
     signatureMap[str] = signature;
 
     if (resultsCountMap[signature] == null) {
-      resultsCountMap[signature] = [str];
-      continue;
+      resultsCountMap[signature] = [];
     }
 
     resultsCountMap[signature].push(str);
