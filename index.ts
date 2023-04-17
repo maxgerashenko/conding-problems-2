@@ -1,4 +1,3 @@
 // Import stylesheets
 import './style.css';
-import './Blind75/1';
-// import './Blind75/7_Encode and Decode Strings';
+import './Blind75/7_Encode and Decode Strings';
