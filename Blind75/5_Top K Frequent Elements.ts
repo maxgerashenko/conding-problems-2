@@ -29,42 +29,41 @@ var topKFrequent = function (nums, k) {
   return result;
 };
 
-// O(KlogN) S:O(m), k amount, n-total, m-distinkt numbers
-
+// O(KlogN) S:O(n)
 
 // hashMapCount + Bucket sort
-var topKFrequent = function(nums, k) {
-    if(nums.length === 0) return [];
-    if(k >= nums.length) return nums;
+var topKFrequent = function (nums, k) {
+  if (nums.length === 0) return [];
+  if (k >= nums.length) return nums;
 
-    let mapCount = {};
-    let pre = null;
-    for(let num of nums){
-        if(mapCount[num] == null) {
-            mapCount[num] = 0;
-        }
-        mapCount[num]++;
+  let mapCount = {};
+  let pre = null;
+  for (let num of nums) {
+    if (mapCount[num] == null) {
+      mapCount[num] = 0;
     }
-    let bucketSort = [];
-    for(let [key, value] of Object.entries(mapCount)){
-        if(bucketSort[value] == null){
-            bucketSort[value] = [];
-        } 
-        bucketSort[value].push(key);
+    mapCount[num]++;
+  }
+  let bucketSort = [];
+  for (let [key, value] of Object.entries(mapCount)) {
+    if (bucketSort[value] == null) {
+      bucketSort[value] = [];
     }
-    console.log(bucketSort);
-    const result = [];
-    let index = nums.length;
-    while(k>0 && index > 0){
-        if(!bucketSort[index] || bucketSort[index].length === 0) {
-            index--;
-            continue;
-        }
-        result.push(bucketSort[index].pop());
-        k--;
+    bucketSort[value].push(key);
+  }
+  console.log(bucketSort);
+  const result = [];
+  let index = nums.length;
+  while (k > 0 && index > 0) {
+    if (!bucketSort[index] || bucketSort[index].length === 0) {
+      index--;
+      continue;
     }
+    result.push(bucketSort[index].pop());
+    k--;
+  }
 
-    return result;
+  return result;
 };
 
-// T O(n) S:(m)
+// T O(n) S:(n)
