@@ -10,3 +10,27 @@ var isPalindrome = function (str) {
   }
   return true;
 };
+
+// O(n)
+
+const isNotAphabetic = (str) => str.match(/[^a-zA-Z0-9]/);
+isPalindrome = function (str) {
+  let left = 0;
+  let right = str.length - 1;
+  while (left < right) {
+    if (isNotAphabetic(str[left])) {
+      left++;
+      continue;
+    }
+    if (isNotAphabetic(str[right])) {
+      right--;
+      continue;
+    }
+    if (str[left].toLowerCase() !== str[right].toLowerCase()) return false;
+    left++;
+    right--;
+  }
+  return true;
+};
+
+// T:O(1)
