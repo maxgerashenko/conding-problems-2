@@ -1,3 +1,9 @@
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+// right check all position
+// left finds the minimum
+// also can just find the min
+
 /**
  * @param {number[]} prices
  * @return {number}
