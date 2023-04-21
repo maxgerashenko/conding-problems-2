@@ -1,19 +1,25 @@
+// https://leetcode.com/problems/two-sum/
+
+// use hashMapToTagetAndIndex
+// use key as target - value
+// and value as index of that element
+
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-  let map = new Map();
+  let mapMapToTargetIndex = new Map();
   const results = [];
-  for (let i = 0; i < nums.length; i++) {
-    const el = parseInt(nums[i]);
-    if (map.has(el)) {
-      results.push(map.get(el), i);
+  for (let index = 0; index < nums.length; index++) {
+    const el = parseInt(nums[index]);
+    if (mapMapToTargetIndex.has(el)) {
+      results.push(mapMapToTargetIndex.get(el), index);
       continue;
     }
 
-    map.set(target - el, i);
+    mapMapToTargetIndex.set(target - el, index);
   }
 
   return results;
