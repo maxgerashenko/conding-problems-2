@@ -1,4 +1,9 @@
+// https://leetcode.com/problems/top-k-frequent-elements/
+
 // hashMapCount + MaxHeap
+
+// calcute elements and put to the heap to not sort everything
+// get to k elements from the heap
 
 var topKFrequent = function (nums, k) {
   if (nums.length === 0) return [];
@@ -27,11 +32,13 @@ var topKFrequent = function (nums, k) {
     k--;
   }
   return result;
-};
-
-// O(KlogN) S:O(n)
+}; // O(KlogN) S:O(n)
 
 // hashMapCount + Bucket sort
+// keep result in Array where index is a Count
+// and value is array of element that has this count
+// max length of the array will be all elements N
+// take k lenents formt he index buckets as needed
 var topKFrequent = function (nums, k) {
   if (nums.length === 0) return [];
   if (k >= nums.length) return nums;
@@ -51,7 +58,6 @@ var topKFrequent = function (nums, k) {
     }
     bucketSort[value].push(key);
   }
-  console.log(bucketSort);
   const result = [];
   let index = nums.length;
   while (k > 0 && index > 0) {
@@ -64,6 +70,4 @@ var topKFrequent = function (nums, k) {
   }
 
   return result;
-};
-
-// T O(n) S:(n)
+}; // T O(n) S:(n)
