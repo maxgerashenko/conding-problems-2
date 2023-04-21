@@ -1,3 +1,10 @@
+// https://leetcode.com/problems/encode-and-decode-strings/
+
+// The question is how to decode wiht existing info
+// use number + # as end of number before each new part
+// when you know number take part of length of numer
+// then next
+
 console.clear();
 console.log('7_Encode and Decode Strings');
 
