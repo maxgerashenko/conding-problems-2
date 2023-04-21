@@ -1,4 +1,9 @@
+//https://leetcode.com/problems/valid-palindrome/
+
 // use simple regexp
+// ignore not aphabet with simple regExp
+// use 2 pointers from left and right
+// return if left !== righ as soon posible
 
 var isPalindrome = function (str) {
   str = str

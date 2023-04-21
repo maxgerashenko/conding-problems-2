@@ -1,3 +1,8 @@
+//https://leetcode.com/problems/contains-duplicate/
+
+// Use hashMap
+// if hash exist return false
+
 /**
  * @param {number[]} nums
  * @return {boolean}

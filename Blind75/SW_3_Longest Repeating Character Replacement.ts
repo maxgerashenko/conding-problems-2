@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/longest-repeating-character-replacement/description/
+//https://leetcode.com/problems/longest-repeating-character-replacement/description/
 
 // Use sliding window
 // Need to know the most frequent number only

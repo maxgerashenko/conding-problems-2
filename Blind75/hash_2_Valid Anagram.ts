@@ -1,3 +1,8 @@
+// https://leetcode.com/problems/valid-anagram/
+
+// use negative hashMapCout
+// if hashMapCout is empty return true
+
 /**
  * @param {string} s
  * @param {string} t
