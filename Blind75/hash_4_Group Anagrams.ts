@@ -1,3 +1,9 @@
+// https://leetcode.com/problems/group-anagrams/
+
+// use hashMapCount to store signatures
+// if string match pattern add to the group
+// use sorted string as a signature
+
 const groupAnagrams = function (strs) {
   let signatureMap = {};
   let resultsCountMap = {};
