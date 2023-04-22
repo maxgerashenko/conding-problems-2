@@ -1,3 +1,22 @@
+// https://www.youtube.com/watch?v=rUC2Rffejj8&list=RDCMUC4_AV_DlLXKdtYDV94Y4Jow&start_radio=1&rv=rUC2Rffejj8&t=19
+
+// https://www.youtube.com/watch?v=84BsI5VJPq4
+
+// prefix to postfix
+// calculate postfix
+
+// - prefixArray + stack
+// + = 1 priority
+// * = 2 priority
+// if stackTopPriority >= elPriority all to prefix
+// pop the rest from stack
+
+// posftix
+// calcStack
+// if el === number push to stack
+// if operator, then calc (i-1 operator i-2), push to stack
+// if end stack[0] === result
+
 // parenthesis
 // if '(' just openCount
 // if ')' move evething until '('
@@ -104,5 +123,5 @@
     return calculatePostFix(postFix);
   }
 
-  console.log(calculate('(10+2*5+(18+2)*(2+1)+10)'));
+  console.log(calculate('(10+2*5+(18*2+3)*(2+1)+10)'));
 })();
