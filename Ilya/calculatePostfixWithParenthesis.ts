@@ -8,20 +8,26 @@
 // - prefixArray + stack
 // + = 1 priority
 // * = 2 priority
-// if stackTopPriority >= elPriority all to prefix
-// pop the rest from stack
 
-// posftix
-// calcStack
-// if el === number push to stack
-// if operator, then calc (i-1 operator i-2), push to stack
+// prefix
+// if number push to stack
+// if operator
+// while stackTopPriority >= elPriority all to prefix
+// then push operator to stack
 // if end stack[0] === result
+// at the end push all stack to postfix
 
 // parenthesis
 // if '(' just openCount
 // if ')' move evething until '('
-// dont add '('
+// dont add '(' to postfix
 // '(' priority 0
+
+// postfix
+// calcStack
+// if number push to stack
+// if operator, then calc (i-1 operator i-2), push to stack
+// if end stack[0] === result
 
 (() => {
   console.clear();
@@ -123,5 +129,5 @@
     return calculatePostFix(postFix);
   }
 
-  console.log(calculate('(10+2*5+(18*2+3)*(2+1)+10)'));
+  console.log(calculate('(10*2+5+(1+18*2+3)*(2+1)+10)'));
 })();
