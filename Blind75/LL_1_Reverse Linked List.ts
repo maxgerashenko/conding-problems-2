@@ -18,27 +18,12 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  let prev = null;
-  let next = head;
-  while (next) {
-    let tmp = next.next;
-    next.next = prev;
-    prev = next;
-    next = tmp;
+  let pre = null;
+  while (head) {
+    let tmp = head.next;
+    head.next = pre;
+    pre = head;
+    head = tmp;
   }
-
-  return prev;
-}; // T:O(N) S:O(1)
-
-var reverseList = function (head) {
-  let pre = new ListNode();
-  let cur = head;
-  while (cur) {
-    let tmp = cur.next;
-    cur.next = pre.next;
-    pre.next = cur;
-    cur = tmp;
-  }
-
-  return pre.next;
+  return pre;
 }; // T:O(N) S:O(1)
