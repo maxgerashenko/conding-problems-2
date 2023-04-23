@@ -19,11 +19,12 @@
  */
 var reverseList = function (head) {
   let pre = null;
-  while (head) {
-    let tmp = head.next;
-    head.next = pre;
-    pre = head;
-    head = tmp;
+  let cur = head;
+  while (cur) {
+    let tmp = cur.next;
+    cur.next = pre;
+    pre = cur;
+    cur = tmp;
   }
   return pre;
 }; // T:O(N) S:O(1)
