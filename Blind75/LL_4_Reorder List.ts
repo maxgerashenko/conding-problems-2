@@ -36,7 +36,7 @@ var reorderList = function (head) {
   }
   let cur = slow.next;
   slow.next = null;
-  pre = null;
+  let pre = null;
   while (cur) {
     let tmp = cur.next;
     cur.next = pre;
