@@ -3,6 +3,12 @@
 
 // DFS interational
 
+interface TreeNode {
+  val: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+}
+
 /**
  * Definition for a binary tree node.
  * class TreeNode {
@@ -31,4 +37,13 @@ function maxDepth(root: TreeNode | null): number {
   }
 
   return maxLevel;
+} // O:(N) S:O(N)
+
+function maxDepthR(node: TreeNode | null, maxLevel = 0): number {
+  if (!node) return maxLevel;
+
+  return Math.max(
+    maxDepthR(node.left, maxLevel + 1),
+    maxDepthR(node.right, maxLevel + 1)
+  );
 } // O:(N) S:O(N)
