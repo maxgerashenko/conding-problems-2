@@ -47,3 +47,19 @@ function maxDepthR(node: TreeNode | null, maxLevel = 0): number {
     maxDepthR(node.right, maxLevel + 1)
   );
 } // O:(N) S:O(N)
+
+function maxDepth(root: TreeNode | null): number {
+  if (!root) return null;
+  let level = [root];
+  let levelCount = 0;
+  while (level.length) {
+    levelCount++;
+    let nextLevel = [];
+    for (let { left, right } of level) {
+      left && nextLevel.push(left);
+      right && nextLevel.push(right);
+    }
+    level = nextLevel;
+  }
+  return levelCount;
+} // T:O(N) S:O(n/2)
