@@ -1,4 +1,5 @@
 class Heap {
+  
   heap = [];
   comparator: (a, b) => {};
   constructor(comparator) {
