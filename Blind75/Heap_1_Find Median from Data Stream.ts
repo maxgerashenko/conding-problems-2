@@ -28,4 +28,4 @@ class MedianFinder {
       ? (this.maxHeap.peek() + this.minHeap.peek()) / 2
       : this.maxHeap.peek();
   }
-}
+} //  addNum() T:O(log n), findMedian() O(1),  S:O(n)
