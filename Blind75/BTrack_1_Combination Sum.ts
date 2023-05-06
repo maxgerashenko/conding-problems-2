@@ -6,20 +6,18 @@
 
 function combinationSum(candidates: number[], target: number): number[][] {
   let res = [];
-
-  function dfs(index = 0, path = [], sum = 0) {
+  function bt(index = 0, stack = [], sum = 0) {
     if (sum === target) {
-      res.push([...path]);
+      res.push([...stack]);
       return;
     }
-    if (index >= candidates.length || sum > target) return;
-    const el = candidates[index];
-    path.push(candidates[index]);
-    dfs(index, path, sum + candidates[index]); // go left
-    path.pop();
-    dfs(index + 1, path, sum); // go right
+    if (sum > target || index >= candidates.length) return;
+    let el = candidates[index];
+    stack.push(el);
+    bt(index, stack, sum + el); // [2,2,2,2,2]
+    stack.pop();
+    bt(index + 1, stack, sum); // [][][][][][]
   }
-  dfs();
-
+  bt();
   return res;
 } // T:O(n^target) S:(target)
