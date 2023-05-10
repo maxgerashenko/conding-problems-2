@@ -4,7 +4,7 @@
 // Number of Provinces
 
 function findCircleNum(isConnected: number[][]): number {
-  let len = isConnected.length;
+  const len = isConnected.length;
   const roots = new Array(len).fill(null).map((el, i) => i);
   const ranks = new Array(len).fill(1);
 
@@ -19,9 +19,7 @@ function findCircleNum(isConnected: number[][]): number {
   function union(n1, n2) {
     n1 = find(n1);
     n2 = find(n2);
-
     if (n1 === n2) return 0;
-
     if (ranks[n2] > ranks[n1]) {
       roots[n1] = n2;
       ranks[n2] += ranks[n1];
