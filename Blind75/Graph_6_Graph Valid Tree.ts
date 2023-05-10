@@ -3,6 +3,7 @@
 
 // Graph Valid Tree
 export class Solution {
+  // UNION FIND
   // make adjacency list
   // use visited nodes
   // use prev to exclude parent
