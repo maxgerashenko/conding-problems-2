@@ -3,6 +3,13 @@
 // https://leetcode.com/problems/number-of-provinces/
 // Number of Provinces
 
+// Union find
+// n1 = i and n2 = j
+// for to check if Union
+// unin by rank and use find
+// find to find root and roots[roots[cur]] to shorter path
+// res = n nodes - number of unions
+
 function findCircleNum(isConnected: number[][]): number {
   const len = isConnected.length;
   const roots = new Array(len).fill(null).map((el, i) => i);
