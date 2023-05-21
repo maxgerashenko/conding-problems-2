@@ -16,4 +16,4 @@ function coinChange(coins: number[], target: number): number {
       dp[i] = Math.min(dp[i], 1 + dp[i - c]);
     }
   return dp[target] === Number.MAX_SAFE_INTEGER ? -1 : dp[target];
-} // T:O(N) S:O(N)
+} // T:O(NM) S:O(N)
