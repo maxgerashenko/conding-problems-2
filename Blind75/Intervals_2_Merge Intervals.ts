@@ -1,6 +1,12 @@
 // Merge Intervals
 // https://leetcode.com/problems/merge-intervals/description/
 
+// sort by start!
+// iterate
+// if start < cur push
+// else update start and end
+// if end of the list store start and end
+
 function merge(intervals: number[][]): number[][] {
   intervals.sort((a, b) => (a[0] < b[0] ? -1 : 1));
   let res = [];
