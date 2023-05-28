@@ -5,7 +5,7 @@
 // if overlap
 // count
 // remove the shortest end
-// It greedy
+// It is greedy
 
 function eraseOverlapIntervals(intervals: number[][]): number {
   let count = 0;
