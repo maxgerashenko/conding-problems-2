@@ -18,16 +18,15 @@ function hammingWeight(n: number, count = 0): number {
 
 // do it 64 times
 
-
 // skip all 0 in the nuber
 // ignore all 0 up to next 1 from the left to right 1 <- 0
 // ignore with & operation 1 & 0 == 0
-// move to next 1 by -1 
+// move to next 1 by -1
 
 function hammingWeight(n: number, count = 0): number {
-    while(n != 0){
-        n &= (n-1); // 1 or 0
-        count++;
-    }
-    return count;
-}; // T:O(1) 1's in the number S:O(1)
+  while (n != 0) {
+    n &= n - 1; // 1 or 0
+    count++;
+  }
+  return count;
+} // T:O(1) 1's in the number S:O(1)
