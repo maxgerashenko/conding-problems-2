@@ -34,4 +34,4 @@ function isValidSudoku(board: string[][]): boolean {
     }
   }
   return true;
-} // T:O(n^2) S:O(n^3)
+} // T:O(n^2) S:O(n^2)
