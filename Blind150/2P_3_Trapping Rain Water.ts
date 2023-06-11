@@ -25,3 +25,31 @@ function trap(height: number[]): number {
 
   return res;
 } // T:O(n) S:O(1)
+
+function trap(height: number[]): number {
+  let mostLef = [0];
+  let mostRigh = [];
+  let len = height.length;
+  mostRigh[len - 1] = 0;
+  let maxLeft = height[0];
+  let maxRight = height[len - 1];
+  let res = 0;
+
+  for (let i = 1; i < len; i++) {
+    maxLeft = Math.max(maxLeft, height[i]);
+    mostLef[i] = maxLeft;
+  }
+
+  for (let i = len - 2; i >= 0; i--) {
+    mostRigh[i] = maxRight;
+    maxRight = Math.max(maxRight, height[i]);
+  }
+
+  for (let i = 0; i < height.length; i++) {
+    console.log(mostLef[i], mostRigh[i], height[i]);
+    let val = Math.min(mostLef[i], mostRigh[i]) - height[i];
+    res += val < 0 ? 0 : val;
+  }
+
+  return res;
+} // T:O(n) S:O(2n)
