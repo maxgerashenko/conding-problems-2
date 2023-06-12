@@ -32,4 +32,4 @@ function checkInclusion(s1: string, s2: string): boolean {
     if (matchCount === 26) return true;
   }
   return false;
-} // T:O(N) S:O(26)
+} // T:O(N) S:O(26) as S:O(1)
