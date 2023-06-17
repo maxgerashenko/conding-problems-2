@@ -2,6 +2,10 @@
 // https://leetcode.com/problems/valid-sudoku/
 
 // new empty Array is Array(5).fill(null).map(()=>({}))
+// n*m, update the copy Array as row and cols, blocks
+// if any row || cols || block is already 1 return false
+// conner case if it is .
+// T:O(n^2) S:O(n^2)
 
 function isValidSudoku(board: string[][]): boolean {
   let len = board.length;
