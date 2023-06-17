@@ -1,6 +1,11 @@
 // Permutation in String
 // https://leetcode.com/problems/permutation-in-string/
 
+// 2 hashMaps
+// count matrches as 26 max - not matches letters
+// when count === 26 return true
+// S:O(s1+s2) T:O(26)
+
 function checkInclusion(s1: string, s2: string): boolean {
   if (s1.length > s2.length) return false; // conner case
   let s1Hash = {};
