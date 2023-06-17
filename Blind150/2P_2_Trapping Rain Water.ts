@@ -1,6 +1,10 @@
 // Trapping Rain Water
 // https://leetcode.com/problems/trapping-rain-water/
 
+// left right, if udpate min of 2 Max
+// val += current - minLeftRightMax
+// if left <= right left --
+
 function trap(height: number[]): number {
   let left = 0;
   let right = height.length - 1;
