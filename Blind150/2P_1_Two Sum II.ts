@@ -1,7 +1,8 @@
 // Two Sum II
 // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
 
-//
+// if sum === target, left++, right--;
+// T:O(N) S:O(1)
 
 function twoSum(numbers: number[], target: number): number[] {
   let left = 0;
