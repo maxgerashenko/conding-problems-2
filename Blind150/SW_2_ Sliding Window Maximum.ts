@@ -1,6 +1,14 @@
 // Sliding Window Maximum
 // https://leetcode.com/problems/sliding-window-maximum/
 
+// left right
+// monotiniq decreasing Queue
+// add new to the end of the Queue
+// remove first if queue start < left
+// if right >= k add queue start to the result
+// and incrase left++
+// increase right;
+
 function maxSlidingWindow(nums: number[], k: number): number[] {
   let maxQueue = [];
   let res = [];
