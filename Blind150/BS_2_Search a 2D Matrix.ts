@@ -1,6 +1,11 @@
 // https://leetcode.com/problems/search-a-2d-matrix/
 // Search a 2D Matrix
 
+// BS
+// row and col could be diffrent
+// find the correct row or out of the range
+// find the correct i or out fo the range
+
 function searchMatrix(matrix: number[][], target: number): boolean {
   let jMax = matrix.length;
   let iMax = matrix[0].length;
