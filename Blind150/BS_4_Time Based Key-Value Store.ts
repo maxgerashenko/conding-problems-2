@@ -1,6 +1,13 @@
 // https://stackblitz.com/edit/conding-problems-oajgfe?file=Blind150%2FBS_3_Koko%20Eating%20Bananas.ts,Blind150%2FBS_4.ts
 // Time Based Key-Value Store
 
+// use BS
+// values are objects
+// objects are sorted by time
+// use bs to find time
+// remenber closest event past or next
+// could be no exact time to search
+
 class TimeMap {
   constructor() {}
 
