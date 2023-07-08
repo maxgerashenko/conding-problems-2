@@ -1,27 +1,34 @@
-# conding-problems-oajgfe
+// Copy List With Random Pointer
+// https://leetcode.com/problems/copy-list-with-random-pointer/
 
-/\*\*
+// LL
+// 2 passes alog
+// go throw all elements
+// Copy all elements with out links
+// go thrwo all elements
+// Copy all connections of the lements
+// Use Map and key as element it selft
+// Return Map.get(header) as a header copy
 
-- Definition for singly-linked list.
-- function ListNode(val, next) {
--     this.val = (val===undefined ? 0 : val)
--     this.next = (next===undefined ? null : next)
-- }
-  \*/
-  /\*\*
-- @param {ListNode} head
-- @return {ListNode}
-  \*/
-  var reverseList = function(head) {
-  prev = null;
-  next = head;
-  while(next){
-  let tmp = next.next;
-  next.next = prev;
-  prev = next;
-  next = tmp;
+function copyRandomList(head: Node | null): Node | null {
+  if (head == null) return null; // coner case
+  let hashMap = new Map(); // coner case
+  hashMap.set(null, null);
+
+  let cur = head;
+  while (cur) {
+    hashMap.set(cur, new Node(cur.val));
+    cur = cur.next;
   }
 
-      return prev
+  cur = head;
+  while (cur) {
+    let { val, next, random } = cur;
+    let copy = hashMap.get(cur);
+    copy.next = hashMap.get(cur.next);
+    copy.random = hashMap.get(cur.random);
+    cur = cur.next;
+  }
 
-  }; // T:O(N) S:O(N)
+  return hashMap.get(head);
+} // T:O(2n) S:O(n)

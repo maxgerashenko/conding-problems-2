@@ -1,6 +1,15 @@
 // Copy List With Random Pointer
 // https://leetcode.com/problems/copy-list-with-random-pointer/
 
+// LL
+// 2 passes alog
+// go throw all elements
+// Copy all elements with out links
+// go thrwo all elements
+// Copy all connections of the lements
+// Use Map and key as element it selft
+// Return Map.get(header) as a header copy
+
 function copyRandomList(head: Node | null): Node | null {
   if (head == null) return null; // coner case
   let hashMap = new Map(); // coner case
