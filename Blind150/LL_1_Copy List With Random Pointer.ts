@@ -2,7 +2,7 @@
 // https://leetcode.com/problems/copy-list-with-random-pointer/
 
 // LL
-// 2 passes al
+// 2 passes along
 // go throw all elements
 // Copy all elements with out links
 // go thrwo all elements
