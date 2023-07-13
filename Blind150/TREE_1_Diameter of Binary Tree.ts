@@ -26,4 +26,3 @@ function diameterOfBinaryTree(root: TreeNode | null): number {
 
   return max;
 } // T:O(N) S:O(1)
-'
