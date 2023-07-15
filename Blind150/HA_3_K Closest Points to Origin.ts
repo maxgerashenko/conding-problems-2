@@ -1,6 +1,11 @@
 // https://leetcode.com/problems/k-closest-points-to-origin/description/
 // K Closest Points to Origin
 
+// Use MaxHeap to find Min K
+// Sort only K values
+// Ighnore other
+// T:O(NlogK) S:O(K)
+
 function kClosest(points: number[][], k: number): number[][] {
   let maxHeap = new Heap((a, b) => b.val - a.val);
   let [x, y] = points.pop();
@@ -19,4 +24,3 @@ function kClosest(points: number[][], k: number): number[][] {
 
   return maxHeap.heap.map((x) => x.coord);
 } // T:O(NlogK) S:O(K)
-
