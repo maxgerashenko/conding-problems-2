@@ -1,6 +1,13 @@
 // https://leetcode.com/problems/combination-sum-ii/submissions/
 // Combination Sum II
 
+// use DFS
+// use Backtraking
+// if sum == target add to res
+// if > target return
+// sort and skipp index === index+1
+// T:O(N2N + NLogN) S:O(logN)
+
 function combinationSum2(candidates: number[], target: number): number[][] {
   candidates.sort((a, b) => a - b);
   let res = [];
