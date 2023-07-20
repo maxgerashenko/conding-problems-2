@@ -48,4 +48,4 @@ var solveNQueens = function (n) {
   dfs();
 
   return res;
-}; // T:O(n^2) S:O(n)
+}; // T:O(n^2N) S:O(N^2)
