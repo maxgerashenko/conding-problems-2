@@ -1,6 +1,13 @@
-1// https://leetcode.com/problems/walls-and-gates/
-// https://leetcode.com/problems/rotting-oranges/submissions/
+// https://leetcode.com/problems/walls-and-gates/
+// https://www.lintcode.com/problem/663/
 // Walls and Gates
+
+// use bfs
+// use count
+// use while for bfs
+// use tmp for level
+// init room value is INFINITY(2147483647)
+// use dir [[1,0][-1,0][0,1][0,-1]
 
 export class Solution {
   wallsAndGates(rooms: number[][]) {
