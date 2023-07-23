@@ -20,7 +20,7 @@ export class Solution {
       for (let i = 0; i < n; i++) {
         if (rooms[j][i] != 0) continue;
         level.push([j, i]);
-      }
+      } // find all gates
 
     let dirs = [
       [1, 0],
@@ -48,6 +48,6 @@ export class Solution {
       }
       count++;
       level = tmp;
-    }
+    } // BFS
   }
 } // T:O(MN) S:O(MN)

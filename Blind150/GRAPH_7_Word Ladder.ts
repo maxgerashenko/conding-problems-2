@@ -3,14 +3,14 @@
 // https://leetcode.com/problems/redundant-connection/description/
 // Word Ladder
 
-// It is Graph
-// Word connects with patterns a*aaa
+// it is Graph
+// word connects with patterns a*aaa
 // use HashMapArray
 // use DFS
 // use visited list
 // level is the count
 // HashMapArray where key is the pattern values are words
-// while for level, for level, for generated patters, for for words from HashMapArray
+// while for level, for generated patters, for for words from HashMapArray
 // T:O(N*M^2) , N words M length of the word S:O(N)
 
 function ladderLength(

@@ -3,7 +3,7 @@
 
 // Use DFS
 // use j,j
-// conner case 0 or i<0 || i===n
+// conner case 0 or i < 0 || i === n
 // return 1 + sum for directions
 // mark visited cells
 // use for for to try to start from every cell

@@ -2,8 +2,8 @@
 // Rotting Oranges
 
 // Use BFS
-// count freshCount
-// check freshCount is 0 at the end
+// use freshCount
+// check freshCount is it 0 at the end
 // use dir = [[1,0], [-1,0],[0,1][0,-1]]
 // check freshCount and level for while
 // check that orange is fresh in only when add the child
@@ -25,7 +25,6 @@ function orangesRotting(grid: number[][]): number {
       if (el !== 2) continue;
       level.push({ j, i });
     }
-  console.log(fresh);
 
   let dir = [
     [-1, 0],

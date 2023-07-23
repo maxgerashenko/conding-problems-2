@@ -1,17 +1,17 @@
 // https://leetcode.com/problems/course-schedule-ii/
 // Course Schedule II
 
-// Use DFS
-// Use Topological sorrt (relationships)
-// Use HashMapArray for relationships
-// Inint all indexes with [] in hashMapArray
-// Set relationships
-// Use path Set to detect cycles
+// use DFS
+// use Topological sort (relationships)
+// use HashMapArray for relationships
+// use pathSet to detect cycles
+// inint all indexes with [] in hashMapArray
+// set relationships
 // return false to exit from dfs when cycle detected
-// Use visited set to skip visited
+// use visited set to skip visited
 // use BackTracking for the Path
 // add index at the end to get reversed order(history)
-// iterate all indexes, 0..N. empty relations willbe ingored as arr is [];
+// iterate all indexes, 0..N empty relations will be ingored as arr is [];
 // T:O(Nodes + Connections) S:O(Nodes + Connections) as call stack
 
 function findOrder(numCourses: number, prerequisites: number[][]): number[] {

@@ -1,15 +1,15 @@
 // https://leetcode.com/problems/redundant-connection/
 // Redundant Connection
 
-// Use Union Find
+// use UnionFind
 // use rootArray
-// use RankArray
+// use rankArray
 // use recurtion
-// use return false to detect a Cycle
+// use return false to detect a cycle
 //
-// Find is to find the root, RootArray
-// Union is to set parent->child, Find, rootArray
-// Concept: When full tree, need edje create a cycle 100%
+// find is to find the root, RootArray
+// union is to set parent->child, Find, rootArray
+// concept: When full tree, a new edje creates a cycle 100%
 // Use RankArray [index] 0 is useless
 // RankArray to define parent -> child
 // Use RootArray to set parant->child
