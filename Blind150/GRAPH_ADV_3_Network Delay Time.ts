@@ -1,2 +1,2 @@
-//
-// GRAPH_ADV_3_Network Delay Time.ts
+// https://leetcode.com/problems/network-delay-time/
+// Network Delay Time
