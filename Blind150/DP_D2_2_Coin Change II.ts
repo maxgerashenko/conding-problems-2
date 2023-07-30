@@ -1,33 +1,33 @@
 // https://leetcode.com/problems/coin-change-ii/
 // Coin Change II
 
-// use DFS + Cache + optimization
-// instead of for... for each option use only option >= i
-// optimisation reduce duplicates as 2-1-1 and 1-1-2
-// dfs is about to reuse existing count for skip to next
-// 1st checks we run out of coins options index >= coins.length
-// 2nd check we run out of amount, when use the same coin many times
-// base case amouin is 0, return +1 posible solution
-
-// DFS
+// DP best T:(m*n) S:O(n)
+//
+// use dp
+// m is coins reversed
+// n is amount
+// amount is amount + 1 with [0] = 1;
+// coins is [last + 1] = 0, but use initial dp [] instead j-1
+// use only tmp and i - coins[j]
+//
+// T:O(m*n) S:O(n)
 function change(amount: number, coins: number[]): number {
-  let cache = {};
-  let len = coins.length;
+  let m = coins.length;
+  let n = amount + 1;
+  let dp = Array(n).fill(0);
+  dp[0] = 1;
 
-  function dfs(index, amount) {
-    if (index >= len) return 0; // conner case
-    if (amount < 0) return 0; // conner case
-    if (amount === 0) return 1; // base case
-    if ('' + index + ':' + amount in cache)
-      return cache['' + index + ':' + amount];
-
-    cache['' + index + ':' + amount] =
-      dfs(index, amount - coins[index]) + dfs(index + 1, amount);
-    return cache['' + index + ':' + amount];
+  for (let j = m - 1; j >= 0; j--) {
+    let tmp = [...dp];
+    for (let i = 1; i < n; i++) {
+      if (i - coins[j] < 0) continue;
+      tmp[i] += tmp[i - coins[j]];
+    }
+    dp = tmp;
   }
 
-  return dfs(0, amount);
-} // T:O(m*n) S:O(m*n)
+  return dp[n - 1];
+} // T:O(m*n) S:O(n)
 
 // DP amount vs coins, not the best space complexity
 //
@@ -59,4 +59,32 @@ function change(amount: number, coins: number[]): number {
     }
 
   return dp[amount][0];
+} // T:O(m*n) S:O(m*n)
+
+// use DFS + Cache + optimization
+// instead of for... for each option use only option >= i
+// optimisation reduce duplicates as 2-1-1 and 1-1-2
+// dfs is about to reuse existing count for skip to next
+// 1st checks we run out of coins options index >= coins.length
+// 2nd check we run out of amount, when use the same coin many times
+// base case amouin is 0, return +1 posible solution
+
+// DFS
+function change(amount: number, coins: number[]): number {
+  let cache = {};
+  let len = coins.length;
+
+  function dfs(index, amount) {
+    if (index >= len) return 0; // conner case
+    if (amount < 0) return 0; // conner case
+    if (amount === 0) return 1; // base case
+    if ('' + index + ':' + amount in cache)
+      return cache['' + index + ':' + amount];
+
+    cache['' + index + ':' + amount] =
+      dfs(index, amount - coins[index]) + dfs(index + 1, amount);
+    return cache['' + index + ':' + amount];
+  }
+
+  return dfs(0, amount);
 } // T:O(m*n) S:O(m*n)
