@@ -1,6 +1,17 @@
 // https://leetcode.com/problems/interleaving-string/
 // Interleaving String
 
+// True DP
+// n+1 X m+1
+// user extra for conner cases when 0 X last and 0 X last
+// leave extra false
+// calculate with extra
+// set [last][last] as true
+// reverse order
+// return [0][0]
+// ij = i+1j || ij+1
+// T:O(m*n) S:O(m*n)
+
 // DFS with cache
 //
 // brute force is with out cahce is O(2^(n+m))
