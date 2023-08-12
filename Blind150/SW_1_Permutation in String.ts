@@ -7,34 +7,45 @@
 // S:O(s1+s2) T:O(26)
 
 function checkInclusion(s1: string, s2: string): boolean {
-  if (s1.length > s2.length) return false; // conner case
-  let s1Hash = {};
-  let s2Hash = {};
+  let hashMapCountPattern = {}; // fingerPrint
+  let hashMapCountWord = {}; // current
   let matchCount = 26;
-  for (let i = 0; i < s1.length; i++) {
-    let char = s1[i];
-    if (s1Hash[char] == null) {
-      s1Hash[char] = 0;
+  let left = 0;
+  let n = s2.length;
+
+  for (let el of s1.split('')) {
+    if (!(el in hashMapCountPattern)) {
+      hashMapCountPattern[el] = 0;
       matchCount--;
     }
-    s1Hash[char]++;
-  }
-  for (let right = 0; right < s2.length; right++) {
-    let rightChar = s2[right];
-    if (s2Hash[rightChar] == null) {
-      s2Hash[rightChar] = 0;
+    hashMapCountPattern[el]++;
+  } // init fingerPrint
+
+  for (let index = 0; index < s1.length; index++) {
+    let el = s2[index];
+    if (!(el in hashMapCountWord)) {
+      hashMapCountWord[el] = 0;
     }
-    s2Hash[rightChar]++;
-    if (s1Hash[rightChar] == s2Hash[rightChar]) matchCount++;
-    if (right >= s1.length) {
-      let leftChar = s2[right - s1.length];
-      if (s1Hash[leftChar] == s2Hash[leftChar]) matchCount--;
-      s2Hash[leftChar]--;
-      if (s2Hash[leftChar] == 0) {
-        delete s2Hash[leftChar];
-      }
+    hashMapCountWord[el]++;
+    if (hashMapCountWord[el] === hashMapCountPattern[el]) matchCount++;
+  } // init word length
+  if (matchCount === 26) return true; // first try
+
+  for (let right = s1.length; right < n; right++) {
+    let el = s2[right];
+    if (!(el in hashMapCountWord)) {
+      hashMapCountWord[el] = 0;
     }
+    hashMapCountWord[el]++;
+    if (hashMapCountWord[el] === hashMapCountPattern[el]) matchCount++;
+
+    el = s2[left];
+    if (hashMapCountWord[el] === hashMapCountPattern[el]) matchCount--;
+    hashMapCountWord[el]--;
+    left++;
+
     if (matchCount === 26) return true;
   }
+
   return false;
-} // T:O(N) S:O(26) as S:O(1)
+} // T:O(n+m) S:O(26+26)
