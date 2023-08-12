@@ -6,27 +6,26 @@
 // if left <= right left --
 
 function trap(height: number[]): number {
-    let left = 0;
-    let right = height.length - 1;
-    let maxLeft = height[left];
-    let maxRight = height[right];
-    let count = 0;
+  let left = 0;
+  let right = height.length - 1;
+  let maxLeft = height[left];
+  let maxRight = height[right];
+  let count = 0;
 
-    while(left < right){
-        if(maxLeft <= maxRight){
-            left++;
-            maxLeft = Math.max(maxLeft, height[left]);
-            count += maxLeft - height[left];
-            continue;
-        }
-        right--;
-        maxRight = Math.max(maxRight, height[right]);
-        count += maxRight - height[right];
+  while (left < right) {
+    if (maxLeft <= maxRight) {
+      left++;
+      maxLeft = Math.max(maxLeft, height[left]);
+      count += maxLeft - height[left];
+      continue;
     }
+    right--;
+    maxRight = Math.max(maxRight, height[right]);
+    count += maxRight - height[right];
+  }
 
-    return count;
-}; // T:O(N) S:O(1)
-
+  return count;
+} // T:O(N) S:O(1)
 
 function trap(height: number[]): number {
   let mostLef = [0];

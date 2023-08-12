@@ -8,19 +8,19 @@
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function (heights) {
+function maxArea(height: number[]): number {
+  let max = 0;
   let left = 0;
-  let right = heights.length - 1;
-  let maxValue = 0;
+  let right = height.length - 1;
+
   while (left < right) {
-    let minHight = Math.min(heights[left], heights[right]);
-    let value = minHight * (right - left);
-    maxValue = Math.max(maxValue, value);
-    if (heights[left] <= heights[right]) {
+    let volume = Math.min(height[left], height[right]) * (right - left);
+    max = Math.max(max, volume);
+    if (height[left] <= height[right]) {
       left++;
       continue;
     }
     right--;
   }
-  return maxValue;
-};
+  return max;
+} // T:O(n) S:O(1)
