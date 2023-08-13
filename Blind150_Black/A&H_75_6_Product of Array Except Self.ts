@@ -5,7 +5,7 @@
 // iterate pre-product
 // iterate post product
 // return res
-// T:O(n) S:O(1)
+// T:O(n) S:O(n)
 
 function productExceptSelf(nums: number[]): number[] {
   let res = [];
