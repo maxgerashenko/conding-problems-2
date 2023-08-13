@@ -1,6 +1,12 @@
 // https://leetcode.com/problems/top-k-frequent-elements/description/
 // Top K Frequent Elements
 
+// use bucket list
+// use hashMapCount
+// the bucket list is the max size of n
+// T:O(n) S:O(n)
+// Better than T:O(klogn) with MaxHeap
+
 function topKFrequent(nums: number[], k: number): number[] {
   let hasMapCount = {};
   let res = [];
