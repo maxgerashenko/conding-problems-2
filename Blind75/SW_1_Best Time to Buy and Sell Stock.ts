@@ -8,20 +8,24 @@
  * @param {number[]} prices
  * @return {number}
  */
-var maxProfit = function (prices) {
+function maxProfit(prices: number[]): number {
   let left = 0;
-  let right = 1;
-  let maxProfit = 0;
-  while (right < prices.length) {
-    if (prices[left] < prices[right]) {
-      maxProfit = Math.max(maxProfit, prices[right] - prices[left]);
-    } else {
+  let max = 0;
+  let n = prices.length;
+
+  for (let right = 0; right < n; right++) {
+    console.log(prices[left], prices[right]);
+    let cur = prices[right] - prices[left];
+
+    if (prices[right] <= prices[left]) {
       left = right;
     }
-    right++;
+
+    max = Math.max(max, cur);
   }
-  return maxProfit;
-};
+
+  return max;
+} // T:O(n) S:O(1)
 
 // T:(N) S:O(1);
 
