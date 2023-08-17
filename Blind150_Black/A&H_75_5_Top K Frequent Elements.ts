@@ -10,28 +10,30 @@
 function topKFrequent(nums: number[], k: number): number[] {
   let hasMapCount = {};
   let res = [];
-  let bucketList = [];
   let n = nums.length;
+  let bucketList = Array(n)
+    .fill(null)
+    .map((el) => []);
 
   for (let el of nums) {
-    hasMapCount[el] = 1 + (hasMapCount[el] || 0);
-  }
-
-  for (let key of Object.keys(hasMapCount)) {
-    bucketList[hasMapCount[key]] = [
-      ...(bucketList[hasMapCount[key]] || []),
-      key,
-    ];
-  }
-
-  let index = n;
-  while (res.length < k && index >= 0) {
-    if (!bucketList[index] || !bucketList[index].length) {
-      index--;
-      continue;
+    if (!hasMapCount[el]) {
+      hasMapCount[el] = 0;
     }
+    hasMapCount[el]++;
+  }
 
-    res.push(bucketList[index].pop());
+  for (let val of Object.keys(hasMapCount)) {
+    let count = hasMapCount[val];
+    console.log(count, val);
+    bucketList[count - 1].push(val);
+  }
+
+  for (let index = n - 1; index >= 0; index--) {
+    if (res.length === k) return res;
+
+    for (let el of bucketList[index]) {
+      res.push(el);
+    }
   }
 
   return res;
