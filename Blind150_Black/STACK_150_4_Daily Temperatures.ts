@@ -4,6 +4,7 @@
 // use stack
 // keep stack monotonicaly decreasing
 // set res by index
+// T:O(n) S:O(n)
 
 var dailyTemperatures = function (temps) {
   let monotoIndexStack = [];
