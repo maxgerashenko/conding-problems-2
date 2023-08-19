@@ -27,7 +27,6 @@ var carFleet = function (target, position, speed) {
       minTime = time;
     }
   }
-
   return count;
 }; // T:O(n) S:O(1);
 
