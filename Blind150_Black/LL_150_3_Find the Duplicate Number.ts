@@ -1,42 +1,34 @@
-// https://leetcode.com/problems/reverse-linked-list/
-// Reverse Linked List
+// https://leetcode.com/problems/find-the-duplicate-number/submissions/
+// Find the Duplicate Number
 
-// 1st
-// pre = node
-// cur = head
-// while cur.next;
-// return pre.next;
+// use fast and slow
+// can't use circle search, spaw thing
+// ignore 1rst value
+// use index as number
+// ignore el in right position
+// find the loop
+// find the start
+// return start;
 
-// 2nd
-// pre = null
-// while cur
-// cur.next = pre;
-// return pre
+function findDuplicate(nums: number[]): number {
+  let n = nums.length;
+  for (let index = 0; index < n; index++) {
+    if (index === nums[index]) continue;
 
-function reverseList(head: ListNode | null): ListNode | null {
-  let pre = new ListNode();
-  pre.next = head;
-  let cur = head;
-  while (cur && cur.next) {
-    let tmp = cur.next;
-    cur.next = tmp.next;
-    tmp.next = pre.next;
-    pre.next = tmp;
+    let slow = index;
+    let fast = index;
+    while (true) {
+      slow = nums[slow];
+      fast = nums[fast];
+      fast = nums[fast];
+      if (slow === fast) break;
+    }
+
+    let start = 0;
+    while (true) {
+      start = nums[start];
+      slow = nums[slow];
+      if (start === slow) return start;
+    }
   }
-
-  return pre.next;
-} // T:O(n) S:O(1)
-
-function reverseList(head: ListNode | null): ListNode | null {
-  let pre = null;
-  let cur = head;
-
-  while (cur) {
-    let tmp = cur.next;
-    cur.next = pre;
-    pre = cur;
-    cur = tmp;
-  }
-
-  return pre;
-} // T:O(n) S:O(1)
+} //T:O(n) S:O(1)
