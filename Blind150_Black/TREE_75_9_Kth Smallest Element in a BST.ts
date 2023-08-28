@@ -1,4 +1,5 @@
-
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+// Kth Smallest Element in a BST
 
 // use DFS inOrder
 // use iterative, not recursive
@@ -8,23 +9,22 @@
 // go right
 
 function kthSmallest(root: TreeNode | null, k: number): number {
-    let stack = [root];
-    let cur = root;
+  let stack = [root];
+  let cur = root;
 
-    while(cur || stack.length){
-        while(cur){
-            stack.push(cur)
-            cur = cur.left;
-        }
-        cur = stack.pop();
-        k--;
-        if(k===0) return cur.val;
-        cur = cur.right;
+  while (cur || stack.length) {
+    while (cur) {
+      stack.push(cur);
+      cur = cur.left;
     }
+    cur = stack.pop();
+    k--;
+    if (k === 0) return cur.val;
+    cur = cur.right;
+  }
 
-    return -1;
-}; // T:O(n) S:O(n)
-
+  return -1;
+} // T:O(n) S:O(n)
 
 // use DFS
 // use BTS specific
@@ -33,19 +33,19 @@ function kthSmallest(root: TreeNode | null, k: number): number {
 // right middle left
 
 function kthSmallest(root: TreeNode | null, k: number): number {
-    let queue = [];
-    let cur = root;
+  let queue = [];
+  let cur = root;
 
-    function dfs(cur){
-        if(cur == null) return
-        let {left, right, val} = cur;
-        dfs(right);
-        queue.unshift(val);
-        dfs(left);
+  function dfs(cur) {
+    if (cur == null) return;
+    let { left, right, val } = cur;
+    dfs(right);
+    queue.unshift(val);
+    dfs(left);
 
-        while(queue.length > k) queue.pop();
-    }
-    dfs(root)
+    while (queue.length > k) queue.pop();
+  }
+  dfs(root);
 
-    return queue.length === k ? queue.pop() : -1
-}; // T:O(n) S:O(n)
+  return queue.length === k ? queue.pop() : -1;
+} // T:O(n) S:O(n)
