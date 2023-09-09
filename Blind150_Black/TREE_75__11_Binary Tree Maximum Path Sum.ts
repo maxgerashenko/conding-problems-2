@@ -14,9 +14,10 @@
 
 function maxPathSum(root: TreeNode | null): number {
   let max = -Infinity;
-  if (root == null) return 0;
 
-  function dfs({ left, right, val }) {
+  function dfs(root) {
+    if (root == null) return 0;
+    let { left, right, val } = root;
     let sumLeft = (left && dfs(left)) || 0;
     let sumRight = (right && dfs(right)) || 0;
     let maxBranch = Math.max(sumLeft, sumRight, 0);
