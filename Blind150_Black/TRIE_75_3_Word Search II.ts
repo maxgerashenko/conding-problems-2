@@ -1,59 +1,58 @@
 // https://leetcode.com/problems/word-search-ii/description/
 // Word Search II
 
-class Node {
+// use Trie
+// use dfs
+// use set
+// use path
+// use visited
+// reset visited on each new start j,i
+// clean visited after move
+// T:O(m*m*4^av) S:O(M*N or T*Av)
+
+class TrieNode {
   nodes = {};
   isEnd = false;
-  contructor() {}
 }
-function findWords(board: string[][], words: string[]): string[] {
-  let m = board.length;
-  let n = board[0].length;
-  let res = new Set();
-  let dir = [
-    [1, 0],
-    [-1, 0],
-    [0, 1],
-    [0, -1],
-  ];
-
-  // init
-  let root = new Node();
-  for (let word of words) {
-    let letters = word.split('');
-    let cur = root; // reset cur
-    while (letters.length) {
-      let letter = letters.shift();
-      if (!cur.nodes[letter]) {
-        cur.nodes[letter] = new Node();
-      }
-      cur = cur.nodes[letter]; // update cur
-    }
-    cur.isEnd = true; // mark as end
+class Trie {
+  isEnd: true;
+  nodes = {};
+  constructor(words: string[]) {
+    for (let w of words) this.add(w);
   }
+  add(word: string) {
+    if (word.length == 0 || word == null) return;
+    let cur = this;
+    for (let l of word.split('')) {
+      if (cur.nodes[l] == null) cur.nodes[l] = new TrieNode();
+      cur = cur.nodes[l];
+    }
+    cur.isEnd = true;
+  }
+}
 
-  function dfs(cur, j, i, path = '', visited = new Set()) {
-    let pos = `${j},${i}`;
-    if (i < 0 || j < 0 || j >= m || i >= n) return; // check borders
-
+function findWords(board: string[][], words: string[]): string[] {
+  const res = new Set<string>();
+  let trie = new Trie(words);
+  function dfs(root, j = 0, i = 0, path = '', visited = new Set()) {
+    if (board[j] == null || board[j][i] == null || visited.has(`${i},${j}`))
+      return;
     let letter = board[j][i];
-    cur = cur.nodes[letter];
-    if (cur == null) return; // conner case
-
-    if (visited.has(`${j},${i}`)) return; // check visited
-    visited.add(`${j},${i}`);
+    if (root.nodes[letter] == null) return;
+    visited.add(`${i},${j}`);
 
     path += letter;
-    if (cur.isEnd) res.add(path); // base case
+    root = root.nodes[letter];
+    if (root.isEnd) res.add(path);
 
-    for (let [dj, di] of dir) dfs(cur, j + dj, i + di, path, visited); // explore
-    visited.delete(pos);
+    dfs(root, j + 1, i, path, visited);
+    dfs(root, j, i + 1, path, visited);
+    dfs(root, j - 1, i, path, visited);
+    dfs(root, j, i - 1, path, visited);
+    visited.delete(`${i},${j}`);
   }
+  for (let j = 0; j < board.length; j++)
+    for (let i = 0; i < board[j].length; i++) dfs(trie, j, i);
 
-  for (let j = 0; j < m; j++)
-    for (let i = 0; i < n; i++) {
-      dfs(root, j, i);
-    }
-
-  return [...res] as string[];
-} // T:O(Max(Total*Av, M*N * 4^Av)) S:(Max(M*N, Av*Total))
+  return [...res];
+} // T:O(N) or O(ROWS*COLS * 4^LONG)) S:O(N) O(sum(words_length) + ROWS*COLS + N_WORDS)
