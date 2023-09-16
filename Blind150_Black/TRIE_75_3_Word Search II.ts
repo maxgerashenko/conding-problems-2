@@ -8,7 +8,7 @@
 // use visited
 // reset visited on each new start j,i
 // clean visited after move
-// T:O(m*m*4^av) S:O(M*N or T*Av)
+// T:O(m*n*4^av) S:O(M*N or T*Av)
 
 class TrieNode {
   nodes = {};
