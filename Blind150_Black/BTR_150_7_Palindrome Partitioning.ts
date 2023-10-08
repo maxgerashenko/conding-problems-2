@@ -11,32 +11,34 @@
 function partition(str: string): string[][] {
   let res = [];
   let comb = [];
-  let len = str.length;
+  let n = str.length;
 
-  function isNotPali(str, l, r) {
+  function isPali(str) {
+    let l = 0;
+    let r = str.length - 1;
     while (l < r) {
-      if (str[l] !== str[r]) return true;
+      if (str[l] !== str[r]) return false;
       l++;
       r--;
     }
-    return false;
+    return true;
   }
 
-  function dfs(start = 0) {
-    if (start === len) {
+  function dfs(index = 0) {
+    if (index === n) {
       res.push([...comb]);
       return;
     }
 
-    for (let index = start; index < len; index++) {
-      let slice = str.slice(start, index + 1);
-      if (isNotPali(slice, start, index)) continue;
-      comb.push(str.slice(start, index + 1));
-      dfs(index + 1);
-      comb.pop();
+    for (let end = index; end < n; end++) {
+      let slice = str.slice(index, end + 1);
+      if (!isPali(slice)) continue;
+      comb.push(slice);
+      dfs(end + 1);
+      comb.pop(); // backtracking
     }
   }
-
   dfs();
+
   return res;
-} // T:O(2^N*N) tree + isPali S:O(2^N * N) Stack + options
+} // T:O(2^N*N) S:O(2^N*N)
