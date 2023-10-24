@@ -51,7 +51,6 @@ export class Solution {
     }
 
     for (let l of Object.keys(adj)) {
-      console.log(l);
       if (dfs(l)) return '';
     }
 
