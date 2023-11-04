@@ -5,7 +5,7 @@
 // DP mutural exclusive ODD and EVEN
 // return max result
 //
-// T:O(n) S:O(1)
+// T:O(n^2) S:O(n)
 
 function longestPalindrome(srt: string): string {
   let res = 0;
@@ -33,4 +33,4 @@ function longestPalindrome(srt: string): string {
   }
 
   return oddMax.length > evenMax.length ? oddMax : evenMax;
-} // ST:O(n) S:O(1)
+} //T:O(n^2) S:O(n)
