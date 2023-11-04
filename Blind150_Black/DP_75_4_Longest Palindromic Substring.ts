@@ -1,34 +1,36 @@
-// https://leetcode.com/problems/palindromic-substrings/description/
-// Palindromic Substrings
+// https://leetcode.com/problems/longest-palindromic-substring/description
+// Longest Palindromic Substring
 
 // DP
-// Muturaly exclusice ODD and EVEN
-// count ODDS and Evens
+// DP mutural exclusive ODD and EVEN
+// return max result
 //
-// T:O(N^2) S:O(1)
+// T:O(n^2) S:O(n)
 
-function countSubstrings(str: string): number {
-  let count = 0;
-  let n = str.length;
+function longestPalindrome(srt: string): string {
+  let res = 0;
+  let evenMax = '';
+  let oddMax = '';
 
+  let n = srt.length;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      if (
-        (str[i - j] == null && str[i + j] == null) ||
-        str[i - j] !== str[i + j]
-      )
-        break;
-      count++;
-    } // odd
+      let pre = srt[i - j];
+      let next = srt[i + j];
+      if ((pre == null && next == null) || pre !== next) break;
 
+      let newStr = srt.slice(i - j, i + j + 1);
+      oddMax = newStr.length > oddMax.length ? newStr : oddMax;
+    }
     for (let j = 0; j < n; j++) {
-      if (
-        (str[i - j] == null && str[i + 1 + j] == null) ||
-        str[i - j] !== str[i + 1 + j]
-      )
-        break;
-      count++;
-    } // even
+      let pre = srt[i - j];
+      let next = srt[i + j + 1];
+      if ((pre == null && next == null) || pre !== next) break;
+
+      let newStr = srt.slice(i - j, i + j + 1 + 1);
+      evenMax = newStr.length > evenMax.length ? newStr : evenMax;
+    }
   }
-  return count;
-} // T:O(n^2) S:O(1)
+
+  return oddMax.length > evenMax.length ? oddMax : evenMax;
+} //T:O(n^2) S:O(n)
