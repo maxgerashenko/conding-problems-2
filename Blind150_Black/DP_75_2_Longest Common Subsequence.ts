@@ -1,34 +1,27 @@
-// https://leetcode.com/problems/palindromic-substrings/description/
-// Palindromic Substrings
+// https://leetcode.com/problems/longest-common-subsequence/description/
+// Longest Common Subsequence
 
-// DP
-// Muturaly exclusice ODD and EVEN
-// count ODDS and Evens
+// use DP
+// use matrix n*m
+// when text1 === text2 use diagonal value + 1
+// else Math.max of j+1,i or j,i+1, values without this letters
+// add rows with 0 to the right and bellow
+// return dp[0][0]
 //
-// T:O(N^2) S:O(1)
+// T:O(n*m) S:(n*m)
 
-function countSubstrings(str: string): number {
-  let count = 0;
-  let n = str.length;
+var longestCommonSubsequence = function (text1, text2) {
+  let n = text1.length;
+  let m = text2.length;
+  let dp = new Array(m + 1).fill(null).map(() => new Array(n + 1).fill(0));
 
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      if (
-        (str[i - j] == null && str[i + j] == null) ||
-        str[i - j] !== str[i + j]
-      )
-        break;
-      count++;
-    } // odd
+  for (let j = m - 1; j >= 0; j--)
+    for (let i = n - 1; i >= 0; i--) {
+      dp[j][i] =
+        text2[j] === text1[i]
+          ? dp[j + 1][i + 1] + 1
+          : Math.max(dp[j + 1][i], dp[j][i + 1]);
+    }
 
-    for (let j = 0; j < n; j++) {
-      if (
-        (str[i - j] == null && str[i + 1 + j] == null) ||
-        str[i - j] !== str[i + 1 + j]
-      )
-        break;
-      count++;
-    } // even
-  }
-  return count;
-} // T:O(n^2) S:O(1)
+  return dp[0][0];
+}; // T:(N*M) S:O(N*M)
