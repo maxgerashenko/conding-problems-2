@@ -24,7 +24,7 @@ function minInterval(intervals: number[][], queries: number[]): number[] {
   }
   queries.sort((a, b) => a - b);
   const minHeap = new Heap(([sizeA], [sizeB]) => sizeA - sizeB);
-  const res = [...queries];
+  const res = [];
 
   for (let query of queries) {
     for (let [start, end] of intervals) {
