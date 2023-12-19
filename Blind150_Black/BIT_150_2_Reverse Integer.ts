@@ -1,22 +1,41 @@
-// https://leetcode.com/problems/sum-of-two-integers/submissions/1121344659/
-// Sum of Two Integers
+// https://leetcode.com/problems/reverse-integer/
+// Reverse Integer
 
-// ned to sum and it is xor 1 and 0 === 1
-// but 1 && 1 === 0, exectly x^y
-// also need to carry 1 which is 1&&1 but moved to the left << 1
-// do both until carray not equal === 0
-// need to use tmp to do carry on previous/original step
+// use product and remainder
+// take num digit with remainder %10
+// update num with product ~~(/10)
+// use while until num != 0
+// the isssue is with number that are not ok when reversed
+// how to check outbound numbers with out storing them
+// check product, if it is bigget it is out
+// or if product === res but remainder is >
 //
 // T:O(1) S:O(1)
 
-function getSum(a: number, b: number): number {
-  let sum_carry = (a & b) << 1;
-  let sum_xor = a ^ b;
-  while (sum_carry) {
-    let tmp = (sum_xor & sum_carry) << 1;
-    sum_xor = sum_xor ^ sum_carry;
-    sum_carry = tmp;
+function reverse(num: number): number {
+  const max = Math.pow(2, 31) - 1;
+  const min = -1 * Math.pow(2, 31);
+  let res = 0;
+
+  while (num) {
+    let digit = num % 10;
+    num = ~~(num / 10);
+
+    let maxRemainder = max % 10;
+    let maxProduct = ~~(max / 10);
+    let minRemainder = min % 10;
+    let minProduct = ~~(min / 10);
+
+    if (
+      res > maxProduct ||
+      res < minProduct ||
+      (res == maxProduct && digit > maxRemainder) ||
+      (res == minProduct && digit < minRemainder)
+    )
+      return 0;
+
+    res = res * 10 + digit;
   }
 
-  return sum_xor;
+  return res;
 } // T:O(1) S:O(1)
