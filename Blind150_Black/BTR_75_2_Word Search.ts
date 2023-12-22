@@ -11,35 +11,33 @@
 // T:O(N*M*4^w) S:O(M*N+W)
 
 function exist(board: string[][], word: string): boolean {
-  const dir = [
+  let m = board.length;
+  let n = board[0].length;
+  let dir = [
     [1, 0],
     [-1, 0],
     [0, 1],
     [0, -1],
   ];
-  let m = board.length;
-  let n = board[0].length;
-  const visited = new Set();
+  let visited = new Set();
 
-  function dfs(j, i, index = 0) {
-    let pos = `${j},${i}`;
-    if (index === word.length) return true;
-    if (
-      board[j] == null ||
-      board[j][i] == null ||
-      board[j][i] !== word[index] ||
-      visited.has(pos)
-    )
-      return false;
+  function dfs(j, i, index) {
+    let key = `${j},${i}`;
+    if (visited.has(key) || board[j][i] != word[index]) return false;
+    if (index == word.length - 1) return true;
+    visited.add(key);
 
-    visited.add(pos);
-    index++;
-    for (let [dj, di] of dir) if (dfs(j + dj, i + di, index)) return true;
-    visited.delete(pos);
+    for (let [dj, di] of dir) {
+      let nJ = j + dj;
+      let nI = i + di;
+      if (nJ < 0 || nI < 0 || nJ == m || nI == n) continue;
+      if (dfs(nJ, nI, index + 1)) return true;
+    }
+    visited.delete(key);
   }
 
   for (let j = 0; j < m; j++)
-    for (let i = 0; i < n; i++) if (dfs(j, i)) return true;
+    for (let i = 0; i < n; i++) if (dfs(j, i, 0)) return true;
 
   return false;
-} // T:O(M*N*4^W) S:O(M*N+L)
+} // T:O(nm) S:O(logN)// T:O(M*N*4^W) S:O(M*N+L)
