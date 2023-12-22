@@ -13,29 +13,27 @@
 // T:O(nlogNn * 2^N) S:O(N*2^N)
 
 function subsetsWithDup(nums: number[]): number[][] {
-  nums.sort((a, b) => a - b);
-  let n = nums.length;
+  nums.sort((a, b) => a - b); // to prevent duplicates
   let res = [];
+  let n = nums.length;
 
-  function btr(index = 0, comb = []) {
+  let cur = [];
+  function dfs(index = 0) {
     if (index === n) {
-      res.push([...comb]);
+      res.push([...cur]);
       return;
     }
+    cur.push(nums[index]);
+    dfs(index + 1); // allow duplicates
+    cur.pop();
 
-    // add branch
-    comb.push(nums[index]);
-    btr(index + 1, comb);
-    comb.pop();
-
-    // skip branch
-    while (index < n && nums[index] === nums[index + 1]) index++;
-    btr(index + 1, comb);
+    while (index < n && nums[index] === nums[index + 1]) index++; // skip duplicates
+    dfs(index + 1);
   }
-  btr();
 
+  dfs();
   return res;
-} // T:O(N*logN+2^N) S:O(N*2^N)
+} // T:O(n*logn*2^n) S:O(2^N)// T:O(N*logN+2^N) S:O(N*2^N)
 
 // use recursion
 // sort array, to exclude duplicatates
