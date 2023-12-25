@@ -12,28 +12,33 @@
 // use while to skip numbers
 // T:O(nlogNn * 2^N) S:O(N*2^N)
 
-function subsetsWithDup(nums: number[]): number[][] {
-  nums.sort((a, b) => a - b); // to prevent duplicates
-  let res = [];
-  let n = nums.length;
+function combinationSum2(candidates: number[], target: number): number[][] {
+  const res = [];
+  const n = candidates.length;
+  const cur = [];
 
-  let cur = [];
-  function dfs(index = 0) {
-    if (index === n) {
+  candidates.sort((a, b) => a - b); // for duplicates
+
+  function dfs(index = 0, rest = target) {
+    if (rest === 0) {
       res.push([...cur]);
       return;
     }
-    cur.push(nums[index]);
-    dfs(index + 1); // allow duplicates
+    if (rest < 0 || index === n) return;
+
+    let el = candidates[index];
+    cur.push(el);
+    dfs(index + 1, rest - el);
     cur.pop();
 
-    while (index < n && nums[index] === nums[index + 1]) index++; // skip duplicates
-    dfs(index + 1);
+    while (index < n && candidates[index + 1] === candidates[index]) index++; // duplicates
+
+    dfs(index + 1, rest);
   }
 
   dfs();
   return res;
-} // T:O(n*logn*2^n) S:O(2^N)// T:O(N*logN+2^N) S:O(N*2^N)
+} // T:O(nlogn) S:O(n)
 
 // use recursion
 // sort array, to exclude duplicatates
