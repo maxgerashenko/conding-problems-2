@@ -9,15 +9,16 @@
 // T:O(2^N) * palindrom N S:O(2^N)*N
 
 function partition(str: string): string[][] {
-  let res = [];
-  let comb = [];
-  let n = str.length;
+  const res = [];
+  const cur = [];
+  const arr = str.split('');
+  const n = arr.length;
 
-  function isPali(str) {
+  function isPali(slice) {
     let l = 0;
-    let r = str.length - 1;
+    let r = slice.length - 1;
     while (l < r) {
-      if (str[l] !== str[r]) return false;
+      if (slice[l] !== slice[r]) return false;
       l++;
       r--;
     }
@@ -26,19 +27,17 @@ function partition(str: string): string[][] {
 
   function dfs(index = 0) {
     if (index === n) {
-      res.push([...comb]);
+      cur.length > 0 && res.push([...cur]);
       return;
     }
-
-    for (let end = index; end < n; end++) {
-      let slice = str.slice(index, end + 1);
-      if (!isPali(slice)) continue;
-      comb.push(slice);
-      dfs(end + 1);
-      comb.pop(); // backtracking
+    for (let i = index; i < n; i++) {
+      let part = arr.slice(index, i + 1); // partion
+      if (!isPali(part)) continue; // pali only
+      cur.push(part.join(''));
+      dfs(i + 1);
+      cur.pop(); // btr
     }
   }
   dfs();
-
   return res;
 } // T:O(2^N*N) S:O(2^N*N)
