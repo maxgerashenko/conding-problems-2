@@ -2,40 +2,43 @@
 // Letter Combinations of a Phone Number
 
 // use dfs
-// use backtrack
-// use numPad
-// for digitMap
+// use backtracking
+// explore all options
+// safe to res when reach the end
+//
 // T:O(4^N) S:O(N)
 
 function letterCombinations(digits: string): string[] {
-  let digitMap = {
-    2: 'abc',
-    3: 'def',
-    4: 'ghi',
-    5: 'jkl',
-    6: 'mno',
-    7: 'pqrs',
-    8: 'tuv',
-    9: 'wxyz',
+  const res = [];
+  const n = digits.length;
+  const cur = [];
+  const digitMap = {
+    2: ['a', 'b', 'c'],
+    3: ['d', 'e', 'f'],
+    4: ['g', 'h', 'i'],
+    5: ['j', 'k', 'l'],
+    6: ['m', 'n', 'o'],
+    7: ['p', 'q', 'r', 's'],
+    8: ['t', 'u', 'v'],
+    9: ['w', 'x', 'y', 'z'],
   };
-  let res = [];
-  let comb = [];
-  let len = digits.length;
+
+  if (n === 0) return [];
 
   function dfs(index = 0) {
-    if (index === len) {
-      res.push(comb.join(''));
+    if (index === n) {
+      res.push([...cur]);
       return;
     }
 
-    let digit = digits[index];
-    for (let letter of digitMap[digit]) {
-      comb.push(letter);
+    const digit = digits[index];
+    for (let el of digitMap[digit]) {
+      cur.push(el);
       dfs(index + 1);
-      comb.pop();
+      cur.pop();
     }
   }
-  digits.length && dfs();
 
-  return res;
-} // T:O(4^N) S:O(N)
+  dfs();
+  return res.map((el) => el.join(''));
+} // T:O(2^N)
