@@ -4,7 +4,7 @@
 // use dfs
 // use backtracking
 // explore all options
-// safe to res when reach the end
+// safe to res when reach the last
 //
 // T:O(4^N) S:O(N)
 
