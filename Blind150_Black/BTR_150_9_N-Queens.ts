@@ -6,7 +6,7 @@
 // use set for col, rol, pos and neg dialog
 // pos = i - j
 // negative = i + j
-// S:O(!N) S:O(N)
+// T:O(!N) S:O(N)
 
 function solveNQueens(n: number): string[][] {
   let res = [];
