@@ -9,38 +9,49 @@
 // T:O(!N) S:O(N)
 
 function solveNQueens(n: number): string[][] {
-  let res = [];
-  let comb = [];
-  let row = new Set();
-  let col = new Set();
-  let pos = new Set();
-  let neg = new Set();
+  const res = [];
+  const cur = [];
+  let colsSet = new Set();
+  let rowsSet = new Set();
+  let positiveDiagonalSet = new Set();
+  let negativeDiagonalSet = new Set();
+  let toString = (i) => {
+    let str = new Array(n).fill('.');
+    str[i] = 'Q';
+    return str.join('');
+  };
 
-  function dfs(j = 0) {
-    if (j === n) {
-      res.push([...comb]);
+  function dfs(j) {
+    if (cur.length === n) {
+      res.push([...cur]);
       return;
     }
+    if (j === n) return;
 
     for (let i = 0; i < n; i++) {
-      if (row.has(i) || col.has(j) || pos.has(j - i) || neg.has(j + i))
+      if (
+        colsSet.has(j) ||
+        rowsSet.has(i) ||
+        positiveDiagonalSet.has(j - i) ||
+        negativeDiagonalSet.has(j + i)
+      )
         continue;
-      let base = Array(n).fill('.');
-      base[i] = 'Q';
-      row.add(i);
-      col.add(j);
-      pos.add(j - i);
-      neg.add(j + i);
-      comb.push(base.join(''));
+
+      cur.push(toString(i));
+      colsSet.add(j);
+      rowsSet.add(i);
+      positiveDiagonalSet.add(j - i);
+      negativeDiagonalSet.add(j + i);
       dfs(j + 1);
-      comb.pop();
-      row.delete(i);
-      col.delete(j);
-      pos.delete(j - i);
-      neg.delete(j + i);
+      colsSet.delete(j);
+      rowsSet.delete(i);
+      positiveDiagonalSet.delete(j - i);
+      negativeDiagonalSet.delete(j + i);
+      cur.pop();
     }
   }
-  dfs();
+
+  dfs(0);
 
   return res;
-} // T:O(!N) S:O(N)
+} // T:O(!n) S:O(n^2)
