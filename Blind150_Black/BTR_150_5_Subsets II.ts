@@ -12,56 +12,35 @@
 // use while to skip numbers
 // T:O(nlogNn * 2^N) S:O(N*2^N)
 
-function combinationSum2(candidates: number[], target: number): number[][] {
+// sort
+// add first
+// skip next
+
+function subsetsWithDup(nums: number[]): number[][] {
+  nums.sort((a, b) => a - b);
   const res = [];
-  const n = candidates.length;
+  const len = nums.length;
   const cur = [];
 
-  candidates.sort((a, b) => a - b); // for duplicates
-
-  function dfs(index = 0, rest = target) {
-    if (rest === 0) {
+  function dfs(index) {
+    if (index === len) {
       res.push([...cur]);
       return;
     }
-    if (rest < 0 || index === n) return;
+    const num = nums[index];
 
-    let el = candidates[index];
-    cur.push(el);
-    dfs(index + 1, rest - el);
+    cur.push(num);
+    dfs(index + 1);
     cur.pop();
 
-    while (index < n && candidates[index + 1] === candidates[index]) index++; // duplicates
-
-    dfs(index + 1, rest);
-  }
-
-  dfs();
-  return res;
-} // T:O(nlogn) S:O(n)
-
-// use recursion
-// sort array, to exclude duplicatates
-// use start point to cacl fresh comb when i === i+1
-//
-function subsetsWithDup(nums: number[]): number[][] {
-  nums.sort((a, b) => a - b);
-  let res = [[]];
-  let preLength = 0;
-
-  function dfs(index = 0) {
-    if (index === nums.length) return;
-    let num = nums[index];
-    let n = res.length;
-    let i = num === nums[index - 1] ? preLength : 0;
-    for (i; i < n; i++) {
-      let el = res[i];
-      res.push([...el, num]);
+    while (index < len && nums[index] === nums[index + 1]) {
+      index++;
     }
-    preLength = n;
+
     dfs(index + 1);
   }
-  dfs();
+
+  dfs(0);
 
   return res;
-} // T:O(N*logN+2^N) S:O(N*2^N)
+} // T:O(nlogn+2^n*n) S:O(n)
