@@ -1,43 +1,40 @@
 // https://leetcode.com/problems/word-search/description/
 // Word Search
 
-// use DFS T:O(m*n) S:O(m*n)
-// use BT S:O(m*n)
-// use dir T:O(4^len(w))
-// return true when end of the word
-// check visited, remove visited to BT
-// check borders
-// check board letter === word letters
-// T:O(N*M*4^w) S:O(M*N+W)
+// check boundaries
+// add/remove visited once before/after dfs
+//
+// T:O(M*N*4^w)
 
 function exist(board: string[][], word: string): boolean {
-  let m = board.length;
-  let n = board[0].length;
-  let dir = [
-    [1, 0],
+  const visited = new Set();
+  const colsLen = board[0].length;
+  const rowsLen = board.length;
+  const wLen = word.length;
+  const dir = [
     [-1, 0],
-    [0, 1],
+    [1, 0],
     [0, -1],
+    [0, 1],
   ];
-  let visited = new Set();
 
   function dfs(j, i, index) {
+    if (index === wLen) return true;
+    if (j < 0 || j >= rowsLen || i < 0 || i >= colsLen) return false;
     let key = `${j},${i}`;
-    if (visited.has(key) || board[j][i] != word[index]) return false;
-    if (index == word.length - 1) return true;
+    if (board[j][i] !== word[index] || visited.has(key)) return false;
     visited.add(key);
 
     for (let [dj, di] of dir) {
-      let nJ = j + dj;
-      let nI = i + di;
-      if (nJ < 0 || nI < 0 || nJ == m || nI == n) continue;
-      if (dfs(nJ, nI, index + 1)) return true;
+      if (dfs(j + dj, i + di, index + 1)) return true;
     }
     visited.delete(key);
   }
 
-  for (let j = 0; j < m; j++)
-    for (let i = 0; i < n; i++) if (dfs(j, i, 0)) return true;
+  for (let j = 0; j < rowsLen; j++)
+    for (let i = 0; i < colsLen; i++) {
+      if (dfs(j, i, 0)) return true;
+    }
 
   return false;
-} // T:O(nm) S:O(logN)// T:O(M*N*4^W) S:O(M*N+L)
+} // T:O(N*M*4^W)
