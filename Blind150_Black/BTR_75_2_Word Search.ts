@@ -7,7 +7,7 @@
 // return true when end of the word
 // check visited, remove visited to BT
 // check borders
-// check board letter === word letter
+// check board letter === word letters
 // T:O(N*M*4^w) S:O(M*N+W)
 
 function exist(board: string[][], word: string): boolean {
