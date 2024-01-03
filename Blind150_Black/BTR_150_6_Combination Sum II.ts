@@ -11,34 +11,35 @@
 // use not add second
 // T:O(nlogn + 2^n) S:(2^N*N) comb * average length
 
+// sort + while
+// add first
+
 function combinationSum2(candidates: number[], target: number): number[][] {
-  let res = [];
-  let comb = [];
-  let n = candidates.length;
-
-  // sort to remove detect duplicates
   candidates.sort((a, b) => a - b);
+  const res = [];
+  const cur = [];
+  const len = candidates.length;
 
-  function dfs(index = 0, sum = 0) {
-    if (sum > target) return;
-    if (sum === target) {
-      res.push([...comb]);
+  function dfs(index, rest) {
+    if (rest === 0) {
+      res.push([...cur]);
       return;
     }
-    if (index === n) return;
+    if (index === len || rest < 0) return;
+    const el = candidates[index];
 
-    // add branch
-    let num = candidates[index];
-    comb.push(num);
-    dfs(index + 1, sum + num);
-    comb.pop();
+    cur.push(el);
+    dfs(index + 1, rest - el);
+    cur.pop();
 
-    // skip duplicates after first run
-    while (candidates[index] === candidates[index + 1]) index++;
-    // not add branch
-    dfs(index + 1, sum);
+    while (index < len && candidates[index] === candidates[index + 1]) {
+      index++;
+    }
+
+    dfs(index + 1, rest);
   }
-  dfs();
+
+  dfs(0, target);
 
   return res;
-} // T:O(NlogN + 2^N) S:O(2^N*N)
+} // T:O(2^n*n) S:O(n)
