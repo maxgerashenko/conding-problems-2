@@ -8,36 +8,39 @@
 // use slice cur + flor slice(start, index)
 // T:O(2^N) * palindrom N S:O(2^N)*N
 
+// need start only
+// use substring
+// get from index to index + 1
+
 function partition(str: string): string[][] {
   const res = [];
   const cur = [];
-  const arr = str.split('');
-  const n = arr.length;
+  const len = str.length;
 
-  function isPali(slice) {
-    let l = 0;
-    let r = slice.length - 1;
-    while (l < r) {
-      if (slice[l] !== slice[r]) return false;
-      l++;
-      r--;
-    }
+  function isPali(strLocal) {
+    let lenLocal = strLocal.length;
+    for (let i = 0; i < ~~(lenLocal / 2); i++)
+      if (strLocal[i] !== strLocal[lenLocal - 1 - i]) return false;
     return true;
   }
 
-  function dfs(index = 0) {
-    if (index === n) {
-      cur.length > 0 && res.push([...cur]);
+  function dfs(start) {
+    if (start === len) {
+      res.push([...cur]);
       return;
     }
-    for (let i = index; i < n; i++) {
-      let part = arr.slice(index, i + 1); // partion
-      if (!isPali(part)) continue; // pali only
-      cur.push(part.join(''));
-      dfs(i + 1);
-      cur.pop(); // btr
+
+    for (let index = start; index < len; index++) {
+      let subStr = str.substring(start, index + 1);
+      cur.push(subStr);
+      if (isPali(subStr)) {
+        dfs(index + 1);
+      }
+      cur.pop();
     }
   }
-  dfs();
+
+  dfs(0);
+
   return res;
-} // T:O(2^N*N) S:O(2^N*N)
+} // T:O(n×n!) S:O(n+2 ^()n−1) ×n)
