@@ -7,38 +7,51 @@
 // safe to res when reach the last
 //
 // T:O(4^N) S:O(N)
+// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+// Letter Combinations of a Phone Number
+
+// use dfs
+// use backtracking
+// explore all options
+// safe to res when reach the last
+//
+// T:O(4^N) S:O(N)
+
+// T:O(4^N) as 4 options for each key
+// T:O(4^N) as all possible combinations
 
 function letterCombinations(digits: string): string[] {
   const res = [];
-  const n = digits.length;
-  const cur = [];
-  const digitMap = {
-    2: ['a', 'b', 'c'],
-    3: ['d', 'e', 'f'],
-    4: ['g', 'h', 'i'],
-    5: ['j', 'k', 'l'],
-    6: ['m', 'n', 'o'],
-    7: ['p', 'q', 'r', 's'],
-    8: ['t', 'u', 'v'],
-    9: ['w', 'x', 'y', 'z'],
+  if (digits === '') return []; // conner case
+  const len = digits.length;
+  const comb = [];
+  const keypad = {
+    2: 'abc',
+    3: 'def',
+    4: 'ghi',
+    5: 'jkl',
+    6: 'mno',
+    7: 'pqrs',
+    8: 'tuv',
+    9: 'wxyz',
   };
 
-  if (n === 0) return [];
-
   function dfs(index = 0) {
-    if (index === n) {
-      res.push([...cur]);
+    if (index === len) {
+      res.push(comb.join(''));
       return;
     }
 
     const digit = digits[index];
-    for (let el of digitMap[digit]) {
-      cur.push(el);
+    const letters = keypad[digit];
+    if (!letters) return;
+    for (let letter of letters) {
+      comb.push(letter);
       dfs(index + 1);
-      cur.pop();
+      comb.pop();
     }
   }
-
   dfs();
-  return res.map((el) => el.join(''));
-} // T:O(2^N)
+
+  return res;
+} // T:O(4^n*n) S:O(4^n)
