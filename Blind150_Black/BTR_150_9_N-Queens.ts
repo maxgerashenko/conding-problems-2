@@ -10,48 +10,45 @@
 
 function solveNQueens(n: number): string[][] {
   const res = [];
+  const cols = new Set();
+  const rows = new Set();
+  const posDiag = new Set();
+  const negDiag = new Set();
   const cur = [];
-  let colsSet = new Set();
-  let rowsSet = new Set();
-  let positiveDiagonalSet = new Set();
-  let negativeDiagonalSet = new Set();
-  let toString = (i) => {
-    let str = new Array(n).fill('.');
-    str[i] = 'Q';
-    return str.join('');
+  const pos = (i) => {
+    let line = new Array(n).fill('.');
+    line[i] = 'Q';
+    return line.join('');
   };
-
-  function dfs(j) {
-    if (cur.length === n) {
+  function dfs(j = 0) {
+    if (j === n) {
       res.push([...cur]);
       return;
     }
-    if (j === n) return;
 
     for (let i = 0; i < n; i++) {
       if (
-        colsSet.has(j) ||
-        rowsSet.has(i) ||
-        positiveDiagonalSet.has(j - i) ||
-        negativeDiagonalSet.has(j + i)
+        cols.has(i) ||
+        rows.has(j) ||
+        posDiag.has(j - i) ||
+        negDiag.has(i + j)
       )
         continue;
 
-      cur.push(toString(i));
-      colsSet.add(j);
-      rowsSet.add(i);
-      positiveDiagonalSet.add(j - i);
-      negativeDiagonalSet.add(j + i);
+      cols.add(i);
+      rows.add(j);
+      posDiag.add(j - i);
+      negDiag.add(i + j);
+      cur.push(pos(i));
       dfs(j + 1);
-      colsSet.delete(j);
-      rowsSet.delete(i);
-      positiveDiagonalSet.delete(j - i);
-      negativeDiagonalSet.delete(j + i);
       cur.pop();
+      cols.delete(i);
+      rows.delete(j);
+      posDiag.delete(j - i);
+      negDiag.delete(i + j);
     }
   }
-
-  dfs(0);
+  dfs();
 
   return res;
-} // T:O(!n) S:O(n^2)
+} // T:O(!N) S:O(n^2)
