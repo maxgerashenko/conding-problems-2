@@ -12,37 +12,56 @@
 // T:O(2MN) S:O(MN)
 
 function pacificAtlantic(heights: number[][]): number[][] {
-  let n = heights[0].length;
-  let m = heights.length;
-  let res = [];
-  let dir = [
+  const res = [];
+  const pasVisitedSet = new Set();
+  const atlVisitedSet = new Set();
+  const rowsLeng = heights.length;
+  const colsLen = heights[0].length;
+  const dir = [
     [1, 0],
     [-1, 0],
     [0, 1],
     [0, -1],
   ];
-  let pas = new Set();
-  let atl = new Set();
+  const pasArray = [];
+  const atlArray = [];
 
-  function dfs(j, i, visited) {
-    if (visited.has(`${j},${i}`)) return;
-    visited.add(`${j},${i}`);
-
-    for (let [dj, di] of dir) {
-      if (heights[j + dj] == null || heights[j + dj][i + di] == null) continue;
-      if (heights[j + dj][i + di] < heights[j][i]) continue;
-      dfs(j + dj, i + di, visited);
-    }
+  for (let j = 0; j < rowsLeng; j++) {
+    pasArray.push([j, 0]);
+    atlArray.push([j, colsLen - 1]);
   }
-  for (let j = 0; j < m; j++) dfs(j, 0, pas);
-  for (let i = 0; i < n; i++) dfs(0, i, pas);
-  for (let j = 0; j < m; j++) dfs(j, n - 1, atl);
-  for (let i = 0; i < n; i++) dfs(m - 1, i, atl);
+  for (let i = 0; i < colsLen; i++) {
+    pasArray.push([0, i]);
+    atlArray.push([rowsLeng - 1, i]);
+  } // init
 
-  for (let el of atl) {
-    if (!pas.has(el)) continue;
-    res.push((el as string).split(','));
+  function bfs(list, visited) {
+    if (list.length == 0) return;
+    let tmp = [];
+
+    for (let [j, i] of list) {
+      visited.add(`${j},${i}`);
+      for (let [dj, di] of dir) {
+        const newJ = j + dj;
+        const newI = i + di;
+        if (heights[newJ] == null || heights[newJ][newI] == null) continue;
+        if (heights[newJ][newI] < heights[j][i]) continue;
+        if (visited.has(`${newJ},${newI}`)) continue;
+
+        tmp.push([newJ, newI]);
+      }
+    }
+    list = tmp;
+    bfs(list, visited);
+  }
+  bfs(pasArray, pasVisitedSet);
+  bfs(atlArray, atlVisitedSet);
+
+  for (let el of pasVisitedSet) {
+    if (atlVisitedSet.has(el)) {
+      res.push((el as string).split(','));
+    }
   }
 
   return res;
-} // T:O(2NM) S:O(NM)
+} // T:O(N*M) S:O(M*N)
