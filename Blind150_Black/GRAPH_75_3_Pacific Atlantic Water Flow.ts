@@ -7,6 +7,10 @@
 // check union(not XOR) for res
 // T:O(2*N*M) S:O(N*M)
 
+// use sets unoin to define the res
+// calculate each regeon separatly
+// T:O(2MN) S:O(MN)
+
 function pacificAtlantic(heights: number[][]): number[][] {
   let n = heights[0].length;
   let m = heights.length;
