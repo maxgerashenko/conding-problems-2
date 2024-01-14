@@ -2,7 +2,7 @@
 // Subsets II
 
 // Use BackTracking
-// use dfsss
+// use dfs
 // use btr for single combination
 // collect combination in res []
 // sort numbers to find duplicates
