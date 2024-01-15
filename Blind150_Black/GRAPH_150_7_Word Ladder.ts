@@ -12,38 +12,44 @@ function ladderLength(
   endWord: string,
   wordList: string[]
 ): number {
-  let visited = new Set();
-  let adjacencyList = {};
+  const visited = new Set();
+  const adjList = {};
   let level = [beginWord];
-  let count = 0;
-
-  // init  Adjacency list
+  let step = 1;
   for (let word of wordList) {
-    for (let i = 0; i < beginWord.length; i++) {
-      let comb = word.slice(0, i) + '*' + word.slice(i + 1);
-      if (adjacencyList[comb] == null) {
-        adjacencyList[comb] = [];
+    for (let i = 0; i < word.length; i++) {
+      let tmp = word.split('');
+      tmp[i] = '*';
+      let mask = tmp.join('');
+      if (adjList[mask] == null) {
+        adjList[mask] = [];
       }
-      adjacencyList[comb].push(word);
-    }
+      adjList[mask].push(word);
+    } // set adj list
   }
 
   function bfs() {
     let tmp = [];
+
     for (let word of level) {
-      if (word == endWord) return true;
+      if (visited.has(word)) continue;
+      if (word === endWord) return true;
       visited.add(word);
       for (let i = 0; i < word.length; i++) {
-        let comb = word.slice(0, i) + '*' + word.slice(i + 1);
-        if (adjacencyList[comb] == null) continue;
-        tmp.push(...adjacencyList[comb].filter((el) => !visited.has(el)));
+        let arr = word.split('');
+        arr[i] = '*';
+        let mask = arr.join('');
+
+        if (adjList[mask] == null) continue;
+        tmp.push(...adjList[mask]);
       }
     }
+
     level = tmp;
-    if (tmp.length === 0) return;
-    count++;
-    return bfs();
+    if (level.length === 0) return;
+    step++;
+    if (bfs()) return true;
   }
 
-  return bfs() ? count + 1 : 0;
+  return bfs() ? step : 0;
 } // T:O(N * Length * 26) S:O(N)// T:O(N * Length * 26) S:O(N)
