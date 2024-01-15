@@ -12,34 +12,25 @@
 // T:O(PRE + N) S:O(N)
 
 function findOrder(numCourses: number, prerequisites: number[][]): number[] {
-  let res = [];
-  let coursesMap = {};
+  const res = [];
+  const adjList = {};
+  let path = new Set();
   let visited = new Set();
 
-  for (let [cur, pre] of prerequisites) {
-    if (coursesMap[cur] == null) {
-      coursesMap[cur] = [];
-    }
-    coursesMap[cur].push(pre);
+  for (let cur = 0; cur < numCourses; cur++) adjList[cur] = []; // init all courses;
+  for (let [cur, pre] of prerequisites) adjList[cur].push(pre); // set all presets;
+
+  function dfs(cur) {
+    if (path.has(cur)) return true;
+    if (visited.has(cur)) return;
+    path.add(cur);
+    visited.add(cur);
+    while (adjList[cur].length) if (dfs(adjList[cur].pop())) return true;
+    res.push(cur);
+    path.delete(cur);
   }
 
-  for (let i = 0; i < numCourses; i++) {
-    if (visited.has(i)) continue;
-    let stack = [i];
-    while (stack.length) {
-      let el = stack[stack.length - 1];
-      if (coursesMap[el] == null || coursesMap[el].length === 0) {
-        if (visited.has(el)) return [];
-        visited.add(el);
-        res.push(el);
-        stack.pop();
-        continue;
-      }
-      let pre = coursesMap[el].pop();
-      if (visited.has(pre)) continue;
-      stack.push(pre);
-    }
-  }
+  for (let cur = 0; cur < numCourses; cur++) if (dfs(cur)) return []; // check all
 
   return res;
-} // T:O(2N) S:O(N)
+} // T:O(V+N) S:O(N)
