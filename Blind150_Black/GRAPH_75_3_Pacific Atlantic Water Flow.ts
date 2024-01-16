@@ -2,7 +2,7 @@
 // Pacific Atlantic Water Flow
 
 // use DFS
-// run check for pasific
+// run check for pasifics
 // run check for atlantic
 // check union(not XOR) for res
 // T:O(2*N*M) S:O(N*M)
