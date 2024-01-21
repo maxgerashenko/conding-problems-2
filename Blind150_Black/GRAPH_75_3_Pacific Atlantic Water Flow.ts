@@ -13,55 +13,53 @@
 
 function pacificAtlantic(heights: number[][]): number[][] {
   const res = [];
-  const pasVisitedSet = new Set();
-  const atlVisitedSet = new Set();
-  const rowsLeng = heights.length;
-  const colsLen = heights[0].length;
+  let pasificVisited = new Set();
+  let atlVisited = new Set();
   const dir = [
     [1, 0],
     [-1, 0],
     [0, 1],
     [0, -1],
   ];
-  const pasArray = [];
-  const atlArray = [];
+  const m = heights.length;
+  const n = heights[0].length;
+  let level = [];
 
-  for (let j = 0; j < rowsLeng; j++) {
-    pasArray.push([j, 0]);
-    atlArray.push([j, colsLen - 1]);
-  }
-  for (let i = 0; i < colsLen; i++) {
-    pasArray.push([0, i]);
-    atlArray.push([rowsLeng - 1, i]);
-  } // init
+  for (let j = 0; j < m; j++) level.push([j, 0]);
+  for (let i = 0; i < n; i++) level.push([0, i]);
+  bfs(level, pasificVisited);
 
-  function bfs(list, visited) {
-    if (list.length == 0) return;
+  level = [];
+
+  for (let j = 0; j < m; j++) level.push([j, n - 1]);
+  for (let i = 0; i < n; i++) level.push([m - 1, i]);
+  bfs(level, atlVisited);
+
+  for (let key of pasificVisited)
+    if (atlVisited.has(key)) res.push((key as string).split(','));
+
+  function bfs(level, visited) {
+    if (level.length === 0) return;
+
     let tmp = [];
+    for (let [j, i] of level) {
+      let key = `${j},${i}`;
 
-    for (let [j, i] of list) {
-      visited.add(`${j},${i}`);
+      visited.add(key);
+
       for (let [dj, di] of dir) {
-        const newJ = j + dj;
-        const newI = i + di;
-        if (heights[newJ] == null || heights[newJ][newI] == null) continue;
+        let [newJ, newI] = [j + dj, i + di];
+        let newKey = `${newJ},${newI}`;
+        if (newJ >= m || newJ < 0 || newI >= n || newI < 0) continue;
         if (heights[newJ][newI] < heights[j][i]) continue;
-        if (visited.has(`${newJ},${newI}`)) continue;
+        if (visited.has(newKey)) continue;
 
         tmp.push([newJ, newI]);
       }
     }
-    list = tmp;
-    bfs(list, visited);
-  }
-  bfs(pasArray, pasVisitedSet);
-  bfs(atlArray, atlVisitedSet);
 
-  for (let el of pasVisitedSet) {
-    if (atlVisitedSet.has(el)) {
-      res.push((el as string).split(','));
-    }
+    bfs(tmp, visited);
   }
 
   return res;
-} // T:O(N*M) S:O(M*N)
+} // T:O(M*N) S:O(M*N) // T:O(N*M) S:O(M*N)
