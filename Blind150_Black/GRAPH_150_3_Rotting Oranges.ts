@@ -15,50 +15,48 @@
 // start from new roatted
 
 function orangesRotting(grid: number[][]): number {
-  const rowsLen = grid.length;
-  const colsLen = grid[0].length;
   const dir = [
     [1, 0],
     [-1, 0],
     [0, 1],
     [0, -1],
   ];
-  let newRotten = [];
-  let count = -1;
-  let totalCount = 0;
+  let steps = 0;
+  let count = 0;
+  let level = [];
+  const m = grid.length;
+  const n = grid[0].length;
 
-  for (let j = 0; j < rowsLen; j++)
-    for (let i = 0; i < colsLen; i++) {
-      let el = grid[j][i];
-      if (el === 1) totalCount++;
-      if (el !== 2) continue;
-      newRotten.push([j, i]);
-    } // init
-
-  if (newRotten.length === 0) return totalCount === 0 ? 0 : -1;
-  count++;
+  for (let j = 0; j < m; j++)
+    for (let i = 0; i < n; i++) {
+      if (grid[j][i] === 2) {
+        level.push([j, i]); // init
+        continue;
+      }
+      if (grid[j][i] === 1) count++;
+    }
 
   function bfs() {
-    let tmp = [];
+    if (level.length === 0) return;
+    if (count === 0) return;
+    steps++;
 
-    for (let [j, i] of newRotten) {
+    let tmp = [];
+    for (let [j, i] of level) {
       for (let [dj, di] of dir) {
         let [newJ, newI] = [j + dj, i + di];
-        if (newJ < 0 || newJ >= rowsLen || newI < 0 || newI >= colsLen)
-          continue;
+        if (newJ < 0 || newJ >= m || newI < 0 || newI >= n) continue;
         if (grid[newJ][newI] !== 1) continue;
         grid[newJ][newI] = 2;
-        totalCount--;
+        count--;
         tmp.push([newJ, newI]);
       }
     }
 
-    newRotten = [...tmp];
-    if (newRotten.length === 0) return;
-    count++;
+    level = tmp;
     bfs();
   }
   bfs();
 
-  return totalCount === 0 ? count : -1;
-} // T:O(m*n) S:O(m*n)
+  return count === 0 ? steps : -1;
+} // T:O(M*N) S:O(M*N)
