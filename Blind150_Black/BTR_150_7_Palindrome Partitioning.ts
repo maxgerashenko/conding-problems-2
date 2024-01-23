@@ -8,7 +8,7 @@
 // use slice cur + flor slice(start, index)
 // T:O(2^N) * palindrom N S:O(2^N)*N
 
-// need start only
+// need start onlyy
 // use substring
 // get from index to index + 1
 
