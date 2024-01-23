@@ -13,24 +13,40 @@
 
 function findOrder(numCourses: number, prerequisites: number[][]): number[] {
   const res = [];
-  const adjList = {};
-  let path = new Set();
-  let visited = new Set();
+  let preConditions = {};
+  let visited;
 
-  for (let cur = 0; cur < numCourses; cur++) adjList[cur] = []; // init all courses;
-  for (let [cur, pre] of prerequisites) adjList[cur].push(pre); // set all presets;
+  for (let i = 0; i < numCourses; i++) {
+    preConditions[i] = new Set();
+  } // init
+
+  for (let [cur, pre] of prerequisites) {
+    if (preConditions[cur].has(pre)) continue;
+    preConditions[cur].add(pre);
+  } // set pre
 
   function dfs(cur) {
-    if (path.has(cur)) return true;
-    if (visited.has(cur)) return;
-    path.add(cur);
+    if (res.indexOf(cur) != -1) return;
+    if (visited.has(cur)) return true;
+    if (preConditions[cur].size == 0) {
+      res.push(cur);
+      return;
+    }
+
     visited.add(cur);
-    while (adjList[cur].length) if (dfs(adjList[cur].pop())) return true;
+
+    for (let el of Array.from(preConditions[cur])) {
+      if (dfs(el)) return true;
+      preConditions[cur].delete(el);
+    }
+
     res.push(cur);
-    path.delete(cur);
   }
 
-  for (let cur = 0; cur < numCourses; cur++) if (dfs(cur)) return []; // check all
+  for (let i = 0; i < numCourses; i++) {
+    visited = new Set();
+    if (dfs(i)) return [];
+  }
 
   return res;
 } // T:O(V+N) S:O(N)
