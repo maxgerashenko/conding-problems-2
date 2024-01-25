@@ -29,7 +29,7 @@ export class Solution {
     for (let i = 0; i < n - 1; i++) {
       let [w1, w2] = [words[i], words[i + 1]];
       let min = Math.min(w1.length, w2.length);
-      if (w1[min] === w1[min] && w1.lenght > w2.length) return ''; // connter case
+      if (w1[min] === w2[min] && w1.lenght > w2.length) return ''; // connter case
       for (let i = 0; i < min; i++) {
         let [l1, l2] = [w1[i], w2[i]];
         if (l1 === l2) continue;
