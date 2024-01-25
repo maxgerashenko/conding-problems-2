@@ -14,46 +14,55 @@
 // T:O(N) S:O(N)
 
 export class Solution {
-  alienOrder(words) {
-    let adj = {};
-    let n = words.length;
-    let res = [];
+  alienOrder(words: string[]): string {
+    let res = []; // response
+    let adjMapSet = {}; // adjacency list
 
-    // init
     for (let word of words)
-      for (let l of word.split('')) {
-        if (adj[l] == null) adj[l] = new Set();
+      for (let l of word.split(''))
+        if (adjMapSet[l] == null) adjMapSet[l] = new Set(); // init all letters
+
+    for (let i = 0; i < words.length - 1; i++) {
+      let w1 = words[i];
+      let w2 = words[i + 1];
+      let l1 = w1[0];
+      let l2 = w2[0];
+
+      if (l1 !== l2) {
+        adjMapSet[l2].add(l1); // l1 is before l2
+        continue;
       }
 
-    // build
-    for (let i = 0; i < n - 1; i++) {
-      let [w1, w2] = [words[i], words[i + 1]];
-      let min = Math.min(w1.length, w2.length);
-      if (w1[min] === w2[min] && w1.lenght > w2.length) return ''; // connter case
-      for (let i = 0; i < min; i++) {
-        let [l1, l2] = [w1[i], w2[i]];
-        if (l1 === l2) continue;
-        adj[l1].add(l2);
-        break;
-      }
+      let letterIndex = 0;
+      let minLen = Math.min(w1.length, w2.length); // limit to shorter word
+      while (letterIndex < minLen && l1 === l2) {
+        letterIndex++;
+        l1 = w1[letterIndex];
+        l2 = w2[letterIndex];
+      } // find next letter after equal
+      if (l2 == null && l1 == null) continue; // ignore when word ended
+      if (l2 == null) return ''; // conner case
+      if (l2 == null || l1 == null) continue;
+      adjMapSet[l2].add(l1); // add dependncy
+    } // set adjacancy list
+
+    let visited = new Set(); // visited at all
+    let path = new Set(); // path to detect cycle in dfs
+    function dfs(letter) {
+      if (path.has(letter)) return true; // detect cycle
+      path.add(letter);
+      if (visited.has(letter)) return; // ignore visited
+      visited.add(letter);
+
+      let arr = Array.from(adjMapSet[letter]) || [];
+      for (let pre of arr) if (dfs(pre)) return ''; // return '' if there is a cycle
+
+      res.push(letter); // dfs postOrder
+      path.delete(letter); // backtracking
     }
 
-    //
-    let visited = {};
-    function dfs(l) {
-      if (l in visited) return visited[l]; // dont visit twice
-      visited[l] = true; // mark as cycle
-      for (let l2 of adj[l]) {
-        if (dfs(l2)) return true;
-      }
-      visited[l] = false; // mark as just visited
-      res.push(l); // reorder
-    }
+    for (let key of Object.keys(adjMapSet).sort()) if (dfs(key)) return '';
 
-    for (let l of Object.keys(adj)) {
-      if (dfs(l)) return '';
-    }
-
-    return res.reverse().join('');
+    return res.join('');
   }
-} // T:O(N) S:O(N)
+} // T:O(N+K) S:O(N+K)
