@@ -35,4 +35,4 @@ function minCostConnectPoints(points) {
   } // bfs
 
   return totalCount;
-} // T:O() S:O()
+} // T:O(E log V) S:O(V)
