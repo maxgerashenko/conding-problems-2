@@ -6,32 +6,37 @@ function findCheapestPrice(
   k: number
 ): number {
   const adjMapList = {};
-  const minHeap = new Heap((a, b) => a.price - b.price);
+  const minHeap = new Heap((a, b) => a[1] - b[1]);
   const distPrice = {};
-  k + 1;
+  const visited = new Set();
 
-  for (let i = 0; i < n; i++) distPrice[i] = Infinity; // init price
+  for (let i = 0; i < n; i++) {
+    distPrice[i] = Infinity; // init price
+    adjMapList[i] = [];
+  } // init
 
   for (let [from, to, price] of flights) {
-    if (adjMapList[from] == null) {
-      adjMapList[from] = [];
-    }
-    adjMapList[from].push([to, price]);
+    from = Number(from);
+    adjMapList[Number(from)].push([Number(to), Number(price)]);
   } // init adj
 
-  minHeap.add({ from: src, price: 0 });
   distPrice[src] = 0;
+  minHeap.add([Number(src), 0, k + 1]);
 
-  while (k > 0 && minHeap.heap.length > 0) {
-    console.log(minHeap.heap);
-    let { from, fromPrice } = minHeap.remove();
-    k--;
+  while (minHeap.heap.length > 0) {
+    let [from, fromPrice, count] = minHeap.remove();
+    if (from === dst) {
+      distPrice[from] = Math.min(distPrice[from], fromPrice);
+      continue;
+    }
+    if (count === 0) continue;
+    if (visited.has(from)) continue;
+    visited.add(from);
     distPrice[from] = Math.min(distPrice[from], fromPrice);
-    console.log(distPrice[from]);
-    if (from === dst) break;
     for (let [to, toPrice] of adjMapList[from]) {
-      console.log(to, toPrice);
-      minHeap.add({ from: to, price: distPrice[from] + toPrice });
+      let newPrice =
+        distPrice[from] == Infinity ? toPrice : distPrice[from] + toPrice;
+      minHeap.add([to, newPrice, count - 1]);
     }
   }
 
