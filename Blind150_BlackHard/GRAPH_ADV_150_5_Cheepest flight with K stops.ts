@@ -1,3 +1,18 @@
+// Cheapest Flights Within K Stops
+// https://leetcode.com/problems/cheapest-flights-within-k-stops/
+
+// Deksta n log k Cheapest dfs
+// Bellman-Ford n*k Cheapest K like bfs
+// Prim’s n^2 MST line bfs
+
+// Bellman-Ford like Dekstra BFS
+// like bfs
+// dynamic programming
+// 2 lines with tmp var
+// check all but skip if from is INFINITY not visited
+// to = to or pre.from+price
+// if no dest return -1
+
 function findCheapestPrice(
   n: number,
   flights: number[][],
@@ -5,40 +20,19 @@ function findCheapestPrice(
   dst: number,
   k: number
 ): number {
-  const adjMapList = {};
-  const minHeap = new Heap((a, b) => a[1] - b[1]);
-  const distPrice = {};
-  const visited = new Set();
+  let dstPriceMap = {};
 
-  for (let i = 0; i < n; i++) {
-    distPrice[i] = Infinity; // init price
-    adjMapList[i] = [];
-  } // init Map
+  for (let i = 0; i < n; i++) dstPriceMap[i] = Infinity;
+  dstPriceMap[src] = 0; // start from
 
-  for (let [from, to, price] of flights) {
-    from = Number(from);
-    adjMapList[Number(from)].push([Number(to), Number(price)]);
-  } // init adj
-
-  distPrice[src] = 0;
-  minHeap.add([Number(src), 0, k + 1]);
-
-  while (minHeap.heap.length > 0) {
-    let [from, fromPrice, count] = minHeap.remove();
-    if (from === dst) {
-      distPrice[from] = Math.min(distPrice[from], fromPrice);
-      continue;
+  for (let step = 0; step < k + 1; step++) {
+    const tmp = { ...dstPriceMap };
+    for (let [from, to, price] of flights) {
+      if (dstPriceMap[from] == Infinity) continue; // not visited yet
+      tmp[to] = Math.min(tmp[to], dstPriceMap[from] + price);
     }
-    if (count === 0) continue;
-    if (visited.has(from)) continue;
-    visited.add(from);
-    distPrice[from] = Math.min(distPrice[from], fromPrice);
-    for (let [to, toPrice] of adjMapList[from]) {
-      let newPrice =
-        distPrice[from] == Infinity ? toPrice : distPrice[from] + toPrice;
-      minHeap.add([to, newPrice, count - 1]);
-    }
+    dstPriceMap = tmp;
   }
 
-  return distPrice[dst] == Infinity ? -1 : distPrice[dst];
-} // T:O(V+E) T:O(V)
+  return dstPriceMap[dst] == Infinity ? -1 : dstPriceMap[dst];
+} // T:(V*K) S:O(V)
