@@ -13,7 +13,7 @@ function findCheapestPrice(
   for (let i = 0; i < n; i++) {
     distPrice[i] = Infinity; // init price
     adjMapList[i] = [];
-  } // init
+  } // init Map
 
   for (let [from, to, price] of flights) {
     from = Number(from);
