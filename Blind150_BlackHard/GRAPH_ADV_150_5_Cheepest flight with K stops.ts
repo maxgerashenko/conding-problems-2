@@ -6,7 +6,7 @@
 // Prim’s n^2 MST line bfs
 
 // Bellman-Ford like Dekstra BFS
-// like bfs
+// like bfss
 // dynamic programming
 // 2 lines with tmp var
 // check all but skip if from is INFINITY not visited
