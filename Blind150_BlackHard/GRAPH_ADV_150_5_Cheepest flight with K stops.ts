@@ -12,6 +12,7 @@
 // check all but skip if from is INFINITY not visited
 // to = to or pre.from+price
 // if no dest return -1
+//
 
 function findCheapestPrice(
   n: number,
