@@ -33,4 +33,4 @@ function trap(height: number[]): number {
   }
 
   return count;
-} //T:O(n) S:O(1)
+} //T:O(n) S:O(1);
