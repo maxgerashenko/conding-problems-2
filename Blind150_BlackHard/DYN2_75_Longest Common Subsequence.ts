@@ -19,4 +19,4 @@ function longestCommonSubsequence(text1: string, text2: string): number {
   }
 
   return dp[0][0];
-} // T:O(n*m) S:O(n*m);
+} // T:O(n*m) S:O(n*m)
