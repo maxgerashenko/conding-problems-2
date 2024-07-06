@@ -19,4 +19,4 @@ function numDistinct(str1: string, str2: string): number {
     }
 
     return dp[n];
-};  // T:O(n*m) S:O(n)
+};  // T:O(n*m) S:O(n);
