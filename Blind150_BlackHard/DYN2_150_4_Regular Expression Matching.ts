@@ -31,4 +31,4 @@ function isMatch(str: string, pat: string): boolean {
         return false;
     }
     return dfs(0, 0);
-}; // T:O(max(n,m)) S:O(n)
+}; // T:O(max(n,m)) S:O(n);
