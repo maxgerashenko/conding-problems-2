@@ -14,4 +14,4 @@ function change(amount: number, coins: number[]): number {
   }
 
   return dp[amount];
-} // T:O(n*m) S:O(n)
+} // T:O(n*m) S:O(n);
