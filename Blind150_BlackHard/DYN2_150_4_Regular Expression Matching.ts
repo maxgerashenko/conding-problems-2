@@ -2,7 +2,7 @@
 //
 // https://leetcode.com/problems/regular-expression-matching/description/
 
-// critical case when i is at the end but patern is not yet but should be true;
+// critical case when i is at the end but patern is not yet but should be true
 function isMatch(str: string, pat: string): boolean {
     let n = str.length;
     let m = pat.length;
