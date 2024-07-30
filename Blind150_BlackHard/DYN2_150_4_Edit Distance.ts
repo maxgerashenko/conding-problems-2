@@ -37,4 +37,4 @@ function minDistance(word1: string, word2: string): number {
   }
 
   return dp[len2][len1];
-} // T:O(min(n,m)) S:O(m*n);
+} // T:O(min(n,m)) S:O(m*n)
