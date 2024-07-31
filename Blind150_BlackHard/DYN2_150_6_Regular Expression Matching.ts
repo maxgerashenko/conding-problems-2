@@ -24,6 +24,7 @@ function isMatch(str: string, pat: string): boolean {
       dp[key] = dfs(i, j + 2);
       return dp[key];
     }
+    // still check i < n
     if (isMatch) {
       dp[key] = dfs(i + 1, j + 1);
       return dp[key];
