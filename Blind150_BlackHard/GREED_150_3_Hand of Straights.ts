@@ -39,4 +39,4 @@ function isNStraightHand(hand: number[], groupSize: number): boolean {
     }
 
     return true; // positive case
-}; // T:O(NlognN) S:O(1);
+}; // T:O(NlognN) S:O(1)
