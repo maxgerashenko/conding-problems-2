@@ -19,4 +19,4 @@ function jump(nums: number[]): number {
   }
 
   return level;
-} // T:O(n) S:O(1)
+} // T:O(n) S:O(1);
