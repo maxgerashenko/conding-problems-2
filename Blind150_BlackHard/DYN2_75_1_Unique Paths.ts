@@ -16,4 +16,4 @@ function uniquePaths(m: number, n: number): number {
   }
 
   return row[n - 1];
-} // T:O(n*m) S:O(2n)
+} // T:O(n*m) S:O(2n);
