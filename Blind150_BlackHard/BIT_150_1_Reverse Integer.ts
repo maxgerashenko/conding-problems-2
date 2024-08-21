@@ -1,3 +1,3 @@
-// https://leetcode.com/problems/single-number/description/
+// https://leetcode.com/problems/reverse-integer/description/
 //
-// Single Number
+// Reverse Integer
