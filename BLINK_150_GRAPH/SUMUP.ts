@@ -1,5 +1,5 @@
 // BIT
-// ^= to find single digit
+// ^= xor twice to find single digit
 // &1 to get single bit
 // ^= + & << to sum
 
