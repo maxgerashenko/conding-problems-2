@@ -1,3 +1,7 @@
+// https://leetcode.com/problems/set-matrix-zeroes/description/
+//
+// Set Matrix Zeroes
+
 // Brut force in n^3
 // reuse existing matrix
 // for [0][0] elemetn use tmp
