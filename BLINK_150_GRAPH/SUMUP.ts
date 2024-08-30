@@ -12,3 +12,6 @@
 
 // INTERVALS
 // sort start + heap end and clen to get max count
+
+//GREEDY
+// count for () and * wildcard 2 directions or minValue + maxValue and reset for min
