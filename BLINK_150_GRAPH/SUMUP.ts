@@ -15,3 +15,4 @@
 
 //GREEDY
 // count for () and * wildcard 2 directions or minValue + maxValue and reset for min
+// if sum is < 0 return -1 if count < 0 reset the start
