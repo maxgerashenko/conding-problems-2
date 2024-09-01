@@ -2,6 +2,7 @@
 //
 // Hand of Straights
 
+
 // 2 for loops
 // cardsMapCount
 // count groups by consecutive numbers
