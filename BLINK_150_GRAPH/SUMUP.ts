@@ -19,3 +19,4 @@
 // if sum is < 0 return -1 if count < 0 reset the start
 // mapCount = {}, consecutive numbers
 // jump from left to right min of cur or l + 1, BFS
+// move target to left as right is valid

@@ -2,7 +2,7 @@
 //
 // Jump Game
 
-// move target to left as right is valud
+// move target to left as right is valid
 function canJump(nums: number[]): boolean {
   let len = nums.length;
   let validIndex = len - 1;
