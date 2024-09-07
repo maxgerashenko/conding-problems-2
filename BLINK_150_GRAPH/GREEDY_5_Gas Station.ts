@@ -3,6 +3,8 @@
 // Gas Station
 
 
+
+
 // if sum of diff < 0 return false
 // if count < 0 reset the start
 function canCompleteCircuit(gas: number[], cost: number[]): number {
