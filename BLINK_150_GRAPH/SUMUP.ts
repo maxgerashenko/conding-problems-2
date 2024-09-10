@@ -21,3 +21,4 @@
 // jump from left to right min of cur or l + 1, BFS
 // move target to left as right is valid
 // sum += left if left < 0 or sum < 0 sum -= left
+
