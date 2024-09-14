@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/gas-station/description/
-//
+// 
 // Gas Station
 
 // if sum of diff < 0 return false
@@ -23,3 +23,4 @@ function canCompleteCircuit(gas: number[], cost: number[]): number {
 
   return start;
 } // T:(n) S:O(1)
+
