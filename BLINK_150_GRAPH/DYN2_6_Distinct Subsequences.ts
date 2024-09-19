@@ -26,6 +26,11 @@ function numDistinct(str: string, tar: string): number {
     return dfs();
 }; // T:O(m*n) S:O(m*n)
 
+// b b
+// bb 
+//  bb
+// bbb and bb has 3 options
+// reverse order to to keep combinations
 function numDistinct(str: string, targ: string): number {
     const lenS = str.length;
     const lenT = targ.length;
