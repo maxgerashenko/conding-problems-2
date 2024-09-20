@@ -40,3 +40,29 @@ function minDistance(str: string, targ: string): number {
 
 // Optimized
 // S:O(min(n,m));
+// matring to array
+// pre[0] = j number to delete
+function minDistance(word1: string, word2: string): number {
+    if (word1.length > word2.length) {
+        [word1, word2] = [word2, word1];
+    }
+    const len1 = word1.length;
+    const len2 = word2.length;
+    let dp = Array(len1 + 1).fill(0);
+    let pre = Array(len1 + 1).fill(0).map((el, i) => i);
+    for (let j = 1; j < len2 + 1; j++) {
+        pre[0] = j; // set insert/delete value for the row
+        for (let i = 1; i < len1 + 1; i++) {
+            dp[i] = word2[j - 1] === word1[i - 1]
+                ? pre[i - 1] // no step
+                : Math.min(
+                    dp[i - 1], // delete
+                    pre[i - 1], // replace
+                    pre[i] // insert
+                ) + 1 // one step
+        }
+        pre = [...dp];
+    }
+
+    return pre[len1];
+}; // T:O(n*m) S:O(Min(n,m))
