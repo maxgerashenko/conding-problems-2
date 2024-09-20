@@ -36,3 +36,6 @@ function minDistance(str: string, targ: string): number {
 
     return dp[letT][lenS];
 }; // T:O(n*m) S:O(n*m)
+
+
+// Optimized
