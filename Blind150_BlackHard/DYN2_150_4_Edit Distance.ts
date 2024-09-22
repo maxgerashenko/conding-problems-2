@@ -40,21 +40,6 @@ function minDistance(word1: string, word2: string): number {
 } // T:O(min(n,m)) S:O(m*n)
 
 
-// optimized
-// Edit Distance
-//
-// https://leetcode.com/problems/edit-distance/description/
-
-// insert i+1
-// delete j+1
-// replace i+1 j+1
-// -1 -1 = 0
-// -1 = the length of cur word
-// 0 -1 = the lenght of cur word
-//
-// 0 1 2
-// 1 - -
-
 function minDistance(word1: string, word2: string): number {
   if (word1.length < word2.length) {
     [word1, word2] = [word2, word1];
