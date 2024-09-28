@@ -19,5 +19,5 @@ function canPartition(nums: number[]): boolean {
         }
     }
 
-    return false
+    return false;
 }; // T:O(n*sum) S:O(sum)
