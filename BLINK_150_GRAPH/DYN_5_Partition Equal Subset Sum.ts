@@ -2,6 +2,11 @@
 // 
 // Partition Equal Subset
 
+
+// bruteforce 2^N
+// dp target-n & i
+// order dosn't matter, dist matter
+// use set for sums with 2 loops
 function canPartition(nums: number[]): boolean {
     let totalSum = nums.reduce((pre, el) => pre + el, 0);
 
@@ -19,5 +24,5 @@ function canPartition(nums: number[]): boolean {
         }
     }
 
-    return false;
+    return false
 }; // T:O(n*sum) S:O(sum)
