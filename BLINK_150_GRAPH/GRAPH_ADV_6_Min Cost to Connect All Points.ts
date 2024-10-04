@@ -4,6 +4,8 @@
 // Min Cost to Connect All Points
 
 
+
+
 // FIX !!!!!
 function minCostConnectPoints(points: number[][]): number {
     const len = points.length;
