@@ -3,42 +3,39 @@
 // 
 // Min Cost to Connect All Points
 
-
 // BFS
-// visited
-// minHeap
+// visited Set
+// index for repeaded points
 function minCostConnectPoints(points: number[][]): number {
     const len = points.length;
-    const visited = new Set();
-    const minHeap = new Heap((a, b) => a.val - b.val);
     const getDist = (a, b) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+    const minHeap = new Heap((a, b) => a.val - b.val);
+    const visited = new Set();
     let count = 0;
-    let A = points.pop();
 
-    for (let B of points) {
-        let [x, y] = B;
-        minHeap.add({ x, y, val: getDist(A, B) });
-    }
-    visited.add(`${A[0]},${A[1]}`);
+    if (len < 2) return 0;
 
-    while (visited.size !== len) {
-        let { x, y, val } = minHeap.remove();
-        if (visited.has(`${x},${y}`)) continue;
-        visited.add(`${x},${y}`);
+    minHeap.add({ val: 0, index: 0 });
+
+    while (visited.size < len) {
+        let { val, index } = minHeap.remove();
+        if (visited.has(index)) continue;
+
+        visited.add(index);
         count += val;
 
-        // Update A to the new point
-        A = [x, y];
-        // Add edges from the new A to all unvisited points
-        for (let B of points) {
-            let [x, y] = B;
-            if (visited.has(`${x},${y}`)) continue;
-            minHeap.add({ x, y, val: getDist(A, B) });
+        const A = points[index];
+
+        // BFS
+        for (let i = 0; i < len; i++) {
+            if (visited.has(i)) continue;
+            const B = points[i];
+            minHeap.add({ val: getDist(A, B), index: i });
         }
     }
 
     return count;
-}; // T:O(n^2 log n) S:O(n^2)
+}; // T:O(n^2logn) S:O(n^2)
 
 class Heap {
     heap = [];
