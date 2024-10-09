@@ -3,31 +3,26 @@
 // Cheapest Flights Within K Stops
 
 
-
-// BFS
-// tmp visited
-// tmp prices
-// BELMAN FORD ALGO
+// Like BFS But FORD
+// not visited is INFINITY
+// tmp visited and price for BFS
 function findCheapestPrice(n: number, flights: number[][], src: number, dst: number, k: number): number {
-    let minPrices = {};
-    let visited = new Set();
+    let minPrice = {};
+
     for (let i = 0; i < n; i++) {
-        minPrices[i] = Infinity;
+        minPrice[i] = Infinity;
     }
-    visited.add(src);
-    minPrices[src] = 0;
+    minPrice[src] = 0; // visited
 
-    for (let count = 0; count < k + 1; count++) {
-        let tmpVisited = [];
-        let tmpPrices = { ...minPrices };
+    for (let i = 0; i < k + 1; i++) {
+        const tmp = { ...minPrice }; // tmp visited
         for (let [from, to, price] of flights) {
-            if (!visited.has(from)) continue;// skip if not visited;
-            tmpPrices[to] = Math.min(tmpPrices[to], minPrices[from] + price);
-            tmpVisited.push(to);
+            if (minPrice[from] === Infinity) continue;
+
+            tmp[to] = Math.min(tmp[to], minPrice[from] + price); // update price dynamicly
         }
-        visited = new Set([...visited, ...tmpVisited]);
-        minPrices = tmpPrices;
+        minPrice = tmp;
     }
 
-    return minPrices[dst] === Infinity ? -1 : minPrices[dst];
-}; // T:O(V + N) S:O(N)
+    return minPrice[dst] === Infinity ? -1 : minPrice[dst];
+}; // T:O(V+E) S:O(V)
