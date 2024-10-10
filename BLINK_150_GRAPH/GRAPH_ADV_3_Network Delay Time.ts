@@ -5,7 +5,7 @@
 // BFS
 // Ford
 function networkDelayTime(times: number[][], n: number, start: number): number {
-    let minNodes = Array(n+1).fill(Infinity);
+    let minNodes = Array(n + 1).fill(Infinity);
     minNodes[0] = 0;
     minNodes[start] = 0; // mark as visited
 
@@ -19,6 +19,6 @@ function networkDelayTime(times: number[][], n: number, start: number): number {
         minNodes = tmp; // update for the next level
     }
 
-
-    return minNodes.some(time => time == Infinity) ? -1 : Math.max(...minNodes);
+    const max = Math.max(...minNodes);
+    return max == Infinity ? -1 : max;
 }; // T:O(V+E) S:O(V)
