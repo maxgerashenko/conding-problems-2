@@ -3,60 +3,65 @@
 // Alien Dictionary
 
 
-
-
 // Topological Sort
+// BFS
+// Adjacency list
+// Set for unique
 alienOrder(words: string[]): string {
-    const res = [];
-    const queue = [];
-    const edgeMapList: { [key: string]: string[] } = {};
-    const charMapCount: { [key: string]: number } = {};
-    const letters = new Set<string>();
+    const letterMapList = {};
+    let letters = new Set();
+    let letterMapCount = {};
+    let len = words.length;
 
-    // Initialize graph and in-degree count
-    for (let word of words)
-        for (let letter of word) {
-            if (charMapCount[letter] != null) continue;
-            charMapCount[letter] = 0;
-            edgeMapList[letter] = [];
+    // init maps with empty values
+    for (let word of words) {
+        for (let letter of word.split('')) {
+            if (letterMapList[letter] == null) {
+                letterMapList[letter] = new Set();
+            }
             letters.add(letter);
+            if (letterMapCount[letter] == null) {
+                letterMapCount[letter] = 0;
+            }
         }
+    }
 
-    // Build the graph
-    const len = words.length;
+    // get Adjacency list
     for (let j = 0; j < len - 1; j++) {
-        let a = words[j];
-        let b = words[j + 1];
+        const cur = words[j];
+        const next = words[j + 1];
+        const min = Math.min(cur.length, next.length);
 
-        const min = Math.min(a.length, b.length)
         for (let i = 0; i < min; i++) {
-            if (a[i] === b[i]) continue;
-
-            // Add an edge from a[i] to b[i] and increment in-degree of b[i]
-            edgeMapList[a[i]].push(b[i]);
-            charMapCount[b[i]]++;
+            const a = cur[i];
+            const b = next[i];
+            if (a === b) continue;
+            letterMapList[a].add(b); // after list
+            letterMapCount[b]++; // how many times letters before
             break;
         }
     }
 
-    // Initialize the queue with letters having zero in-degree
+    // init queue with letter with 0 pre
+    let queue = [];
     for (let letter of letters) {
-        if (charMapCount[letter] > 0) continue;
+        if (letterMapCount[letter] > 0) continue;
         queue.push(letter);
     }
 
-    // Topological sort using BFS
+    // get res and update queue
+    let res = [];
     while (queue.length > 0) {
-        let next = queue.shift();
-        res.push(next);
+        let letter = queue.shift();
+        res.push(letter);
 
-        for (let dep of edgeMapList[next]) {
-            charMapCount[dep]--;
-            if (charMapCount[dep] !== 0) continue;
-            queue.push(dep);
+        for (let post of letterMapList[letter]) {
+            letterMapCount[post]--;
+
+            if (letterMapCount[post] > 0) continue;
+            queue.push(post);
         }
     }
 
-    // If not all letters are processed, it means there is a cycle
-    return res.length !== letters.size ? '' : res.join('');
-}
+    return res.length === letters.size ? res.join('') : "";
+} // T:O(V) S:O(V+E) v = 26
