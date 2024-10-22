@@ -3,52 +3,50 @@
 // Rotting Oranges
 
 
-// BFS
 function orangesRotting(grid: number[][]): number {
-    const m = grid.length;
-    const n = grid[0].length;
+    const dir = [[1, 0], [0, 1], [-1, 0], [0, -1],];
+    const [m, n] = [grid.length, grid[0].length];
+    let queue = [];
+    let levelCount = 0;
     let freshCount = 0;
-    let queue: [number, number][] = [];
-    let minutes = 0;
-    const directions = [[1, 0], [0, 1], [-1, 0], [0, -1]];
 
-    // Initialize the queue with all the rotten oranges and count fresh oranges
+    // init freshCount and queue
     for (let j = 0; j < m; j++) {
         for (let i = 0; i < n; i++) {
-            if (grid[j][i] === 2) {
+            let cell = grid[j][i];
+            if (cell === 2) {
                 queue.push([j, i]);
-            } else if (grid[j][i] === 1) {
-                freshCount++;
+                continue;
             }
+            if (cell === 1) freshCount++;
         }
     }
 
-    // If there are no fresh or rotten oranges, return 0
-    if (freshCount === 0) return 0;
+    if (freshCount === 0) return 0; // check conner case
 
-    // BFS to spread the rot
+    if (queue.length === 0) return -1; // check conner case
+
+    // BFS
     while (queue.length > 0) {
-        let newQueue: [number, number][] = [];
+        if (freshCount === 0) return levelCount; // base case
 
+        let tmp = [];
         for (let [j, i] of queue) {
-            for (let [dJ, dI] of directions) {
-                const newJ = j + dJ;
-                const newI = i + dI;
-
-                // Check if the position is within bounds and the orange is fresh
-                if (newJ >= 0 && newI >= 0 && newJ < m && newI < n && grid[newJ][newI] === 1) {
-                    grid[newJ][newI] = 2; // Mark the orange as rotten
-                    freshCount--;
-                    newQueue.push([newJ, newI]);
-                }
+            for (let [dj, di] of dir) {
+                const [newJ, newI] = [j + dj, i + di];
+                // check boundaries
+                if (newJ < 0 || newI < 0 || newJ >= m || newI >= n) continue;
+                let cell = grid[newJ][newI];
+                if (cell !== 1) continue; // ignore othen than fresh
+                grid[newJ][newI] = 2 // mark as rotting
+                freshCount--;
+                tmp.push([newJ, newI]);
             }
         }
 
-        // If newQueue is not empty, increase the time
-        if (newQueue.length > 0) minutes++;
-        queue = newQueue;
+        levelCount++
+        queue = tmp;
     }
 
-    // If there are still fresh oranges, return -1
-    return freshCount === 0 ? minutes : -1;
-} // T:O(N*N) S:O(N*M)
+    return freshCount === 0 ? levelCount : -1;
+}; // T:O(M*N) S:O(M*N)
