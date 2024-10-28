@@ -2,6 +2,11 @@
 //
 // N-Queens
 
+// DFS
+// Backtraking
+// Cols & Rolls
+// Positive j-i and Negative j+i diagonals
+// return when n = q count
 function solveNQueens(n: number): string[][] {
     const results: string[][] = [];
 
