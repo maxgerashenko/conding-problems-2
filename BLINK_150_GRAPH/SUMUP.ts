@@ -16,6 +16,19 @@
 // Longest Consecutive Sequence - use Set() and start looking for a sequence from existing nubmers T:O(N) S:O(N)
 // Valid Sudoku - use Set() for rows, cols, blocks as box-${~~(i / 3)}-${~~(j / 3)}-${num}
 
+// 2P
+// 
+// start end
+// sort for duplicates
+// sort for tager
+// start on left and end on the right, use greedy
+// 
+// Valid Palindrome - while start < end start++ end--;
+// 3Sum - to 0, sort, for duplicates and search, start and end on the right, seach with start, end, sorted
+// Container With Most Water - start on left and end on right, update max and move smaller hight to the middle
+
+
+
 
 // BIT
 // ^= xor twice to find single digit
