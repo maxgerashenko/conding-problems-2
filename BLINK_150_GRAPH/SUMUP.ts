@@ -14,6 +14,7 @@
 // Encode and Decode Strings - Use word length in encoded string of words "#5word1#3one"
 // Product of Array Except Self - cal prefix in order and sufix in reversed order and get result T:O(N) S:O(1)
 // Longest Consecutive Sequence - use Set() and start looking for a sequence from existing nubmers T:O(N) S:O(N)
+// Product of Array Except Self - use Set() for rows, cols, blocks as box-${~~(i / 3)}-${~~(j / 3)}-${num}
 
 
 // BIT
