@@ -19,4 +19,4 @@ function productExceptSelf(nums: number[]): number[] {
     }
 
     return res;
-}; // T:O(n) S:O(n)
+}; // T:O(n) S:O(1)
