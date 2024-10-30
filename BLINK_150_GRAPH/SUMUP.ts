@@ -22,10 +22,13 @@
 // sort for duplicates
 // sort for tager
 // start on left and end on the right, use greedy
+// start on lef and end on the right, but calculate the local max/min
 // 
 // Valid Palindrome - while start < end start++ end--;
 // 3Sum - to 0, sort, for duplicates and search, start and end on the right, seach with start, end, sorted
 // Container With Most Water - start on left and end on right, update max and move smaller hight to the middle
+// Two Sum II - Input Array Is Sorted - start on left and end on right move to the middle while not equal target
+// Trapping Rain Water - left to left right to right, mesure each col for total += minHeight - cur
 
 
 
