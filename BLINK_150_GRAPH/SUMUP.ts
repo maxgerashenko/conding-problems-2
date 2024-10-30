@@ -1,3 +1,21 @@
+// A&H
+// 
+// Set()
+// LettersCountMap()
+// Array(26) - 91 signature
+// Prefix and sufix in revered order
+// MinHeap() with max K values
+//
+//
+// Contains Duplicate - Set() for duplicates
+// Valid Anagram - LetterCountMap() to count word letters
+// Two Sum - use restOfTargetMap to find a tager
+// Group Anagrams - Use word signature as lettersCountArray(26) + AnagramsSet
+// Encode and Decode Strings - Use word length in encoded string of words "#5word1#3one"
+// Product of Array Except Self - cal prefix in order and sufix in reversed order and get result T:O(N) S:O(1)
+// Longest Consecutive Sequence - use Set() and start looking for a sequence from existing nubmers T:O(N) S:O(N)
+
+
 // BIT
 // ^= xor twice to find single digit
 // &1 to get single bit
@@ -24,3 +42,6 @@
 
 // DP2
 // DFS + CASH + Variaions with 2 pointers
+
+
+
