@@ -30,8 +30,9 @@
 // Two Sum II - Input Array Is Sorted - start on left and end on right move to the middle while not equal target
 // Trapping Rain Water - left to left right to right, mesure each col for total += minHeight - cur
 
-
-
+// SW
+//
+//
 
 // BIT
 // ^= xor twice to find single digit
