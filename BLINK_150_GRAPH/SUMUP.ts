@@ -35,12 +35,15 @@
 // left right
 // Set() for duplicates
 // Use queue[0] as max, use index for the queue, keep queue small
-// Use signature for 26 letters array, compare signatures
+// Use signature for 26 letters array, compare signatures (Frequency Map)
+// Frequency Map
 //
 // Best Time to Buy and Sell Stock - swap [left and right] if right < left, increase right and update max // T:O(N) S:O(1)
 // Longest Substring Without Repeating Characters - set + left right, update length
 // Sliding Window Maximum - Use queue[0] as max, use index for queue, clean queue before adding new
 // Permutation in String - 2 hash maps with array or map init pattern get window pattern every time
+// Minimum Window Substring - Frequency Map, left right, increase window for the match, decrease for min value
+// Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 // BIT
 // ^= xor twice to find single digit
