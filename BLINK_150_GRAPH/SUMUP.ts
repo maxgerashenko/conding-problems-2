@@ -31,8 +31,16 @@
 // Trapping Rain Water - left to left right to right, mesure each col for total += minHeight - cur
 
 // SW
+// 
+// left right
+// Set() for duplicates
+// Use queue[0] as max, use index for the queue, keep queue small
+// Use signature for 26 letters array, compare signatures
 //
-//
+// Best Time to Buy and Sell Stock - swap [left and right] if right < left, increase right and update max // T:O(N) S:O(1)
+// Longest Substring Without Repeating Characters - set + left right, update length
+// Sliding Window Maximum - Use queue[0] as max, use index for queue, clean queue before adding new
+// Permutation in String - 2 hash maps with array or map init pattern get window pattern every time
 
 // BIT
 // ^= xor twice to find single digit
