@@ -47,6 +47,13 @@
 // Minimum Window Substring - Frequency Map, left right, increase window for the match, decrease for min value
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
+// Graphs ADV
+//
+// PRISM = BFS + MINHEAP + Visited
+// index as visited
+//
+// Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
+
 // BIT
 // ^= xor twice to find single digit
 // &1 to get single bit
