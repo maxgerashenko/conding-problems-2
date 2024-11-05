@@ -38,6 +38,7 @@
 // Use signature for 26 letters array, compare signatures (Frequency Map)
 // Frequency Map
 // DequeIndex, remove from the back if el > last, add el if smaller, remove el if index < k
+// Frequensy Count index, move +1 and -1, then if is enought
 //
 // Best Time to Buy and Sell Stock - swap [left and right] if right < left, increase right and update max // T:O(N) S:O(1)
 // Longest Substring Without Repeating Characters - set + left right, update length
