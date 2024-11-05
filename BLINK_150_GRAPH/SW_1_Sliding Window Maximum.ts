@@ -2,6 +2,7 @@
 // 
 // Sliding Window Maximum
 
+
 function maxSlidingWindow(nums: number[], k: number): number[] {
     const dequeIndex = [];
     let n = nums.length;
