@@ -48,7 +48,6 @@
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 
-
 // ==========================================================
 
 // Graphs ADV
@@ -58,7 +57,8 @@
 // adjList
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
-// Cheapest Flights Within K Stops - 
+// Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost +  Cost[]
+// Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 
 // ==========================================================
 

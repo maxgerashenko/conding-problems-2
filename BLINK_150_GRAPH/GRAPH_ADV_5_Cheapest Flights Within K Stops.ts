@@ -44,22 +44,18 @@ function findCheapestPrice(n: number, flights: number[][], src: number, dst: num
 // not visited is INFINITY
 // tmp visited and price for BFS
 function findCheapestPrice(n: number, flights: number[][], src: number, dst: number, k: number): number {
-    let minPrice = {};
-
-    for (let i = 0; i < n; i++) {
-        minPrice[i] = Infinity;
-    }
-    minPrice[src] = 0; // visited
+    let cost = new Array(n).fill(Infinity);
+    cost[src] = 0; // visited
 
     for (let i = 0; i < k + 1; i++) {
-        const tmp = { ...minPrice }; // tmp visited
+        const tmp = [...cost]; // tmp visited
         for (let [from, to, price] of flights) {
-            if (minPrice[from] === Infinity) continue;
+            if (cost[from] === Infinity) continue;
 
-            tmp[to] = Math.min(tmp[to], minPrice[from] + price); // update price dynamicly
+            tmp[to] = Math.min(tmp[to], cost[from] + price); // update price dynamicly
         }
-        minPrice = tmp;
+        cost = tmp;
     }
 
-    return minPrice[dst] === Infinity ? -1 : minPrice[dst];
-}; // T:O(V+E) S:O(V)
+    return cost[dst] === Infinity ? -1 : cost[dst];
+}; // T:O(V+(k+1)) S:O(V)
