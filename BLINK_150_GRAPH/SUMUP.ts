@@ -55,10 +55,12 @@
 // PRISM = BFS + MINHEAP + Visited
 // index as visited
 // adjList
+// FORD = BFS + MAP all all the time + Don't check visted + use tmp for Map as level
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
 // Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost +  Cost[]
 // Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
+// Swim in Rising Water - BFS + HEAP + Visted + dir
 
 // ==========================================================
 
