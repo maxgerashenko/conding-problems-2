@@ -56,6 +56,7 @@
 // index as visited
 // adjList
 // FORD = BFS + MAP all all the time + Don't check visted + use tmp for Map as level
+// BFS + HEAP + visited + dir
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
 // Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost +  Cost[]
