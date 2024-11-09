@@ -2,23 +2,27 @@
 // 
 // Network Delay Time
 
-// BFS
-// Ford
+
+// FORD BFS 
+// Result array with min values
+// Visited with Infinity
+// Return max value
+// use tmp value as level
 function networkDelayTime(times: number[][], n: number, start: number): number {
-    let minNodes = Array(n + 1).fill(Infinity);
-    minNodes[0] = 0;
-    minNodes[start] = 0; // mark as visited
+    let resulMinDelay = Array(n + 1).fill(Infinity);
+    resulMinDelay[start] = 0; // start
 
-    for (let i = 0; i < n; i++) {
-        const tmp = [...minNodes];
-        for (let [from, to, time] of times) {
-            if (minNodes[from] == Infinity) continue; // ignore visited nodes
+    for (let i = 1; i < n; i++) {
+        const level = [...resulMinDelay];
+        for (let [from, to, delay] of times) {
+            if (resulMinDelay[from] == Infinity) continue;
 
-            tmp[to] = Math.min(tmp[to], tmp[from] + time); // mark as visited
+            level[to] = Math.min(level[to], resulMinDelay[from] + delay);
         }
-        minNodes = tmp; // update for the next level
+
+        resulMinDelay = level;
     }
 
-    const max = Math.max(...minNodes);
-    return max == Infinity ? -1 : max;
+    const max = Math.max(...resulMinDelay.slice(1)); // index starts from 1
+    return max === Infinity ? -1 : max; // conner case
 }; // T:O(V+E) S:O(V)

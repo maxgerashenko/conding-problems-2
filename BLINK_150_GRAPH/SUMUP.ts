@@ -62,6 +62,7 @@
 // Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost +  Cost[]
 // Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
+// Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
 
 // ==========================================================
 
