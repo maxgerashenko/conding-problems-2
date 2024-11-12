@@ -30,6 +30,7 @@
 // Two Sum II - Input Array Is Sorted - start on left and end on right move to the middle while not equal target
 // Trapping Rain Water - left to left right to right, mesure each col for total += minHeight - cur
 
+
 // SW
 // 
 // left right
@@ -46,6 +47,7 @@
 // Permutation in String - 2 hash maps with array or map init pattern get window pattern every time
 // Minimum Window Substring - Frequency Map, left right, increase window for the match, decrease for min value
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
+
 
 
 
