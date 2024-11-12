@@ -57,6 +57,7 @@
 //
 // PRISM = BFS + MINHEAP + Visited + dir
 // FORD = BFS + resultsByIndex[] + level[] + Infinity as visited
+// Topological Sorting = adjListMap + countMap + DFS + queue
 // index as visited
 // adjList
 //
@@ -65,6 +66,7 @@
 // Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
+// Alien Dictionary = TopologicalSort + lettersSet
 
 // ==========================================================
 
