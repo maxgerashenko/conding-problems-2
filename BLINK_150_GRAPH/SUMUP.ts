@@ -59,14 +59,14 @@
 // FORD = BFS + resultsByIndex[] + level[] + Infinity as visited
 // Topological Sorting = adjListMap + countMap + DFS + queue
 // index as visited
-// adjList
+// adjList + Set()
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
-// Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost +  Cost[]
+// Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost + Cost[]
 // Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
-// Alien Dictionary = TopologicalSort + lettersSet
+// Alien Dictionary = TopologicalSort + AdjList with Sort
 
 // ==========================================================
 
