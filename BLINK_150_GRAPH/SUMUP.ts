@@ -55,7 +55,7 @@
 
 // Graphs ADV
 //
-// PRISM = BFS + MINHEAP + Visited + dir
+// MST PRISM = BFS + MINHEAP + Visited + dir
 // FORD = BFS + resultsByIndex[] + level[] + Infinity as visited
 // Topological Sorting = adjListMap + countMap + DFS + queue
 // index as visited
