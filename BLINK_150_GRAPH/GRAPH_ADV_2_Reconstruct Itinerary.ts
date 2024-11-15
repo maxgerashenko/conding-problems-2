@@ -40,6 +40,10 @@ function findItinerary(tickets: string[][], start = "JFK"): string[] {
 
 
 // Post Order
+// Post Order
+// remove use
+// use rest to add to the path
+// reverse result
 function findItinerary(tickets: string[][], start = "JFK"): string[] {
     const adjList: { [key: string]: string[] } = {};
 
@@ -49,22 +53,19 @@ function findItinerary(tickets: string[][], start = "JFK"): string[] {
         adjList[from].push(to);
     }
 
-    // Pre-sort destinations for lexicographical order
-    for (let from in adjList) {
-        adjList[from].sort();
-    }
-
     const path: string[] = [];
-
     function dfs(from: string): void {
-        const destinations = adjList[from] || [];
-        while (destinations.length > 0) {
-            const to = destinations.shift()!; // Get the next destination
-            dfs(to);
+        adjList[from] = adjList[from] || [];
+        adjList[from].sort();// lexicographical order
+
+
+        while (adjList[from].length > 0) {
+            dfs(adjList[from].shift()!); // Get the next destination
         }
+
         path.push(from); // Add airport to path after visiting all destinations
     }
 
     dfs(start);
     return path.reverse(); // Reverse to get the correct order
-} // T:O(E log E) S:O(E)
+} // T:O(E log E) S:(E)
