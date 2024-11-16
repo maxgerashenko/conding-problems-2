@@ -38,34 +38,28 @@ function findItinerary(tickets: string[][], start = "JFK"): string[] {
     return dfs(start) ? path : [];
 } // T:O(E^2) S:O(E)
 
-
-// Post Order
-// Post Order
-// remove use
-// use rest to add to the path
-// reverse result
+// DFS
+// post order
+// reverse
 function findItinerary(tickets: string[][], start = "JFK"): string[] {
-    const adjList: { [key: string]: string[] } = {};
+    const adjList = {};
+    const path = [] as string[];
 
-    // Build adjacency list
     for (let [from, to] of tickets) {
-        if (!adjList[from]) adjList[from] = [];
+        if (adjList[from] == null) adjList[from] = [];
         adjList[from].push(to);
-    }
+    } // init adj list
 
-    const path: string[] = [];
-    function dfs(from: string): void {
-        adjList[from] = adjList[from] || [];
-        adjList[from].sort();// lexicographical order
-
-
-        while (adjList[from].length > 0) {
-            dfs(adjList[from].shift()!); // Get the next destination
+    function dfs(from) {
+        (adjList[from] || []).sort();
+        while ((adjList[from] || []).length > 0) {
+            const to = adjList[from].shift() // in lexical order
+            dfs(to);
         }
 
-        path.push(from); // Add airport to path after visiting all destinations
+        path.push(from);
     }
-
     dfs(start);
-    return path.reverse(); // Reverse to get the correct order
-} // T:O(E log E) S:(E)
+
+    return path.reverse();
+}; // T:O(ElogE) S:O(E)
