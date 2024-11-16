@@ -1,3 +1,8 @@
+// Prim's: Minimum Spanning Tree, MinHeap, VisitedSet, AdjListMap, MinHeap as level
+// Bellman-Ford: MinDistanceArray, AdjList , Infinity as visited, All E + visited as level
+// Dijkstra's Algorithm: MinHeap, MinDistance, Visited, MinHeap as level
+// Topological Sort: postAdjList, IndexCountArray, queque as a level
+
 
 // PRISM: Minimum Spanning Tree, ALL to ALL
 //
