@@ -72,7 +72,7 @@
 
 // Graphs
 // 
-// Redundant Connection - 
+// Redundant Connection - Union Find for not directed grap, Check if node has the same root
 
 // ==========================================================
 
