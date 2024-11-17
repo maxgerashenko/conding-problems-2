@@ -2,7 +2,7 @@
 // Bellman-Ford: MinDistanceArray, AdjList , Infinity as visited, All E + visited as level
 // Dijkstra's Algorithm: MinHeap, MinDistance, Visited, MinHeap as level
 // Topological Sort: postAdjList, IndexCountArray, queque as a level
-// Union-Find: 
+// Union-Find: FindRoot + UninUndateRanck + CheckVisited
 
 
 // PRISM: Minimum Spanning Tree, ALL to ALL
@@ -140,3 +140,27 @@
 // not fot the path
 //
 // T:O(V + E) S:O(V + E)
+
+// Union Find: FindRoot + Union update Rank
+//
+// Input:
+// Edjes List, not directed Graph
+//
+// Data Strcuturs:
+// Union function
+// Find function
+// Rank 
+// 
+// Cycle:
+// Level = []
+// 
+// Steps:
+// Find
+// Union
+// Chek every Edge
+// Return res if parent is the same
+//
+// Limits:
+// Not directed grah
+//
+// T:O(E α(V)) S:O(V)  α - function that grow very slowly
