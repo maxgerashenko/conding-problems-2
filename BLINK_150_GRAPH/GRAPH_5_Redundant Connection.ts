@@ -17,6 +17,7 @@ function findRedundantConnection(edges: number[][]): number[] {
         }
         return par;
     }
+    
 
     // Union with rank
     function union(a: number, b: number): boolean {
