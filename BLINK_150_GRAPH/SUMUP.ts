@@ -70,10 +70,11 @@
 // 
 // Reverse thinking - Find connected
 // Reverse thinking - Find cycle Union Find - Find Root, compress path, union by rank, increase rank when equal
+// Word Ladder - Map of {'h*t': hit, hot}
 //
 // Redundant Connection - Union Find, Find the root, Union by rank, increa rank when equal
 // Surrounded Regions - Reverse thinking, dfs all connnected to border and mark T the flip others
-// 
+// Word Ladder - wordsMaskMap with 1 letter change *, bfs for word in wordsMaskMap as level, + visted
 // 
 // 
 
