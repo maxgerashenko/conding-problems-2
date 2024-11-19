@@ -49,12 +49,6 @@
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 
-
-
-
-
-
-
 // ==========================================================
 
 // Graphs ADV
@@ -71,6 +65,15 @@
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
 // Alien Dictionary = TopologicalSort + AdjList with Sort
+
+// Graphs
+// 
+// Reverse thinking - Find connected
+// Reverse thinking - Find cycle Union Find - Find Root, compress path, union by rank, increase rank when equal
+//
+// Redundant Connection - Union Find, Find the root, Union by rank, increa rank when equal
+// Surrounded Regions - Reverse thinking, dfs all connnected to border and mark T the flip others
+//
 
 // ==========================================================
 
