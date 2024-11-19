@@ -52,6 +52,9 @@
 
 
 
+
+
+
 // ==========================================================
 
 // Graphs ADV
@@ -67,12 +70,7 @@
 // Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
-// Reconstruct Itinerary - DFS post order - reverse
 // Alien Dictionary = TopologicalSort + AdjList with Sort
-
-// Graphs
-// 
-// Redundant Connection - Union Find for not directed grap, Check if node has the same root
 
 // ==========================================================
 
