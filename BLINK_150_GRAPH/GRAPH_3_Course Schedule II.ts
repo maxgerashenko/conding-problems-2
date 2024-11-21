@@ -2,40 +2,79 @@
 //
 // Course Schedule II
 
-function findOrder(numCourses: number, prerequisites: number[][]): number[] {
-    const preListMap: number[][] = Array.from({ length: numCourses }, () => []);
-    const visited = new Set<number>();
-    const path = new Set<number>(); // To detect cycles
 
-    // Initialize adjacency list
-    for (const [post, pre] of prerequisites) {
-        preListMap[post].push(pre);
+// BFS
+// Topological Sort
+function findOrder(numCourses: number, prerequisites: number[][]): number[] {
+    const res = [];
+    const postListArray = Array(numCourses).fill(0).map((_) => []);
+    const preCountArray = Array(numCourses).fill(0);
+
+    for (let [post, pre] of prerequisites) {
+        postListArray[pre].push(post);
+        preCountArray[post]++;
     }
 
-    const res: number[] = [];
+    const level = [];
+    for (let i = 0; i < numCourses; i++) {
+        if (preCountArray[i] > 0) continue;
+        level.push(i);
+    } // init level
 
-    // Depth-First Search
-    function dfs(i: number): boolean {
-        if (visited.has(i)) return true; // Already processed this node
-        if (path.has(i)) return false; // Cycle detected
+    let cur = 0; // optimize shift();
+    while (cur < level.length) {
+        let tmp = level.length;
+        for (let index = cur; index < tmp; index++) {
+            const pre = level[index]
+            res.push(pre);
 
-        path.add(i); // Mark node in the current DFS path
+            for (let post of postListArray[pre]) {
+                preCountArray[post]--;
+                if (preCountArray[post] > 0) continue;
+                level.push(post);
+            }
+        }
+        cur = tmp;
+    }
 
-        for (const pre of preListMap[i]) {
-            if (!dfs(pre)) return false; // Cycle detected
+    return res.length == numCourses ? res : [];
+}; // T:O(V + E) S:O(V + E)
+
+
+
+// dfs post order
+// backtracking
+// cycle detection
+function findOrder(numCourses: number, prerequisites: number[][]): number[] {
+    const postPreArray = Array(numCourses).fill(null).map(_ => []);
+    const visited = new Set();
+    const cycle = new Set();
+
+    for (let [post, pre] of prerequisites) postPreArray[post].push(pre);
+
+     // Build the adjacency list: course -> list of prerequisites
+    for (let [post, pre] of prerequisites)  postPreArray[post].push(pre);
+
+    const res = [];
+    function dfs(post) {
+        if (visited.has(post)) return true;
+        if (cycle.has(post)) return false;
+
+        cycle.add(post);
+
+        for (let pre of postPreArray[post]) {
+            if (dfs(pre) == false) return false;
         }
 
-        path.delete(i); // Remove from path after processing
-        visited.add(i); // Mark node as processed
-        res.push(i); // Add node to result after processing its prerequisites
-
-        return true;
+        cycle.delete(post)
+        visited.add(post)
+        res.push(post);
     }
 
-    // Perform DFS for all nodes
-    for (let i = 0; i < numCourses; i++) {
-        if (!dfs(i)) return []; // If a cycle is detected, return an empty array
+    for (let index = 0; index < numCourses; index++) {
+        if (visited.has(index)) continue;
+        if (dfs(index) == false) return [];
     }
 
-    return res.length === numCourses ? res : [];
-}; // T: O(V + E), S: O(V + E)
+    return res;
+}; // T:O(V + E) S:O(V + E)
