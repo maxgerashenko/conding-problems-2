@@ -49,6 +49,8 @@
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 
+
+
 // ==========================================================
 
 // Graphs ADV
@@ -61,7 +63,7 @@
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
 // Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost + Cost[]
-// Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
+// Cheapest Flights Within K Stops - FORD, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
 // Alien Dictionary = TopologicalSort + AdjList with Sort
@@ -70,7 +72,7 @@
 // 
 // Reverse thinking - Find connected
 // Reverse thinking - Find cycle Union Find - Find Root, compress path, union by rank, increase rank when equal
-// Word Ladder - Map of {'h*t': hit, hot}
+// Word Mask - Map of {'h*t': hit, hot}
 //
 // Redundant Connection - Union Find, Find the root, Union by rank, increa rank when equal
 // Surrounded Regions - Reverse thinking, dfs all connnected to border and mark T the flip others
