@@ -73,12 +73,14 @@
 // Reverse thinking - Find connected
 // Reverse thinking - Find cycle Union Find - Find Root, compress path, union by rank, increase rank when equal
 // Word Mask - Map of {'h*t': hit, hot}
-//
+// Topological sort - Adj list prePostMap + preCountMap + BFS for preCountMap === 0
+// 
+// 
 // Redundant Connection - Union Find, Find the root, Union by rank, increa rank when equal
 // Surrounded Regions - Reverse thinking, dfs all connnected to border and mark T the flip others
 // Word Ladder - wordsMaskMap with 1 letter change *, bfs for word in wordsMaskMap as level, + visted
-// 
-// 
+// Course Schedule II - Topological sort OR DFS post order
+// Walls and Gates -  Multi-Source BFS, Run BFS from all gates simultaniusly 
 
 // ==========================================================
 

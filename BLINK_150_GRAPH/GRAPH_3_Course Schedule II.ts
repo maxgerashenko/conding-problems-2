@@ -46,35 +46,32 @@ function findOrder(numCourses: number, prerequisites: number[][]): number[] {
 // backtracking
 // cycle detection
 function findOrder(numCourses: number, prerequisites: number[][]): number[] {
-    const postPreArray = Array(numCourses).fill(null).map(_ => []);
-    const visited = new Set();
-    const cycle = new Set();
-
-    for (let [post, pre] of prerequisites) postPreArray[post].push(pre);
-
-     // Build the adjacency list: course -> list of prerequisites
-    for (let [post, pre] of prerequisites)  postPreArray[post].push(pre);
-
+    const adjList = Array(numCourses).fill(0).map(() => []);
     const res = [];
+
+    for (let [post, pre] of prerequisites) adjList[pre].push(post); // init adjs list
+
+    const path = new Set();  // cycle
+    const visited = new Set();
     function dfs(post) {
-        if (visited.has(post)) return true;
-        if (cycle.has(post)) return false;
+        if (path.has(post)) return true ;// cycle
+        if (visited.has(post)) return false; 
 
-        cycle.add(post);
+        path.add(post);
 
-        for (let pre of postPreArray[post]) {
-            if (dfs(pre) == false) return false;
+        for (let pre of adjList[post]) {
+            if (dfs(pre)) return true;
         }
 
-        cycle.delete(post)
-        visited.add(post)
+        path.delete(post);
+        visited.add(post);
         res.push(post);
+        return false;
     }
 
-    for (let index = 0; index < numCourses; index++) {
-        if (visited.has(index)) continue;
-        if (dfs(index) == false) return [];
+    for (let i = 0; i < numCourses; i++) {
+        if (dfs(i)) return []; // conner case
     }
 
-    return res;
-}; // T:O(V + E) S:O(V + E)
+    return res.reverse(); // base case
+}; // T:O(V+E) S:O(V+E)
