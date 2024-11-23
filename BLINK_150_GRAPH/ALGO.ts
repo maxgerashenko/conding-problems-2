@@ -164,3 +164,34 @@
 // Not directed grah
 //
 // T:O(E α(V)) S:O(V)  α - function that grow very slowly
+
+
+// DFS post order
+//
+// Input:
+// Graph
+//
+// Data Strcuturs:
+// adjList
+// vistedSet
+// cycleSet
+// 
+// Cycle:
+// Level = []
+// 
+// Steps:
+// each el dfs
+// dfs if cycle return true
+// dfs if visted return false
+// post order add cycle
+// dfs
+// remove cycle
+// add visted
+// add result
+// 
+// Return:  result.reversed()
+//
+// Limits:
+// Returns the last solution
+//
+// T:O(V + E) S:O(E+V)
