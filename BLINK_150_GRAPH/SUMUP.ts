@@ -50,7 +50,6 @@
 
 
 
-
 // ==========================================================
 
 // Graphs ADV
@@ -63,24 +62,21 @@
 //
 // Min Cost to Connect All Points - PRISM T:O(N^2 log N) S:O(N^2)
 // Cheapest Flights Within K Stops - BFS + ADJLIST + Path with current Cost + Cost[]
-// Cheapest Flights Within K Stops - FORD, like BFS, use cost[] but check all exept marked as visted
+// Cheapest Flights Within K Stops - FOR, like BFS, use cost[] but check all exept marked as visted
 // Swim in Rising Water - BFS + HEAP + Visted + dir
 // Network Delay Time - FORD DFS minDelay[] + Infinity as visited + array as level
+// Reconstruct Itinerary - DFS post order - reverse
 // Alien Dictionary = TopologicalSort + AdjList with Sort
 
 // Graphs
 // 
-// Reverse thinking - Find connected
-// Reverse thinking - Find cycle Union Find - Find Root, compress path, union by rank, increase rank when equal
-// Word Mask - Map of {'h*t': hit, hot}
-// Topological sort - Adj list prePostMap + preCountMap + BFS for preCountMap === 0
-// 
-// 
-// Redundant Connection - Union Find, Find the root, Union by rank, increa rank when equal
-// Surrounded Regions - Reverse thinking, dfs all connnected to border and mark T the flip others
-// Word Ladder - wordsMaskMap with 1 letter change *, bfs for word in wordsMaskMap as level, + visted
-// Course Schedule II - Topological sort OR DFS post order
-// Walls and Gates -  Multi-Source BFS, Run BFS from all gates simultaniusly 
+// Redundant Connection - Union Find for not directed grap, Check if node has the same root
+// Surrounded Regions'
+// Word Ladder
+// Course Schedule II
+// Walls and Gates
+// Max Area of Island
+
 
 // ==========================================================
 
