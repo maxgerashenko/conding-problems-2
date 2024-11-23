@@ -83,6 +83,12 @@
 // Course Schedule II - DFS post order + reverse + visitedSet + cycleSet T:O(V+E) S:O(V+E)
 // Walls and Gates - BFS from gates  T:O(m × n) S:O(m × n)
 // Max Area of Island - BFS from each + visited T:O(m*n) S:O(m*n)
+// Graph Valid Tree -
+// The Number of Connected Components in an Undirected Graph -
+// Course Schedule - 
+// Pacific Atlantic Water Flow - 
+// Clone Graph - 
+// Number of Islands -
 
 
 // ==========================================================
