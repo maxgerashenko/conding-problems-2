@@ -69,13 +69,20 @@
 // Alien Dictionary = TopologicalSort + AdjList with Sort
 
 // Graphs
+//
+// Reverse - start from the border
+// Adj List
+// BFS for shortest path
+// Topoligical Sort = AdjListPost + CountPre + BFS
+// DFS post order + reverse + visitedSet + cycleSet
 // 
 // Redundant Connection - Union Find for not directed grap, Check if node has the same root
-// Surrounded Regions'
-// Word Ladder
-// Course Schedule II
-// Walls and Gates
-// Max Area of Island
+// Surrounded Regions - Reverse - BFS border - repaint border and unpaint islands T:O(M*N) S:O(m*n)
+// Word Ladder - BFS + Adj List + visited  T:O(N × L) S:O(N+L)
+// Course Schedule II - Topoligical Sort T:O(V + E) S:O(V + E)
+// Course Schedule II - DFS post order + reverse + visitedSet + cycleSet T:O(V+E) S:O(V+E)
+// Walls and Gates - BFS from gates  T:O(m × n) S:O(m × n)
+// Max Area of Island - BFS from each + visited T:O(m*n) S:O(m*n)
 
 
 // ==========================================================
