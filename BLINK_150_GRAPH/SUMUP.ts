@@ -83,12 +83,15 @@
 // Course Schedule II - DFS post order + reverse + visitedSet + cycleSet T:O(V+E) S:O(V+E)
 // Walls and Gates - BFS from gates  T:O(m × n) S:O(m × n)
 // Max Area of Island - BFS from each + visited T:O(m*n) S:O(m*n)
-// Graph Valid Tree -
+// Graph Valid Tree - DFS try to visit all nodes with out a cycle, ignore parent T:O(V+E) S:O(V+E)
 // The Number of Connected Components in an Undirected Graph -
-// Course Schedule - 
-// Pacific Atlantic Water Flow - 
-// Clone Graph - 
-// Number of Islands -
+// adjlist + DFS + visted, count not visited from all
+// The Number of Connected Components in an Undirected Graph - Union Find and ignore if union is true
+// Course Schedule - DFS post order + adjList, return false if cycle or not all nodes visited
+// Course Schedule - Topological sort postAdjList + preCount 
+// Pacific Atlantic Water Flow - BFS twice T:O(n*m) S:O(m*n)
+// Clone Graph - DFS T:O(V + E) S:O(V) stack is the limit/ BFS T:O(V + E) S:O(V)
+// Number of Islands - T:O(m × n) S:O(m × n)
 
 
 // ==========================================================
