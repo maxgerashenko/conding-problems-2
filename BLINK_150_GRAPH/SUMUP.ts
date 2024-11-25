@@ -75,6 +75,7 @@
 // BFS for shortest path
 // Topoligical Sort = AdjListPost + CountPre + BFS
 // DFS post order + reverse + visitedSet + cycleSet
+// Union Find = Find ther root + Union with rank, update rank if rank is equal
 // 
 // Redundant Connection - Union Find for not directed grap, Check if node has the same root
 // Surrounded Regions - Reverse - BFS border - repaint border and unpaint islands T:O(M*N) S:O(m*n)
