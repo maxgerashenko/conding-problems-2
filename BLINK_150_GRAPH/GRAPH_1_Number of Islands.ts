@@ -1,6 +1,6 @@
-// https://leetcode.com/problems/pacific-atlantic-water-flow/
+// https://leetcode.com/problems/number-of-islands/description/
 // 
-// Pacific Atlantic Water Flow
+// Number of Islands
 
 
 function pacificAtlantic(heights: number[][]): number[][] {
