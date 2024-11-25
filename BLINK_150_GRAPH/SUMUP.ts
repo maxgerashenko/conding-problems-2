@@ -91,7 +91,7 @@
 // Course Schedule - Topological sort postAdjList + preCount 
 // Pacific Atlantic Water Flow - BFS twice T:O(n*m) S:O(m*n)
 // Clone Graph - DFS T:O(V + E) S:O(V) stack is the limit/ BFS T:O(V + E) S:O(V)
-// Number of Islands - T:O(m × n) S:O(m × n)
+// Number of Islands - DFS or BFS T:O(m × n) S:O(m × n)
 
 
 // ==========================================================
