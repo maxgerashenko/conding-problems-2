@@ -62,8 +62,8 @@
 // Generate Parentheses - DFS Stack Backtracking - T:(2^2*n) S:O(2n)
 // Daily Temperatures - monotonic stack, add when smaller, remove while bigger, use stack with indexes
 // Car Fleet - Monotonic stack, sort by distance - T:O(nlogn) S:O(n)
-// Evaluate Reverse Polish Notation - 
-// Largest Rectangle in Histogram - 
+// Evaluate Reverse Polish Notation - Put numbers to the stack, use last 2 numbers for symbols
+// Largest Rectangle in Histogram - From left to right, Stack mono, {start, height},  cal the rest
 
 // ==========================================================
 
