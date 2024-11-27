@@ -26,4 +26,4 @@ function largestRectangleArea(heights) {
         max = Math.max(max, height * (heights.length - index));
     }
     return max;
-} // T:O(N) S:O(n)
+} // T:O(n) S:O(n)
