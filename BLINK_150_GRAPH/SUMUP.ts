@@ -49,6 +49,21 @@
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 
+// ==========================================================
+
+// Stack
+//
+// DFS
+// Backtracking from path is stack
+// monotonic stack (decreasing stack)
+//
+// Valid Parentheses - Stack add [ remove ] check conner cases, shold be 0 len at the end
+// Min Stack - stack + minStack, when stackTop === minStackTop remove both
+// Generate Parentheses - DFS Stack Backtracking - T:(2^2*n) S:O(2n)
+// Daily Temperatures - monotonic stack, add when smaller, remove while bigger, use stack with indexes
+// Car Fleet - Monotonic stack, sort by distance - T:O(nlogn) S:O(n)
+// Evaluate Reverse Polish Notation - 
+// Largest Rectangle in Histogram - 
 
 // ==========================================================
 
