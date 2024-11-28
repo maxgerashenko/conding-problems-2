@@ -89,4 +89,4 @@ function calculate(str: string): number {
 
     while (opStack.length > 0) applyOp();
     return numStack.length > 0 ? numStack.pop()! : 0;
-}
+} // T:O(N) S:O(N)
