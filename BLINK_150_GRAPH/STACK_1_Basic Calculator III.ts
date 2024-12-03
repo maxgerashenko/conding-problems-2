@@ -94,6 +94,7 @@ function calculate(str: string): number {
             num = num * 10 + Number(strArr[i]);
             i++;
         }
+        
         i--; // Adjust index after overshoot
 
         numsStack.push(num); // Push the parsed number onto the number stack
