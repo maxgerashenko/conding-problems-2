@@ -71,7 +71,7 @@
 // 
 // Search a 2D Matrix - 
 // Median of Two Sorted Arrays - 
-// Time Based Key-Value Store -
+// Time Based Key-Value Store - Use MapArray use Binary search, don't sort and time is always increasing, use {value, timeStap pair}, binary search by the timeStampt T:O(log n) S:O(N)
 // Koko Eating Bananas - Sort, start min ned max, find the pivit check with hours use binary search T:O(NlogN) S:O(1)
 // Binary Search - Binary Search - while(start < end) return when pivit === start T:O(log n)  T:O(1)
 // Search in Rotated Sorted Array - Split in half, ignore sored part. Repean until pivit === target otherwise return -1 T:O(log n) S:O(1)
