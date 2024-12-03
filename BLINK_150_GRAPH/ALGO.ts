@@ -195,3 +195,33 @@
 // Returns the last solution
 //
 // T:O(V + E) S:O(E+V)
+
+// Calculate Expression
+// 
+// Input:
+// Expression Sting
+//
+// Data Strcuturs:
+// Mono stack
+// Priority Map
+// 
+// Cycle:
+// For symbols in the string
+// 
+// Steps:
+// Trip string
+// Create stringApp
+// Add all number to numStack
+// Mono stack for operators
+// Pop() and calc for ')'
+// Mono stack for operators
+// Calculate numbers
+// while for double digit numbers
+// while nums is > 1 calculate evertying
+// 
+// Return: numsStack.pop()
+//
+// Limits:
+// Returns the last solution
+//
+// T:O(N) S:O(N)
