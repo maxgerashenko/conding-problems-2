@@ -66,6 +66,18 @@
 // Largest Rectangle in Histogram - From left to right, Stack mono, {start, height},  cal the rest
 // Basic Calculator - Stack for Number + Mono Stack for Operators + Priorityles for operators + Clean after ")" + double digit numbers
 
+
+// Binary Search
+// 
+// Search a 2D Matrix - 
+// Median of Two Sorted Arrays - 
+// Time Based Key-Value Store -
+// Koko Eating Bananas - 
+// Binary Search - 
+// Search in Rotated Sorted Array - 
+// Find Minimum in Rotated Sorted Array - Split in half, ignore sored part. repeat until start === end
+// 
+
 // ==========================================================
 
 // Graphs ADV
