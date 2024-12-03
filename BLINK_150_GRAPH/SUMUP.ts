@@ -49,6 +49,22 @@
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
 
 
+// ==========================================================
+
+// Stack
+//
+// DFS
+// Backtracking from path is stack
+// monotonic stack (decreasing stack)
+//
+// Valid Parentheses - Stack add [ remove ] check conner cases, shold be 0 len at the end
+// Min Stack - stack + minStack, when stackTop === minStackTop remove both
+// Generate Parentheses - DFS Stack Backtracking - T:(2^2*n) S:O(2n)
+// Daily Temperatures - monotonic stack, add when smaller, remove while bigger, use stack with indexes
+// Car Fleet - Monotonic stack, sort by distance - T:O(nlogn) S:O(n)
+// Evaluate Reverse Polish Notation - Put numbers to the stack, use last 2 numbers for symbols
+// Largest Rectangle in Histogram - From left to right, Stack mono, {start, height},  cal the rest
+// Basic Calculator - Stack for Number + Mono Stack for Operators + Priorityles for operators + Clean after ")" + double digit numbers
 
 // ==========================================================
 
@@ -95,6 +111,7 @@
 // Number of Islands - DFS or BFS T:O(m × n) S:O(m × n)
 
 
+
 // ==========================================================
 
 // BIT
@@ -123,6 +140,5 @@
 
 // DP2
 // DFS + CASH + Variaions with 2 pointers
-
 
 
