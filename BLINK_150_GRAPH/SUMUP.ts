@@ -73,9 +73,9 @@
 // Median of Two Sorted Arrays - 
 // Time Based Key-Value Store -
 // Koko Eating Bananas - 
-// Binary Search - 
-// Search in Rotated Sorted Array - 
-// Find Minimum in Rotated Sorted Array - Split in half, ignore sored part. repeat until start === end
+// Binary Search - Binary Search - while(start < end) return when pivit === start
+// Search in Rotated Sorted Array - Split in half, ignore sored part. Repean until pivit === target otherwise return -1 T:O(log n) S:O(1)
+// Find Minimum in Rotated Sorted Array - Split in half, ignore sored part. repeat until start === end T:O(log n) S:O(1)
 // 
 
 // ==========================================================
