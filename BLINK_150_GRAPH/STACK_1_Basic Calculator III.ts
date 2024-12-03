@@ -77,8 +77,6 @@ function calculate(str: string): number {
             continue;
         }
 
-
-        
         // Handle operators
         if (opers.has(el)) {
             while (
