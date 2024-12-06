@@ -78,8 +78,18 @@
 // Find Minimum in Rotated Sorted Array - Split in half, ignore sored part. repeat until start === end T:O(log n) S:O(1)
 // 
 
-// Linked List
+// Linked List - 
 // Add Two Numbers -
+// Reverse Nodes in k-Group - 
+// LRU Cache - 
+// Find the Duplicate Number - 
+// Copy List with Random Pointer -
+// Merge k Sorted Lists - 
+// Linked List Cycle - 
+// Remove Nth Node From End of List -
+// Reorder List - 
+// Merge Two Sorted Lists -
+// Reverse Linked List - 
 
 // ==========================================================
 
