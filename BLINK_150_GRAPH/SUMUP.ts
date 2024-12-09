@@ -70,8 +70,8 @@
 
 // Binary Search
 // 
-// Search a 2D Matrix -  
-// Median of Two Sorted Arrays - 
+// Search a 2D Matrix -  2x2 Matrix as one list, binary search with pivot
+// Median of Two Sorted Arrays - merge 2 el with 2 pivots, calc second pivot with hall - pivot1
 // Time Based Key-Value Store - Use MapArray use Binary search, don't sort and time is always increasing, use {value, timeStap pair}, binary search by the timeStampt T:O(log n) S:O(N)
 // Koko Eating Bananas - Sort, start min ned max, find the pivit check with hours use binary search T:O(NlogN) S:O(1)
 // Binary Search - Binary Search - while(start < end) return when pivit === start T:O(log n)  T:O(1)
@@ -80,7 +80,6 @@
 // 
 
 // Linked List
-// 
 // 
 // Add Two Numbers -
 // Reverse Nodes in k-Group - 
