@@ -88,15 +88,17 @@
 //     pre = cur;
 //     cur = tmp;
 // }
+//
+// Floyd’s Cycle Detection
 // 
 // Add Two Numbers -
 // Reverse Nodes in k-Group - 
 // LRU Cache - 
 // Find the Duplicate Number - 
-// Copy List with Random Pointer -
-// Merge k Sorted Lists - 
-// Linked List Cycle - 
-// Remove Nth Node From End of List -
+// Copy List with Random Pointer - Create a copies of all nodes. Create new head and put copies for each node
+// Merge k Sorted Lists - MinHeap T:O(NlogK) S:O(K) instead of T:O(N^2)
+// Linked List Cycle - fast && slow, slow should get to the end end never meet fast
+// Remove Nth Node From End of List - Reverse, count nth element, remove, reverse
 // Reorder List - Fast and slow to find middle, reverse second part, merge 2 lists  T:O(n) S:O(1)
 // Merge Two Sorted Lists - l1, l2, new StartNode, move l1 or l2, clean last node at the end => return startNode.next;  T:O(n) S:O(1)
 // Reverse Linked List - cur.next = pre; pre = cur; cur = tmp; T:O(n) S:O(1)

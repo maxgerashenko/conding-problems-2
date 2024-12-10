@@ -225,3 +225,15 @@
 // Returns the last solution
 //
 // T:O(N) S:O(N)
+
+
+// Floyd’s Cycle Detection
+//
+// 
+// T:O(n) S:O(1) instaed of T:O(nlogn) S:O(1)
+//
+// Fast and slow to find a cycle meeting poit
+// 1rst pointer to start
+// 2nd on meeting moint
+// move 1st and 2nd with 1 step until 1st reach meeting point
+// 2 pointer is duplicate number
