@@ -97,8 +97,8 @@
 // Merge k Sorted Lists - 
 // Linked List Cycle - 
 // Remove Nth Node From End of List -
-// Reorder List - 
-// Merge Two Sorted Lists - l1, l2, new StartNode, move l1 or l2, clean last node at the end => return startNode.next;
+// Reorder List - Fast and slow to find middle, reverse second part, merge 2 lists  T:O(n) S:O(1)
+// Merge Two Sorted Lists - l1, l2, new StartNode, move l1 or l2, clean last node at the end => return startNode.next;  T:O(n) S:O(1)
 // Reverse Linked List - cur.next = pre; pre = cur; cur = tmp; T:O(n) S:O(1)
 
 // ==========================================================
