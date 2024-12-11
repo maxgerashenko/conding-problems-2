@@ -85,12 +85,13 @@
 //     cur = tmp;
 // }
 //
+//
 // Floyd’s Cycle Detection
 // Fast and Slow, meeting point, start and metting point + 1, 2nd is the duplicate
 //
 // Add Two Numbers - reversed, remember digit in > 9 number, return in reversed order
-// Reverse Nodes in k-Group -
-// LRU Cache -
+// Reverse Nodes in k-Group - dummy, prevEnd, Start, End, nextStart. calculate end & nextStart = end.next
+// LRU Cache - Double linked list, with limited nodes, move to head remove tail
 // Find the Duplicate Number -  Floyd’s Cycle Detection T:O(NlogN) S:O(1)
 // Copy List with Random Pointer - Create a copies of all nodes. Create new head and put copies for each node
 // Merge k Sorted Lists - MinHeap T:O(NlogK) S:O(K) instead of T:O(N^2)
