@@ -1,5 +1,5 @@
 // A&H
-// 
+//
 // Set()
 // LettersCountMap()
 // Array(26) - 91 signature
@@ -17,22 +17,21 @@
 // Valid Sudoku - use Set() for rows, cols, blocks as box-${~~(i / 3)}-${~~(j / 3)}-${num}
 
 // 2P
-// 
+//
 // start end
 // sort for duplicates
 // sort for tager
 // start on left and end on the right, use greedy
 // start on lef and end on the right, but calculate the local max/min
-// 
+//
 // Valid Palindrome - while start < end start++ end--;
 // 3Sum - to 0, sort, for duplicates and search, start and end on the right, seach with start, end, sorted
 // Container With Most Water - start on left and end on right, update max and move smaller hight to the middle
 // Two Sum II - Input Array Is Sorted - start on left and end on right move to the middle while not equal target
 // Trapping Rain Water - left to left right to right, mesure each col for total += minHeight - cur
 
-
 // SW
-// 
+//
 // left right
 // Set() for duplicates
 // Use queue[0] as max, use index for the queue, keep queue small
@@ -47,7 +46,6 @@
 // Permutation in String - 2 hash maps with array or map init pattern get window pattern every time
 // Minimum Window Substring - Frequency Map, left right, increase window for the match, decrease for min value
 // Longest Repeating Character Replacement -  Frequency Map + window + just need max char, by updating from new, update max length, move left when k is exided
-
 
 // ==========================================================
 
@@ -66,18 +64,16 @@
 // Largest Rectangle in Histogram - From left to right, Stack mono, {start, height},  cal the rest
 // Basic Calculator - Stack for Number + Mono Stack for Operators + Priorityles for operators + Clean after ")" + double digit numbers
 
-
-
 // Binary Search
-// 
-// Search a 2D Matrix -  
-// Median of Two Sorted Arrays - 
+//
+// Search a 2D Matrix -
+// Median of Two Sorted Arrays -
 // Time Based Key-Value Store - Use MapArray use Binary search, don't sort and time is always increasing, use {value, timeStap pair}, binary search by the timeStampt T:O(log n) S:O(N)
 // Koko Eating Bananas - Sort, start min ned max, find the pivit check with hours use binary search T:O(NlogN) S:O(1)
 // Binary Search - Binary Search - while(start < end) return when pivit === start T:O(log n)  T:O(1)
 // Search in Rotated Sorted Array - Split in half, ignore sored part. Repean until pivit === target otherwise return -1 T:O(log n) S:O(1)
 // Find Minimum in Rotated Sorted Array - Split in half, ignore sored part. repeat until start === end T:O(log n) S:O(1)
-// 
+//
 
 // Linked List
 //
@@ -91,11 +87,11 @@
 //
 // Floyd’s Cycle Detection
 // Fast and Slow, meeting point, start and metting point + 1, 2nd is the duplicate
-// 
-// Add Two Numbers -
-// Reverse Nodes in k-Group - 
-// LRU Cache - 
-// Find the Duplicate Number - 
+//
+// Add Two Numbers - reversed, remember digit in > 9 number, return in reversed order
+// Reverse Nodes in k-Group -
+// LRU Cache -
+// Find the Duplicate Number -  Floyd’s Cycle Detection T:O(NlogN) S:O(1)
 // Copy List with Random Pointer - Create a copies of all nodes. Create new head and put copies for each node
 // Merge k Sorted Lists - MinHeap T:O(NlogK) S:O(K) instead of T:O(N^2)
 // Linked List Cycle - fast && slow, slow should get to the end end never meet fast
@@ -130,7 +126,7 @@
 // Topoligical Sort = AdjListPost + CountPre + BFS
 // DFS post order + reverse + visitedSet + cycleSet
 // Union Find = Find ther root + Union with rank, update rank if rank is equal
-// 
+//
 // Redundant Connection - Union Find for not directed grap, Check if node has the same root
 // Surrounded Regions - Reverse - BFS border - repaint border and unpaint islands T:O(M*N) S:O(m*n)
 // Word Ladder - BFS + Adj List + visited  T:O(N × L) S:O(N+L)
@@ -143,12 +139,10 @@
 // adjlist + DFS + visted, count not visited from all
 // The Number of Connected Components in an Undirected Graph - Union Find and ignore if union is true
 // Course Schedule - DFS post order + adjList, return false if cycle or not all nodes visited
-// Course Schedule - Topological sort postAdjList + preCount 
+// Course Schedule - Topological sort postAdjList + preCount
 // Pacific Atlantic Water Flow - BFS twice T:O(n*m) S:O(m*n)
 // Clone Graph - DFS T:O(V + E) S:O(V) stack is the limit/ BFS T:O(V + E) S:O(V)
 // Number of Islands - DFS or BFS T:O(m × n) S:O(m × n)
-
-
 
 // ==========================================================
 
@@ -178,5 +172,3 @@
 
 // DP2
 // DFS + CASH + Variaions with 2 pointers
-
-
