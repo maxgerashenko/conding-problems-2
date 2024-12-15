@@ -2,30 +2,26 @@
 //
 // House Robber II
 
+// For the circle use 2 arrays
+// check conner cases twice
+// slice includes last if not mentioned
 
 function rob(nums: number[]): number {
-    const len = nums.length;
+  const totalLen = nums.length;
 
-    // Handle the case where there is only one house
-    if (len === 1) return nums[0];
+  if (totalLen < 3) return Math.max(...nums);
 
-    function findMax(range: number[]): number {
-        let len = range.length;
-        if (len === 0) return 0;
-        if (len === 1) return range[0];
+  function find(part) {
+    const len = part.length;
+    if (len < 3) return Math.max(...part);
 
-        let pre = 0;
-        let max = range[0];
-
-        for (let i = 1; i < len; i++) {
-            let tmp = max;
-            max = Math.max(max, pre + range[i]);
-            pre = tmp;
-        }
-
-        return max;
+    const dp = Array(len).fill(0);
+    [dp[0], dp[1]] = [part[0], Math.max(part[0], part[1])];
+    for (let i = 2; i < len; i++) {
+      dp[i] = Math.max(part[i] + dp[i - 2], dp[i - 1]);
     }
+    return dp[len - 1];
+  }
 
-    // Since the houses are in a circle, rob either from the second to the last or from the first to the second last
-    return Math.max(findMax(nums.slice(1)), findMax(nums.slice(0, len - 1)));
-}; // T:O(n) S:O(1)
+  return Math.max(find(nums.slice(0, totalLen - 1)), find(nums.slice(1)));
+} // T:O(n) S:O(1)
