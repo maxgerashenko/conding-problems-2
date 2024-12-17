@@ -148,6 +148,14 @@
 
 // ==========================================================
 
+// DYN
+// 
+// pre = 0; cur = 1; 0 pos equal 1 posible path 
+//
+// Climbing Stairs - pre = 0 cur = 0; i[0] = pre + cur T:O(N) S:O(1)
+
+// ==========================================================
+
 // BIT
 // ^= xor twice to find single digit
 // &1 to get single bit
