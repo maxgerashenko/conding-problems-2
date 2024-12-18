@@ -4,7 +4,7 @@
 
 
 //     a b 
-//.  0 0 0
+//   0 0 0
 // c 0 0 0
 // b 0 0 1
 function longestCommonSubsequence(text1: string, text2: string): number {
