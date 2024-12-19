@@ -170,7 +170,7 @@
 // Word Break - 
 // Longest Increasing Subsequence -
 // Min Cost Climbing Stairs - pre2 = el[0]; pre= el[1] i = 2, pre = min(pre + cost[i], pre2 + cost[i]);
-// Partition Equal Subset Sum -
+// Partition Equal Subset Sum - 
 
 // ==========================================================
 
