@@ -155,6 +155,8 @@
 // Max value i = 1, pre2 = 0; pre = el[0], pre = Math.max(pre, prev2 + el[i])
 // Min value i = 2, pre2 = el[0]; pre= el[1]; pre = min(pre + cost[i], pre2 + cost[i]);
 //
+// Matrix options X targets, use rest as index to navigate, sort options
+//
 // if cycle calculate twice
 //
 // Climbing Stairs - pre = 0 cur = 0; i[0] = pre + cur T:O(N) S:O(1)
@@ -163,7 +165,7 @@
 // Longest Palindromic Substring - expand from the center, twice for even and odd T:O(n) S:O(1)
 // Palindromic Substrings - expand from the center, twice for even and odd T:O(n) S:O(1)
 // Decode Ways - pre + prev2; prev2 = 0 as empty; pre = str[0] = "0" : 0 : 1; cur += pre amd cur += pre2 T:O(n) S:O(1)
-// Coin Change - 
+// Coin Change - Matrix min combination, sort coins mathrix coins X tagets
 // Maximum Product Subarray -
 // Word Break - 
 // Longest Increasing Subsequence -
