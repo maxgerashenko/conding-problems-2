@@ -151,9 +151,10 @@
 
 // DYN
 // 
-// Distinkt i=0, value = 1, cur = cur + pre;
+// Distinkt paths i=0, value = 1, cur = cur + pre;
+// Max value i = 1, value = el[0], cur = Math.max(pre, prev2 + el[i])
+// Min value i = 2, pre2 = el[0]; pre= el[1]; pre = min(pre + cost[i], pre2 + cost[i]);
 //
-// pre = 0; cur = 1; 0 pos equal 1 posible path 
 // if cycle calculate twice
 //
 // Climbing Stairs - pre = 0 cur = 0; i[0] = pre + cur T:O(N) S:O(1)
@@ -166,7 +167,7 @@
 // Maximum Product Subarray -
 // Word Break - 
 // Longest Increasing Subsequence -
-// Min Cost Climbing Stairs -
+// Min Cost Climbing Stairs - pre2 = el[0]; pre= el[1] i = 2, pre = min(pre + cost[i], pre2 + cost[i]);
 // Partition Equal Subset Sum -
 
 // ==========================================================
