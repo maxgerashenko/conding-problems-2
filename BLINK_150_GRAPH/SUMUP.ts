@@ -151,8 +151,8 @@
 
 // DYN
 // 
-// Distinkt paths i=0, value = 1, cur = cur + pre;
-// Max value i = 1, value = el[0], cur = Math.max(pre, prev2 + el[i])
+// Distinkt paths i=0, pre = 1, pre = pre + pre2;
+// Max value i = 1, value = el[0], pre = Math.max(pre, prev2 + el[i])
 // Min value i = 2, pre2 = el[0]; pre= el[1]; pre = min(pre + cost[i], pre2 + cost[i]);
 //
 // if cycle calculate twice
