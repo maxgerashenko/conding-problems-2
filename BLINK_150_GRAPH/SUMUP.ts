@@ -151,6 +151,8 @@
 
 // DYN
 // 
+// Distinkt i=0, value = 1, cur = cur + pre;
+//
 // pre = 0; cur = 1; 0 pos equal 1 posible path 
 // if cycle calculate twice
 //
