@@ -2,28 +2,28 @@
 // 
 // Partition Equal Subset
 
+// Check all variants
+// Matrix aproach
+// But copy results from prev level
+// Revesed to keep local updats independent
 
-
-// bruteforce 2^N
-// dp target-n & i
-// order dosn't matter, dist matter
-// use set for sums with 2 loops
 function canPartition(nums: number[]): boolean {
-    let totalSum = nums.reduce((pre, el) => pre + el, 0);
+    let sum = nums.reduce((acc, i) => acc + i, 0);
+    if (sum % 2 !== 0) return false;
 
-    if (totalSum % 2 === 1) return false;
-    let target = totalSum / 2;
-    let sumsSet = new Set([0]); // base case !!!
+    const target = sum / 2;
+    let dp = new Array(target + 1).fill(false);
+    dp[0] = true;
 
     for (let num of nums) {
-        let tmp = [...sumsSet]; // don't modify on fly
-        for (let sum of tmp) {
-            let newSum = sum + num;
-            if (newSum === target) return true;
-            if (newSum > target) continue;
-            sumsSet.add(newSum);
+        for (let t = target; t >= num; t--) {
+            if (dp[t - num]) {
+                dp[t] = true;
+            }
         }
+        if (dp[target]) return true;
     }
 
-    return false
-}; // T:O(n*sum) S:O(sum)
+    return dp[target];
+} // T:O(n*sum) S:O(sum)
+
