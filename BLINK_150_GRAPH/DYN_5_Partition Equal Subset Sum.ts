@@ -7,6 +7,7 @@
 // But copy results from prev level
 // Revesed to keep local updats independent
 
+
 function canPartition(nums: number[]): boolean {
     let sum = nums.reduce((acc, i) => acc + i, 0);
     if (sum % 2 !== 0) return false;
