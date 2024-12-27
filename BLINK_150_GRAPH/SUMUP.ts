@@ -166,7 +166,7 @@
 // Palindromic Substrings - expand from the center, twice for even and odd T:O(n) S:O(1)
 // Decode Ways - pre + prev2; prev2 = 0 as empty; pre = str[0] = "0" : 0 : 1; cur += pre amd cur += pre2 T:O(n) S:O(1)
 // Coin Change - Matrix min combination, sort coins mathrix coins X tagets
-// Maximum Product Subarray -
+// Maximum Product Subarray - max, udpate max(cur, cur * max, min * cur); - * - = +, so update min
 // Word Break - 
 // Longest Increasing Subsequence -
 // Min Cost Climbing Stairs - pre2 = el[0]; pre= el[1] i = 2, pre = min(pre + cost[i], pre2 + cost[i]);
