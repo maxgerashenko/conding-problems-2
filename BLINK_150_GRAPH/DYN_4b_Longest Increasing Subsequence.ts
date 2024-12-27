@@ -22,4 +22,4 @@ function lengthOfLIS(nums: number[]): number {
 
     // The result is the maximum value in dp
     return Math.max(...dp);
-}
+} // T:O(n^2) S:O(n)
