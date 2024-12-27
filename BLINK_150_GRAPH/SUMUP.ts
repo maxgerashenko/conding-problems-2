@@ -168,8 +168,8 @@
 // Coin Change - Matrix min combination, sort coins mathrix coins X tagets
 // Maximum Product Subarray - max, udpate max(cur, cur * max, min * cur); - * - = +, so update min
 // Word Break - Check all substings with dp start, end. dp[i] === true when before is correct, by dp[start] && str[start, end).has(any word)
-// Longest Increasing Subsequence -
-// Min Cost Climbing Stairs - pre2 = el[0]; pre= el[1] i = 2, pre = min(pre + cost[i], pre2 + cost[i]);
+// Longest Increasing Subsequence - dp each with each dp[i] = max(dp[i], dp[i] + (dp[pre])
+// Min Cost Climbing Stairs - pre = el[0]; cur= el[1] i = 1, cur = min(cur + cost[i], pre + cost[i]); pre = tmp
 // Partition Equal Subset Sum - 
 
 // ==========================================================
