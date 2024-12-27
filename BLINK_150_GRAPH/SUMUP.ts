@@ -170,7 +170,7 @@
 // Word Break - Check all substings with dp start, end. dp[i] === true when before is correct, by dp[start] && str[start, end).has(any word)
 // Longest Increasing Subsequence - dp each with each dp[i] = max(dp[i], dp[i] + (dp[pre])
 // Min Cost Climbing Stairs - pre = el[0]; cur= el[1] i = 1, cur = min(cur + cost[i], pre + cost[i]); pre = tmp
-// Partition Equal Subset Sum - 
+// Partition Equal Subset Sum - dp[target / 2], if odd ignore, iterate for target-- with nums where dp[i-num] should be true to to set it true return dp[target/2]
 
 // ==========================================================
 
