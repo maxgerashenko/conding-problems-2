@@ -3,8 +3,6 @@
 //
 // Basic Calculator III 
 
-
-
 // while in forward order
 // numsStack
 // operStack
@@ -12,7 +10,7 @@
 // add nums to numsStack
 // '(' add to the opStack
 // ')' call all after '('
-// monotonic increase, +* ok 
+// monotonic increase, +* ok .
 
 function calculate(str: string): number {
     const opers = new Set(['-', '+', '*', '/', ')', '(']);
